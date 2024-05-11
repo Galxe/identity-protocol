@@ -1,0 +1,7 @@
+{
+  "verifier": "0xB6D545eEe2d9B3653DaBCf1D0ea23A80FCd51B4C",
+  "proofReceiver": "0xb85eb64229A46ee784ee504bc583E0820551fa7c",
+  "poseidon": "0x0457c39230A791c63ceFe7166d0Db8e1A2Fad27d",
+  "aggregatedProofVerifier": "0xaf0e17dC4De072b9b6a356c51418e017804c560D",
+  "feeModel": "0xd43Ed118ef8E2D8d5E11FeEbadADDf456d31639E"
+}

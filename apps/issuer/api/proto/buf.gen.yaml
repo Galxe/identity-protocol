@@ -1,0 +1,24 @@
+version: v1
+managed:
+  enabled: true # for golang
+plugins:
+  - name: go
+    out: ../go
+    opt: paths=source_relative
+  - name: go-grpc
+    out: ../go
+    opt:
+      - paths=source_relative
+      - require_unimplemented_servers=false
+  - name: ts
+    out: ../../src/grpc
+    strategy: all
+    path: ../../node_modules/ts-proto/protoc-gen-ts_proto
+    opt:
+      - forceLong=string
+      - esModuleInterop=true
+      - outputServices=grpc-js
+      - env=node
+      - useOptionals=messages
+      - exportCommonSymbols=false
+      - importSuffix=.js # fix import for protobufjs/minimal

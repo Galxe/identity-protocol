@@ -1,0 +1,462 @@
+{
+  "address": "0xF3D3404eb75D076Ab8A0F728C7FAA3c0A5e6549F",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "contract ITypeRegistry",
+          "name": "typeRegistry",
+          "type": "address"
+        },
+        {
+          "internalType": "contract IIssuerRegistry",
+          "name": "issuerRegistry",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "admin",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "message",
+          "type": "string"
+        }
+      ],
+      "name": "InvalidArgument",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "contract IIssuerRegistry",
+          "name": "oldIssuerRegistry",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "contract IIssuerRegistry",
+          "name": "newIssuerRegistry",
+          "type": "address"
+        }
+      ],
+      "name": "IssuerRegistryUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "contract ITypeRegistry",
+          "name": "oldTypeRegistry",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "contract ITypeRegistry",
+          "name": "newTypeRegistry",
+          "type": "address"
+        }
+      ],
+      "name": "TypeRegistryUpdated",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "STACK_ID",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getIssuerRegistry",
+      "outputs": [
+        {
+          "internalType": "contract IIssuerRegistry",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getTypeRegistry",
+      "outputs": [
+        {
+          "internalType": "contract ITypeRegistry",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IIssuerRegistry",
+          "name": "issuerRegistry",
+          "type": "address"
+        }
+      ],
+      "name": "updateIssuerRegistry",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ITypeRegistry",
+          "name": "typeRegistry",
+          "type": "address"
+        }
+      ],
+      "name": "updateTypeRegistry",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint160",
+          "name": "typeId",
+          "type": "uint160"
+        },
+        {
+          "internalType": "uint160",
+          "name": "contextId",
+          "type": "uint160"
+        },
+        {
+          "internalType": "uint256",
+          "name": "issuerId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "proofs",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "publicSignals",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "verifyProofFull",
+      "outputs": [
+        {
+          "internalType": "enum VerifyResult",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint160",
+          "name": "typeId",
+          "type": "uint160"
+        },
+        {
+          "internalType": "uint160",
+          "name": "contextId",
+          "type": "uint160"
+        },
+        {
+          "internalType": "uint256",
+          "name": "keyId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "proofs",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "publicSignals",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "verifyProofStatic",
+      "outputs": [
+        {
+          "internalType": "enum VerifyResult",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x02f1664b7a34d6b9831b11e6ce3004002a3aee429e8897a6b6dbe00734aa41cd",
+  "receipt": {
+    "to": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
+    "from": "0xa5E5EA38cF3bD36475596858AC7546d17752E4A7",
+    "contractAddress": null,
+    "transactionIndex": 106,
+    "gasUsed": "1051707",
+    "logsBloom": "0x00000000000000000000000000000000000000400000000000800000000000000000000000000000000000004000000000008000000000000000000000000000000000000000000000000000000000800001000000000000000100000000000000000000020000000000000000000800000000000000000080000000000000400000000000000000000000000000000000000000001000000009000000000000200000020001000000000000000004000000000000000000000000000000004000800000000000000001000000008000000000000000000000100000000020000000020000000000000000000000000080000000000000000000000000100000",
+    "blockHash": "0xcd7e9779e0781c4f2b50bcc550754a93df2611f403a80448e685176dfae5db42",
+    "transactionHash": "0x02f1664b7a34d6b9831b11e6ce3004002a3aee429e8897a6b6dbe00734aa41cd",
+    "logs": [
+      {
+        "transactionIndex": 106,
+        "blockNumber": 55656289,
+        "transactionHash": "0x02f1664b7a34d6b9831b11e6ce3004002a3aee429e8897a6b6dbe00734aa41cd",
+        "address": "0xF3D3404eb75D076Ab8A0F728C7FAA3c0A5e6549F",
+        "topics": [
+          "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x0000000000000000000000004e59b44847b379578588920ca78fbf26c0b4956c"
+        ],
+        "data": "0x",
+        "logIndex": 647,
+        "blockHash": "0xcd7e9779e0781c4f2b50bcc550754a93df2611f403a80448e685176dfae5db42"
+      },
+      {
+        "transactionIndex": 106,
+        "blockNumber": 55656289,
+        "transactionHash": "0x02f1664b7a34d6b9831b11e6ce3004002a3aee429e8897a6b6dbe00734aa41cd",
+        "address": "0xF3D3404eb75D076Ab8A0F728C7FAA3c0A5e6549F",
+        "topics": [
+          "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
+          "0x0000000000000000000000004e59b44847b379578588920ca78fbf26c0b4956c",
+          "0x000000000000000000000000a5e5ea38cf3bd36475596858ac7546d17752e4a7"
+        ],
+        "data": "0x",
+        "logIndex": 648,
+        "blockHash": "0xcd7e9779e0781c4f2b50bcc550754a93df2611f403a80448e685176dfae5db42"
+      },
+      {
+        "transactionIndex": 106,
+        "blockNumber": 55656289,
+        "transactionHash": "0x02f1664b7a34d6b9831b11e6ce3004002a3aee429e8897a6b6dbe00734aa41cd",
+        "address": "0x0000000000000000000000000000000000001010",
+        "topics": [
+          "0x4dfe1bbbcf077ddc3e01291eea2d5c70c2b422b415d95645b9adcfd678cb1d63",
+          "0x0000000000000000000000000000000000000000000000000000000000001010",
+          "0x000000000000000000000000a5e5ea38cf3bd36475596858ac7546d17752e4a7",
+          "0x00000000000000000000000067b94473d81d0cd00849d563c94d0432ac988b49"
+        ],
+        "data": "0x000000000000000000000000000000000000000000000000009112be5e701cee00000000000000000000000000000000000000000000000cba2ca22b1988aaca00000000000000000000000000000000000000000000123128b1d95b4b21d08900000000000000000000000000000000000000000000000cb99b8f6cbb188ddc0000000000000000000000000000000000000000000012312942ec19a991ed77",
+        "logIndex": 649,
+        "blockHash": "0xcd7e9779e0781c4f2b50bcc550754a93df2611f403a80448e685176dfae5db42"
+      }
+    ],
+    "blockNumber": 55656289,
+    "cumulativeGasUsed": "19742013",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0x77dA3Cf4418009D171B4963db815Ca46d6F2E79D",
+    "0xc4525dA874A6A3877db65e37f21eEc0b41ef9877",
+    "0xa5E5EA38cF3bD36475596858AC7546d17752E4A7"
+  ],
+  "numDeployments": 1,
+  "solcInputHash": "bc078363460d61dedeec968994d22b1e",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.23+commit.f704f362\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"contract ITypeRegistry\",\"name\":\"typeRegistry\",\"type\":\"address\"},{\"internalType\":\"contract IIssuerRegistry\",\"name\":\"issuerRegistry\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"admin\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"message\",\"type\":\"string\"}],\"name\":\"InvalidArgument\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"contract IIssuerRegistry\",\"name\":\"oldIssuerRegistry\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"contract IIssuerRegistry\",\"name\":\"newIssuerRegistry\",\"type\":\"address\"}],\"name\":\"IssuerRegistryUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"contract ITypeRegistry\",\"name\":\"oldTypeRegistry\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"contract ITypeRegistry\",\"name\":\"newTypeRegistry\",\"type\":\"address\"}],\"name\":\"TypeRegistryUpdated\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"STACK_ID\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getIssuerRegistry\",\"outputs\":[{\"internalType\":\"contract IIssuerRegistry\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getTypeRegistry\",\"outputs\":[{\"internalType\":\"contract ITypeRegistry\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IIssuerRegistry\",\"name\":\"issuerRegistry\",\"type\":\"address\"}],\"name\":\"updateIssuerRegistry\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ITypeRegistry\",\"name\":\"typeRegistry\",\"type\":\"address\"}],\"name\":\"updateTypeRegistry\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint160\",\"name\":\"typeId\",\"type\":\"uint160\"},{\"internalType\":\"uint160\",\"name\":\"contextId\",\"type\":\"uint160\"},{\"internalType\":\"uint256\",\"name\":\"issuerId\",\"type\":\"uint256\"},{\"internalType\":\"uint256[]\",\"name\":\"proofs\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"publicSignals\",\"type\":\"uint256[]\"}],\"name\":\"verifyProofFull\",\"outputs\":[{\"internalType\":\"enum VerifyResult\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint160\",\"name\":\"typeId\",\"type\":\"uint160\"},{\"internalType\":\"uint160\",\"name\":\"contextId\",\"type\":\"uint160\"},{\"internalType\":\"uint256\",\"name\":\"keyId\",\"type\":\"uint256\"},{\"internalType\":\"uint256[]\",\"name\":\"proofs\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"publicSignals\",\"type\":\"uint256[]\"}],\"name\":\"verifyProofStatic\",\"outputs\":[{\"internalType\":\"enum VerifyResult\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"events\":{\"IssuerRegistryUpdated(address,address)\":{\"params\":{\"newIssuerRegistry\":\"The address of the new IssuerRegistry.\",\"oldIssuerRegistry\":\"The address of the old IssuerRegistry.\"}},\"TypeRegistryUpdated(address,address)\":{\"params\":{\"newTypeRegistry\":\"The address of the new TypeRegistry.\",\"oldTypeRegistry\":\"The address of the old TypeRegistry.\"}}},\"kind\":\"dev\",\"methods\":{\"constructor\":{\"details\":\"BabyzkVerifier constructor\",\"params\":{\"issuerRegistry\":\"issuer registry contract\",\"typeRegistry\":\"type registry contract\"}},\"getIssuerRegistry()\":{\"details\":\"return the issuer registry\"},\"getTypeRegistry()\":{\"details\":\"return the type registry\"},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"},\"updateIssuerRegistry(address)\":{\"details\":\"update the issuer registry\"},\"updateTypeRegistry(address)\":{\"details\":\"update the type registry\"},\"verifyProofFull(uint160,uint160,uint256,uint256[],uint256[])\":{\"details\":\"Stateful verification of zero-knowledge proofs that checks      if the proof is valid and the issuer public key is active, and      for revocation checks if the the smt root matches.The trust relationship between the credential and issuer is binded by      the public key ID:      credential <--- signed by ---- publikc key <--- authroized by ---- issuer      As long as the issuer set the public key ID to be active, the credential is trusted by the issuer,      However, note that it does not mean that the credential is directly generated by the issuer.\"},\"verifyProofStatic(uint160,uint160,uint256,uint256[],uint256[])\":{\"details\":\"static verification of zero-knowledge proofs that only checks if the proof is valid.Code duplication is deliberate for clear separation of concerns.\"}},\"stateVariables\":{\"_issuerRegistry\":{\"details\":\"issuer registry\"},\"_typeRegistry\":{\"details\":\"type registry\"}},\"title\":\"BabyzkVerifier\",\"version\":1},\"userdoc\":{\"events\":{\"IssuerRegistryUpdated(address,address)\":{\"notice\":\"Emitted when the IssuerRegistry is updated.\"},\"TypeRegistryUpdated(address,address)\":{\"notice\":\"Emitted when the TypeRegistry is updated.\"}},\"kind\":\"user\",\"methods\":{},\"notice\":\"@dev BabyzkVerifier is a contract that does on-chain stateful verification of zero-knowledge proofs.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/babyzk/StatefulProofVerifier.sol\":\"BabyzkStatefulVerifier\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"none\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":800},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/access/Ownable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v4.9.0) (access/Ownable.sol)\\n\\npragma solidity ^0.8.0;\\n\\nimport \\\"../utils/Context.sol\\\";\\n\\n/**\\n * @dev Contract module which provides a basic access control mechanism, where\\n * there is an account (an owner) that can be granted exclusive access to\\n * specific functions.\\n *\\n * By default, the owner account will be the one that deploys the contract. This\\n * can later be changed with {transferOwnership}.\\n *\\n * This module is used through inheritance. It will make available the modifier\\n * `onlyOwner`, which can be applied to your functions to restrict their use to\\n * the owner.\\n */\\nabstract contract Ownable is Context {\\n    address private _owner;\\n\\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\\n\\n    /**\\n     * @dev Initializes the contract setting the deployer as the initial owner.\\n     */\\n    constructor() {\\n        _transferOwnership(_msgSender());\\n    }\\n\\n    /**\\n     * @dev Throws if called by any account other than the owner.\\n     */\\n    modifier onlyOwner() {\\n        _checkOwner();\\n        _;\\n    }\\n\\n    /**\\n     * @dev Returns the address of the current owner.\\n     */\\n    function owner() public view virtual returns (address) {\\n        return _owner;\\n    }\\n\\n    /**\\n     * @dev Throws if the sender is not the owner.\\n     */\\n    function _checkOwner() internal view virtual {\\n        require(owner() == _msgSender(), \\\"Ownable: caller is not the owner\\\");\\n    }\\n\\n    /**\\n     * @dev Leaves the contract without owner. It will not be possible to call\\n     * `onlyOwner` functions. Can only be called by the current owner.\\n     *\\n     * NOTE: Renouncing ownership will leave the contract without an owner,\\n     * thereby disabling any functionality that is only available to the owner.\\n     */\\n    function renounceOwnership() public virtual onlyOwner {\\n        _transferOwnership(address(0));\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Can only be called by the current owner.\\n     */\\n    function transferOwnership(address newOwner) public virtual onlyOwner {\\n        require(newOwner != address(0), \\\"Ownable: new owner is the zero address\\\");\\n        _transferOwnership(newOwner);\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Internal function without access restriction.\\n     */\\n    function _transferOwnership(address newOwner) internal virtual {\\n        address oldOwner = _owner;\\n        _owner = newOwner;\\n        emit OwnershipTransferred(oldOwner, newOwner);\\n    }\\n}\\n\",\"keccak256\":\"0xba43b97fba0d32eb4254f6a5a297b39a19a247082a02d6e69349e071e2946218\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/Context.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v4.9.4) (utils/Context.sol)\\n\\npragma solidity ^0.8.0;\\n\\n/**\\n * @dev Provides information about the current execution context, including the\\n * sender of the transaction and its data. While these are generally available\\n * via msg.sender and msg.data, they should not be accessed in such a direct\\n * manner, since when dealing with meta-transactions the account sending and\\n * paying for execution may not be the actual sender (as far as an application\\n * is concerned).\\n *\\n * This contract is only required for intermediate, library-like contracts.\\n */\\nabstract contract Context {\\n    function _msgSender() internal view virtual returns (address) {\\n        return msg.sender;\\n    }\\n\\n    function _msgData() internal view virtual returns (bytes calldata) {\\n        return msg.data;\\n    }\\n\\n    function _contextSuffixLength() internal view virtual returns (uint256) {\\n        return 0;\\n    }\\n}\\n\",\"keccak256\":\"0xa92e4fa126feb6907daa0513ddd816b2eb91f30a808de54f63c17d0e162c3439\",\"license\":\"MIT\"},\"contracts/babyzk/StatefulProofVerifier.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.18;\\n\\nimport { Ownable } from \\\"@openzeppelin/contracts/access/Ownable.sol\\\";\\n\\nimport { IPublicSignalGetter, IntrinsicSignalName } from \\\"../interfaces/IPublicSignalGetter.sol\\\";\\nimport { IProofVerifier } from \\\"../interfaces/IProofVerifier.sol\\\";\\nimport { IIssuerRegistry } from \\\"../interfaces/IIssuerRegistry.sol\\\";\\nimport { ITypeRegistry } from \\\"../interfaces/ITypeRegistry.sol\\\";\\nimport { IStatefulVerifier, VerifyResult } from \\\"../interfaces/IStatefulVerifier.sol\\\";\\n\\n/// @title BabyzkVerifier\\n/// @notice\\n/// @dev BabyzkVerifier is a contract that does on-chain stateful verification of zero-knowledge proofs.\\ncontract BabyzkStatefulVerifier is IStatefulVerifier, Ownable {\\n    error InvalidArgument(string message);\\n\\n    // constants\\n    uint8 public constant STACK_ID = 1;\\n\\n    /// @dev type registry\\n    ITypeRegistry private _typeRegistry;\\n\\n    /// @dev issuer registry\\n    IIssuerRegistry private _issuerRegistry;\\n\\n    /// @dev BabyzkVerifier constructor\\n    /// @param typeRegistry type registry contract\\n    /// @param issuerRegistry issuer registry contract\\n    constructor(ITypeRegistry typeRegistry, IIssuerRegistry issuerRegistry, address admin) {\\n        _typeRegistry = typeRegistry;\\n        _issuerRegistry = issuerRegistry;\\n        transferOwnership(admin);\\n    }\\n\\n    /// @dev static verification of zero-knowledge proofs that only checks if the proof is valid.\\n    /// @dev Code duplication is deliberate for clear separation of concerns.\\n    function verifyProofStatic(\\n        uint160 typeId,\\n        uint160 contextId,\\n        uint256 keyId,\\n        uint256[] calldata proofs,\\n        uint256[] calldata publicSignals\\n    ) external view override returns (VerifyResult) {\\n        if (!_typeRegistry.isTypeFullyInitializedForStack(typeId, STACK_ID)) {\\n            return VerifyResult.TYPE_UNINITIALIZED;\\n        }\\n\\n        // static validation\\n        {\\n            IPublicSignalGetter psGetter = _typeRegistry.getPublicSignalGetter(typeId, STACK_ID);\\n\\n            // type matches\\n            if (typeId != psGetter.getPublicSignal(uint8(IntrinsicSignalName.TYPE), publicSignals)) {\\n                return VerifyResult.TYPE_ID_MISMATCH;\\n            }\\n\\n            // context matches\\n            if (contextId != psGetter.getPublicSignal(uint8(IntrinsicSignalName.CONTEXT), publicSignals)) {\\n                return VerifyResult.CONTEXT_ID_MISMATCH;\\n            }\\n\\n            // keyID matches\\n            if (keyId != psGetter.getPublicSignal(uint8(IntrinsicSignalName.KEY_ID), publicSignals)) {\\n                return VerifyResult.PUBKEY_INACTIVE;\\n            }\\n\\n            // proof is valid only if its expiration lower bound is not exceeded.\\n            {\\n                uint256 expiration = psGetter.getPublicSignal(uint8(IntrinsicSignalName.EXPIRATION_LB), publicSignals);\\n                if (expiration < block.timestamp) {\\n                    return VerifyResult.EXPIRED;\\n                }\\n            }\\n        }\\n\\n        IProofVerifier verifier = _typeRegistry.getVerifier(typeId, STACK_ID);\\n        // zk-SNARK proof verification\\n        if (!verifier.verifyProof(proofs, publicSignals)) {\\n            return VerifyResult.PROOF_INVALID;\\n        }\\n        // signal alias check must be done within the verifier.verifyProof.\\n        // // signal alias check\\n        // if (verifier.isAliased(publicSignals)) {\\n        //     return VerifyResult.ALIASED_SIGNAL;\\n        // }\\n        return VerifyResult.OK;\\n    }\\n\\n    /// @dev Stateful verification of zero-knowledge proofs that checks\\n    ///      if the proof is valid and the issuer public key is active, and\\n    ///      for revocation checks if the the smt root matches.\\n    /// @dev The trust relationship between the credential and issuer is binded by\\n    ///      the public key ID:\\n    ///      credential <--- signed by ---- publikc key <--- authroized by ---- issuer\\n    ///      As long as the issuer set the public key ID to be active, the credential is trusted by the issuer,\\n    ///      However, note that it does not mean that the credential is directly generated by the issuer.\\n    function verifyProofFull(\\n        uint160 typeId,\\n        uint160 contextId,\\n        uint256 issuerId,\\n        uint256[] calldata proofs,\\n        uint256[] calldata publicSignals\\n    ) external view override returns (VerifyResult) {\\n        if (!_typeRegistry.isTypeFullyInitializedForStack(typeId, STACK_ID)) {\\n            return VerifyResult.TYPE_UNINITIALIZED;\\n        }\\n\\n        // full input validation\\n        {\\n            IPublicSignalGetter psGetter = _typeRegistry.getPublicSignalGetter(typeId, STACK_ID);\\n\\n            // type matches\\n            if (typeId != psGetter.getPublicSignal(uint8(IntrinsicSignalName.TYPE), publicSignals)) {\\n                return VerifyResult.TYPE_ID_MISMATCH;\\n            }\\n\\n            // context matches\\n            if (contextId != psGetter.getPublicSignal(uint8(IntrinsicSignalName.CONTEXT), publicSignals)) {\\n                return VerifyResult.CONTEXT_ID_MISMATCH;\\n            }\\n\\n            // proof is valid only if the issuer public key is still active.\\n            {\\n                uint256 keyId = psGetter.getPublicSignal(uint8(IntrinsicSignalName.KEY_ID), publicSignals);\\n                if (!_issuerRegistry.isPublicKeyActiveForStack(issuerId, keyId, STACK_ID)) {\\n                    return VerifyResult.PUBKEY_INACTIVE;\\n                }\\n            }\\n\\n            // proof is valid only if its expiration lower bound is not exceeded.\\n            {\\n                uint256 expiration = psGetter.getPublicSignal(uint8(IntrinsicSignalName.EXPIRATION_LB), publicSignals);\\n                if (expiration < block.timestamp) {\\n                    return VerifyResult.EXPIRED;\\n                }\\n            }\\n\\n            // proof is valid only if the smt root matches for revocable credentials.\\n            if (_typeRegistry.isRevocable(typeId)) {\\n                uint256 root = psGetter.getPublicSignal(\\n                    uint8(IntrinsicSignalName.SIG_REVOCATION_SMT_ROOT),\\n                    publicSignals\\n                );\\n                uint256 currentRoot = uint256(_issuerRegistry.getSignatureStateRoot(typeId, contextId, issuerId));\\n                if (currentRoot != root) {\\n                    return VerifyResult.SIG_REVOCATION_SMT_ROOT_MISMATCH;\\n                }\\n            }\\n        }\\n\\n        IProofVerifier verifier = _typeRegistry.getVerifier(typeId, STACK_ID);\\n        // zk-SNARK proof verification\\n        if (!verifier.verifyProof(proofs, publicSignals)) {\\n            return VerifyResult.PROOF_INVALID;\\n        }\\n        // signal alias check must be done within the verifier.verifyProof.\\n        // // signal alias check\\n        // if (verifier.isAliased(publicSignals)) {\\n        //     return VerifyResult.ALIASED_SIGNAL;\\n        // }\\n        return VerifyResult.OK;\\n    }\\n\\n    /// @dev return the type registry\\n    function getTypeRegistry() external view override returns (ITypeRegistry) {\\n        return _typeRegistry;\\n    }\\n\\n    /// @dev update the type registry\\n    function updateTypeRegistry(ITypeRegistry typeRegistry) external onlyOwner {\\n        if (typeRegistry == ITypeRegistry(address(0))) {\\n            revert InvalidArgument(\\\"typeRegistry is zero address\\\");\\n        }\\n        emit TypeRegistryUpdated(_typeRegistry, typeRegistry);\\n        _typeRegistry = typeRegistry;\\n    }\\n\\n    /// @dev return the issuer registry\\n    function getIssuerRegistry() external view override returns (IIssuerRegistry) {\\n        return _issuerRegistry;\\n    }\\n\\n    /// @dev update the issuer registry\\n    function updateIssuerRegistry(IIssuerRegistry issuerRegistry) external onlyOwner {\\n        if (issuerRegistry == IIssuerRegistry(address(0))) {\\n            revert InvalidArgument(\\\"issuerRegistry is zero address\\\");\\n        }\\n        emit IssuerRegistryUpdated(_issuerRegistry, issuerRegistry);\\n        _issuerRegistry = issuerRegistry;\\n    }\\n}\\n\",\"keccak256\":\"0x4690ac2f663ecddbe8dacb6ffbff44eab303c1e184d527d682737166e915cb07\",\"license\":\"MIT\"},\"contracts/interfaces/IIssuerRegistry.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.18;\\n\\n/// @dev The status of the public key, only active public key can be used for verification.\\nenum PublicKeyStatus {\\n    UNINITIALIZED,\\n    REVOKED,\\n    ACTIVE\\n}\\n\\n/// @dev The public key struct\\nstruct PublicKey {\\n    /// @dev the verification stack id that the public key is enabled for.\\n    mapping(uint8 => bool) enabledVerificationStacks;\\n    /// @dev the status of the public key\\n    PublicKeyStatus status;\\n    /// @dev the raw bytes of the public key. Not used in the contract, only for off-chain usage.\\n    /// The spec for marshalling the public key is defined by the issuer.\\n    bytes raw;\\n}\\n\\n/// @dev The revoked signature ID in a sparsed merkle tree.\\nstruct SignatureState {\\n    /// @dev the root hash of the sparsed merkle tree.\\n    bytes32 root;\\n    /// @dev uri to the sparsed merkle tree, representing the revoked signature ids.\\n    string treeURI;\\n}\\n\\n/// @dev The issuer struct\\nstruct Issuer {\\n    /// @dev the name of the issuer\\n    string name;\\n    /// @dev the admin of the issuer, who can add or revoke public keys.\\n    address admin;\\n}\\n\\n/// @title IIssuerRegistry\\n/// @dev The interface for the issuer registry contract.\\ninterface IIssuerRegistry {\\n    /// @notice Emitted when a new issuer is registered in the registry.\\n    /// @param issuerId Unique identifier for the newly registered issuer.\\n    /// @param name Name of the issuer registered.\\n    event IssuerRegistered(uint256 indexed issuerId, string name);\\n\\n    /// @notice Emitted when an issuer's administrative role is transferred to a new address.\\n    /// @param issuerId ID of issuer whose admin is being transferred.\\n    /// @param oldAdmin Address of the current admin being replaced.\\n    /// @param newAdmin Address of the new admin taking over.\\n    event IssuerAdminTransferred(uint256 indexed issuerId, address indexed oldAdmin, address indexed newAdmin);\\n\\n    /// @notice Emitted when the status of a public key is updated.\\n    /// @param issuerId ID for the issuer to whom the public key belongs.\\n    /// @param publicKeyId ID for the public key being updated.\\n    /// @param status New status of the public key.\\n    event PublicKeyStatusUpdated(uint256 indexed issuerId, uint256 indexed publicKeyId, PublicKeyStatus status);\\n\\n    /// @notice Emitted when the verification stack for a public key is updated.\\n    /// @param issuerId Unique identifier for the issuer to whom the public key belongs.\\n    /// @param publicKeyId Unique identifier for the public key.\\n    /// @param verificationStackId Identifier for the verification stack being updated.\\n    /// @param enabled Boolean indicating whether the stack is enabled or disabled for the public key.\\n    event PublicKeyVerificationStackUpdated(\\n        uint256 indexed issuerId,\\n        uint256 indexed publicKeyId,\\n        uint256 indexed verificationStackId,\\n        bool enabled\\n    );\\n\\n    /// @notice Emitted when the signature state URI is updated for a specific type and context.\\n    /// @param typeId Type identifier for the signature state being updated.\\n    /// @param contextID Context identifier for the signature state being updated.\\n    /// @param issuerId Issuer identifier related to the signature state.\\n    /// @param newTreeURI New URI for the signature state tree.\\n    event SignatureStateURIUpdated(\\n        uint160 indexed typeId,\\n        uint160 indexed contextID,\\n        uint256 indexed issuerId,\\n        string newTreeURI\\n    );\\n\\n    /// @notice Emitted when the signature state root is updated for a specific type and context.\\n    /// @param typeId Type identifier for the signature state being updated.\\n    /// @param contextID Context identifier for the signature state being updated.\\n    /// @param issuerId Issuer identifier related to the signature state.\\n    /// @param newRoot New root hash for the signature state tree.\\n    event SignatureStateRootUpdated(\\n        uint160 indexed typeId,\\n        uint160 indexed contextID,\\n        uint256 indexed issuerId,\\n        bytes32 newRoot\\n    );\\n\\n    /// @dev Registers a new issuer along with their first public key and enabled verification stack.\\n    /// @param name Name of the issuer to register.\\n    /// @param verificationStackId Identifier for the verification stack.\\n    /// @param publicKeyId  Identifier for the issuer's public key.\\n    /// @param publicKeyRaw The raw public key data.\\n    /// @return The unique identifier for the newly registered issuer.\\n    function registerIssuer(\\n        string calldata name,\\n        uint8 verificationStackId,\\n        uint256 publicKeyId,\\n        bytes calldata publicKeyRaw\\n    ) external returns (uint256);\\n\\n    /// @dev Transfers the administrative role of an issuer to a new owner.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @param newOwner Address of the new administrator.\\n    function transferIssuerAdmin(uint256 issuerId, address newOwner) external;\\n\\n    /// @dev Adds a new public key for an issuer and enables it for a specified verification stack.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @param verificationStackId Identifier for the verification stack.\\n    /// @param publicKeyId Unique identifier for the new public key.\\n    /// @param publicKeyRaw The raw public key data.\\n    function addPublicKey(\\n        uint256 issuerId,\\n        uint8 verificationStackId,\\n        uint256 publicKeyId,\\n        bytes calldata publicKeyRaw\\n    ) external;\\n\\n    /// @dev Updates the status (active/revoked) of an issuer's public key.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @param publicKeyId Unique identifier for the public key.\\n    /// @param status New status for the public key.\\n    // only the issuer admin can call this function\\n    function updatePublicKeyStatus(uint256 issuerId, uint256 publicKeyId, PublicKeyStatus status) external;\\n\\n    /// @dev Updates the verification stack association for an issuer's public key.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @param publicKeyId Unique identifier for the public key.\\n    /// @param verificationStackId New verification stack identifier for the public key.\\n    /// @param enabled Boolean indicating whether the stack is enabled for the public key.\\n    function updatePublicKeyVerificationStack(\\n        uint256 issuerId,\\n        uint256 publicKeyId,\\n        uint8 verificationStackId,\\n        bool enabled\\n    ) external;\\n\\n    /// @dev Updates the signature state URI for a given type and context.\\n    /// @param typeId Type identifier.\\n    /// @param contextId Context identifier.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @param treeURI New URI for the signature state.\\n    function updateSignatureStateURI(\\n        uint160 typeId,\\n        uint160 contextId,\\n        uint256 issuerId,\\n        string calldata treeURI\\n    ) external;\\n\\n    /// @dev Updates the signature SMT root for a given type, context and issuer.\\n    /// @param typeId Type identifier.\\n    /// @param contextId Context identifier.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @param root New root hash for the revoked SMT.\\n    function updateSignatureState(uint160 typeId, uint160 contextId, uint256 issuerId, bytes32 root) external;\\n\\n    /// @dev Sets both the signature SMT URI and root for a given type, context and issuer.\\n    /// @param typeId Type identifier.\\n    /// @param contextId Context identifier.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @param treeURI New URI for the signature state.\\n    /// @param root New root hash for the signature state.\\n    function setSignatureState(\\n        uint160 typeId,\\n        uint160 contextId,\\n        uint256 issuerId,\\n        string calldata treeURI,\\n        bytes32 root\\n    ) external;\\n\\n    /// @dev Retrieves the issuer data, reverts if the issuer does not exist.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @return Issuer data structure containing issuer details.\\n    function getIssuer(uint256 issuerId) external view returns (Issuer memory);\\n\\n    /// @dev Retrieves the raw public key data for an issuer's public key.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @param publicKeyId Unique identifier for the public key.\\n    /// @return The raw public key data.\\n    function getPublicKeyRaw(uint256 issuerId, uint256 publicKeyId) external view returns (bytes memory);\\n\\n    /// @dev Checks if an issuer's public key is active.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @param publicKeyId Unique identifier for the public key.\\n    /// @return True if the public key is active, false otherwise.\\n    function isPublicKeyActive(uint256 issuerId, uint256 publicKeyId) external view returns (bool);\\n\\n    /// @dev Checks if an issuer's public key is active and enabled for a specific verification stack.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @param publicKeyId Unique identifier for the public key.\\n    /// @param verificationStackId Identifier for the verification stack.\\n    /// @return True if the public key is active and enabled for the stack, false otherwise.\\n    function isPublicKeyActiveForStack(\\n        uint256 issuerId,\\n        uint256 publicKeyId,\\n        uint8 verificationStackId\\n    ) external view returns (bool);\\n\\n    /// @dev Retrieves the signature state for a given type, context and issuer.\\n    /// @param typeId Type identifier.\\n    /// @param contextId Context identifier.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @return The signature state.\\n    function getSignatureState(\\n        uint160 typeId,\\n        uint160 contextId,\\n        uint256 issuerId\\n    ) external view returns (SignatureState memory);\\n\\n    /// @dev Retrieves the signature state URI for a given type, context and issuer.\\n    /// @param typeId Type identifier.\\n    /// @param contextId Context identifier.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @return The URI of the signature state.\\n    function getSignatureStateURI(\\n        uint160 typeId,\\n        uint160 contextId,\\n        uint256 issuerId\\n    ) external view returns (string memory);\\n\\n    /// @dev Retrieves the signature state root for a given type, context and issuer.\\n    /// @param typeId Type identifier.\\n    /// @param contextId Context identifier.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @return The root hash of the signature state.\\n    function getSignatureStateRoot(uint160 typeId, uint160 contextId, uint256 issuerId) external view returns (bytes32);\\n}\\n\",\"keccak256\":\"0xec472bdee80280b790f226a9526cdea5a618e65881858317b40fba1a9893932b\",\"license\":\"MIT\"},\"contracts/interfaces/IProofVerifier.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.18;\\n\\n/// @title IProofVerifier\\n/// @dev Interface for static verification of zero-knowledge proofs.\\ninterface IProofVerifier {\\n    /// @notice Retrieves the verification keys.\\n    /// @dev This function is used to get the verification keys that are necessary for verifying proofs.\\n    /// @return An array of `uint` representing the verification keys.\\n    function getVerificationKeys() external view returns (uint256[] memory);\\n\\n    /// @dev Checks if the public signals are aliased. Aliased signals should never be used in proofs.\\n    ///      This is useful when using proof aggregators that does not check for signal aliasing.\\n    /// @param _pubSignals An array of `uint` representing the public signals.\\n    /// @return A boolean value indicating if any public signal is aliased (`true`) or not (`false`).\\n    function isAliased(uint256[] calldata _pubSignals) external view returns (bool);\\n\\n    /// @dev This function takes a cryptographic proof and public signals to verify the proof's validity.\\n    /// @notice It verifies the proof and check if public signals were aliased.\\n    /// @param _proofs An array of `uint` representing the proof.\\n    /// @param _pubSignals An array of `uint` representing the public signals.\\n    /// @return A boolean value indicating whether the proof is valid (`true`) or not (`false`).\\n    function verifyProof(uint256[] calldata _proofs, uint256[] calldata _pubSignals) external view returns (bool);\\n}\\n\",\"keccak256\":\"0xcf34af8efbb65237c2a47fd421e615cec850b19f9647fc2087c2a034d319b7be\",\"license\":\"MIT\"},\"contracts/interfaces/IPublicSignalGetter.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.18;\\n\\n/// @title Intrinsic Signal enum\\nenum IntrinsicSignalName {\\n    TYPE,\\n    CONTEXT,\\n    NULLIFIER,\\n    EXTERNAL_NULLIFIER,\\n    REVEAL_IDENTITY,\\n    EXPIRATION_LB,\\n    KEY_ID,\\n    ID_EQUALS_TO,\\n    SIG_REVOCATION_SMT_ROOT\\n}\\n\\n/// @title Public Signal Getter Interface\\n/// @dev Public signals (inputs) are represented as an array of uints in galxe identity protocol.\\n///      To find the public signal for a given signal name, type designer should set a contract\\n///      in the type registry that implements this interface.\\ninterface IPublicSignalGetter {\\n    /// @dev get the public signal for the signal name, represented as the given enum (represented as uint8), based on the public signals.\\n    /// @notice Implementation must be able to handle intrinsic signals, defiend in IntrinsicSignalName enum.\\n    ///         Type-specific signals support is optional.\\n    /// @param name The signal name, represented as the given enum (converted to uint8).\\n    /// @param publicSignals The public signals.\\n    function getPublicSignal(uint8 name, uint256[] calldata publicSignals) external view returns (uint256);\\n}\\n\",\"keccak256\":\"0xdfdfd996ad88b94d59f07e0ef67a2e6091ccd03a25c395fe53fb1e83770d99b2\",\"license\":\"MIT\"},\"contracts/interfaces/IStatefulVerifier.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.18;\\n\\nimport { IIssuerRegistry } from \\\"../interfaces/IIssuerRegistry.sol\\\";\\nimport { ITypeRegistry } from \\\"../interfaces/ITypeRegistry.sol\\\";\\n\\n/// @title VerifyResult\\n/// @notice Enum representing the possible results of a proof verification.\\n/// Only the OK result indicates a successful verification.\\nenum VerifyResult {\\n    OK,\\n    TYPE_UNINITIALIZED,\\n    TYPE_ID_MISMATCH,\\n    CONTEXT_ID_MISMATCH,\\n    PUBKEY_INACTIVE,\\n    SIG_REVOCATION_SMT_ROOT_MISMATCH,\\n    PROOF_INVALID,\\n    EXPIRED,\\n    UNKNOWN_ERROR\\n}\\n\\n/// @title IBabyzkStatefulVerifier\\n/// @notice Interface for the BabyzkStatefulVerifier contract which handles on-chain stateful verification of zero-knowledge proofs.\\ninterface IStatefulVerifier {\\n    /// @notice Emitted when the TypeRegistry is updated.\\n    /// @param oldTypeRegistry The address of the old TypeRegistry.\\n    /// @param newTypeRegistry The address of the new TypeRegistry.\\n    event TypeRegistryUpdated(ITypeRegistry oldTypeRegistry, ITypeRegistry newTypeRegistry);\\n\\n    /// @notice Emitted when the IssuerRegistry is updated.\\n    /// @param oldIssuerRegistry The address of the old IssuerRegistry.\\n    /// @param newIssuerRegistry The address of the new IssuerRegistry.\\n    event IssuerRegistryUpdated(IIssuerRegistry oldIssuerRegistry, IIssuerRegistry newIssuerRegistry);\\n\\n    /// @notice Performs static verification of zero-knowledge proofs.\\n    /// @param typeId The type ID of the proof to verify.\\n    /// @param contextId The context ID of the proof to verify.\\n    /// @param keyId The key ID associated with the proof.\\n    /// @param proofs An array containing the proof data.\\n    /// @param publicSignals An array containing the public signals data.\\n    /// @return A value from the VerifyResult enum representing the verification result.\\n    function verifyProofStatic(\\n        uint160 typeId,\\n        uint160 contextId,\\n        uint256 keyId,\\n        uint256[] calldata proofs,\\n        uint256[] calldata publicSignals\\n    ) external view returns (VerifyResult);\\n\\n    /// @notice Performs full verification of zero-knowledge proofs, including issuer public key activity and revocation checks.\\n    /// @param typeId The type ID of the proof to verify.\\n    /// @param contextId The context ID of the proof to verify.\\n    /// @param issuerId The issuer ID associated with the proof.\\n    /// @param proofs An array containing the proof data.\\n    /// @param publicSignals An array containing the public signals data.\\n    /// @return A value from the VerifyResult enum representing the verification result.\\n    function verifyProofFull(\\n        uint160 typeId,\\n        uint160 contextId,\\n        uint256 issuerId,\\n        uint256[] calldata proofs,\\n        uint256[] calldata publicSignals\\n    ) external view returns (VerifyResult);\\n\\n    /// @notice Returns the current TypeRegistry address.\\n    /// @return The address of the TypeRegistry.\\n    function getTypeRegistry() external view returns (ITypeRegistry);\\n\\n    /// @notice Returns the current IssuerRegistry address.\\n    /// @return The address of the IssuerRegistry.\\n    function getIssuerRegistry() external view returns (IIssuerRegistry);\\n}\\n\",\"keccak256\":\"0xf4457922d63377bb39b469b690992890ace2397fb87f92bd7f379f3f9b79132d\",\"license\":\"MIT\"},\"contracts/interfaces/ITypeRegistry.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.18;\\n\\nimport { IProofVerifier } from \\\"./IProofVerifier.sol\\\";\\nimport { IPublicSignalGetter } from \\\"./IPublicSignalGetter.sol\\\";\\n\\n/// @title Credential Type\\n/// @dev Defines the structure of a credential type.\\nstruct CredentialType {\\n    // @dev This flag indicates if the credential type support revocation.\\n    bool revocable;\\n    // @dev The address of the admin of the credential type, initially set to the creator.\\n    address admin;\\n    // @dev Provides a human-readable identifier for the credential.\\n    string name;\\n    // @dev The type specification of Galxe Identity Credential Type Schema.\\n    string definition;\\n    // @dev Additional context or information about the type.\\n    string description;\\n    // @dev A URI to an external JSON file of more information about the credential.\\n    // See whitepaper for the JSON schema specification.\\n    string resourceURI;\\n}\\n\\n/// @title Credential Type Config, miscellanous.\\n/// @notice To save stack space, we use this struct to store the verifier and public signal getter.\\nstruct CredentialTypeMiscConfig {\\n    bool revocable;\\n    uint8 verificationStackId;\\n    IProofVerifier verifier;\\n    IPublicSignalGetter publicSignalGetter;\\n}\\n\\n/// @title Interface for Type Registration Contract\\n/// @notice This interface defines the functions for registering and managing types by users.\\ninterface ITypeRegistry {\\n    /// @dev Emitted when a new type is registered\\n    /// @param typeID Unique identifier for the registered type\\n    /// @param admin Address of the admin of the type.\\n    /// @param name Name of the type\\n    /// @param definition Immutable definition of the type\\n    /// @param description Immutable description of the type\\n    /// @param resourceURI Mutable resource URI for the type\\n    event TypeRegistered(\\n        uint160 indexed typeID,\\n        address indexed admin,\\n        string name,\\n        string definition,\\n        string description,\\n        string resourceURI\\n    );\\n\\n    /// @dev Emitted when the resource URI of a type is updated\\n    /// @param typeID Unique identifier for the type being updated\\n    /// @param oldResourceURI The previous resource URI\\n    /// @param newResourceURI The new resource URI\\n    event TypeResourceURIUpdated(uint160 indexed typeID, string oldResourceURI, string newResourceURI);\\n\\n    /// @dev Emitted when a proof verifier is updated for a type\\n    /// @param typeID type id\\n    /// @param verificationStackID verification stack id\\n    /// @param verifier address of the verifier\\n    event TypeVerifierUpdated(uint160 indexed typeID, uint8 indexed verificationStackID, address indexed verifier);\\n\\n    /// @dev Emitted when the intrinsic signal indexes are updated for a type\\n    /// @param typeID type id\\n    /// @param verificationStackID verification stack id\\n    /// @param publicSignalGetter  address of the public signal getter\\n    event TypePublicSignalGetterUpdated(\\n        uint160 indexed typeID,\\n        uint8 indexed verificationStackID,\\n        address indexed publicSignalGetter\\n    );\\n\\n    /// @dev Emitted when the admin of a type is transferred\\n    /// @param typeID type id\\n    /// @param oldAdmin address of the old admin\\n    /// @param newAdmin address of the new admin\\n    event TypeAdminTransferred(uint160 indexed typeID, address indexed oldAdmin, address indexed newAdmin);\\n\\n    /// @dev transfer the ownership of a type.\\n    /// @param typeId type id of the type\\n    /// @param newAdmin address of the new admin\\n    function transferTypeAdmin(uint160 typeId, address newAdmin) external;\\n\\n    /// @notice set a primitive type, only callable by the admin.\\n    /// @param typeId the type id of the primitive type\\n    /// @param name name of the type\\n    /// @param definition definition string\\n    /// @param description Description of the type\\n    /// @param resourceURI Mutable resource URI of the type\\n    /// @param config revocable, verifier and public signal getter.\\n    function setPrimitiveType(\\n        uint160 typeId,\\n        string calldata name,\\n        string calldata definition,\\n        string calldata description,\\n        string calldata resourceURI,\\n        CredentialTypeMiscConfig calldata config\\n    ) external;\\n\\n    /// @notice Register a new type by `msg.sender`\\n    /// @param name Type name\\n    /// @param definition Immutable type definition string\\n    /// @param description Description of the type\\n    /// @param resourceURI Mutable resource URI of the type\\n    /// @return typeID Unique identifier of the registered type\\n    function registerType(\\n        bool revocable,\\n        string calldata name,\\n        string calldata definition,\\n        string calldata description,\\n        string calldata resourceURI\\n    ) external returns (uint160);\\n\\n    /// @notice Register a new type by `msg.sender` with verifier and public signal getter set for a specific verification stack.\\n    /// @param name Type name\\n    /// @param definition Immutable type definition string\\n    /// @param description Description of the type\\n    /// @param resourceURI Mutable resource URI of the type\\n    /// @param verifier verifier for the type\\n    /// @param publicSignalGetter public signal getter for the type\\n    /// @return typeID Unique identifier of the registered type\\n    function registerType1Step(\\n        bool revocable,\\n        string calldata name,\\n        string calldata definition,\\n        string calldata description,\\n        string calldata resourceURI,\\n        uint8 verificationStackId,\\n        IProofVerifier verifier,\\n        IPublicSignalGetter publicSignalGetter\\n    ) external returns (uint160);\\n\\n    /// @notice Update the resource URI of a type\\n    /// @dev Can only be called by the type owner (`msg.sender`)\\n    /// @param _id ID of the type to update\\n    /// @param _resourceURI New resource URI for the type\\n    function updateTypeResourceURI(uint160 _id, string calldata _resourceURI) external;\\n\\n    /// @dev update the verifier for a type\\n    function updateTypeVerifier(uint160 typeId, uint8 verificationStackId, IProofVerifier verifier) external;\\n\\n    /// @dev update the verifier for a type\\n    function updateTypePublicSignalGetter(\\n        uint160 typeId,\\n        uint8 verificationStackId,\\n        IPublicSignalGetter getter\\n    ) external;\\n\\n    /// @param typeId type id of the type\\n    /// @param verificationStackId verification stack id\\n    function getVerifier(uint160 typeId, uint8 verificationStackId) external view returns (IProofVerifier);\\n\\n    /// @param typeId type id of the type\\n    /// @param verificationStackId verification stack id\\n    function getPublicSignalGetter(\\n        uint160 typeId,\\n        uint8 verificationStackId\\n    ) external view returns (IPublicSignalGetter);\\n\\n    /// @dev check if the type is fully initialized for the given verification stack.\\n    /// @param typeId id of the type\\n    /// @param verificationStackId id the verification stack\\n    function isTypeFullyInitializedForStack(uint160 typeId, uint8 verificationStackId) external view returns (bool);\\n\\n    /// @dev Retrieve details of a type for the given typeID\\n    /// @param _id ID of the type to retrieve\\n    /// @return A `CredentialType` struct containing details of the type\\n    function getType(uint160 _id) external view returns (CredentialType memory);\\n\\n    /// @dev Retrieve the admin of a type\\n    /// @param typeId type id of the type\\n    /// @return address of the admin of the type\\n    function getTypeAdmin(uint160 typeId) external view returns (address);\\n\\n    /// @dev check if the type is revocable\\n    function isRevocable(uint160 typeId) external view returns (bool);\\n\\n    /// @notice Calculate the typeID of a type, typeID is keccak256(creator, name) in uint160.\\n    /// @param creator Address of the type creator\\n    /// @param name Name of the type\\n    /// @return The calculated typeID based on the creator address and type name\\n    function calcTypeID(address creator, string calldata name) external pure returns (uint160);\\n}\\n\",\"keccak256\":\"0x86d4db6288f762aecd0725e2d4c560b56e5792c0062d48f406e04807488d1878\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x60806040523480156200001157600080fd5b50604051620012c2380380620012c28339810160408190526200003491620001ca565b6200003f3362000083565b600180546001600160a01b038086166001600160a01b03199283161790925560028054928516929091169190911790556200007a81620000d3565b5050506200021e565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b620000dd62000156565b6001600160a01b038116620001485760405162461bcd60e51b815260206004820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201526564647265737360d01b60648201526084015b60405180910390fd5b620001538162000083565b50565b6000546001600160a01b03163314620001b25760405162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e657260448201526064016200013f565b565b6001600160a01b03811681146200015357600080fd5b600080600060608486031215620001e057600080fd5b8351620001ed81620001b4565b60208501519093506200020081620001b4565b60408501519092506200021381620001b4565b809150509250925092565b611094806200022e6000396000f3fe608060405234801561001057600080fd5b50600436106100be5760003560e01c80638cf8d66511610076578063aff16ba11161005b578063aff16ba114610163578063b29b86af14610176578063f2fde38b1461019057600080fd5b80638cf8d665146101415780638da5cb5b1461015257600080fd5b80634b718b8c116100a75780634b718b8c1461010157806354207d4c14610114578063715018a61461013957600080fd5b8063070ecf4d146100c35780631a7d10f1146100ec575b600080fd5b6100d66100d1366004610eac565b6101a3565b6040516100e39190610f4b565b60405180910390f35b6100ff6100fa366004610f73565b6107dc565b005b6100ff61010f366004610f73565b6108b6565b6001546001600160a01b03165b6040516001600160a01b0390911681526020016100e3565b6100ff61098b565b6002546001600160a01b0316610121565b6000546001600160a01b0316610121565b6100d6610171366004610eac565b61099f565b61017e600181565b60405160ff90911681526020016100e3565b6100ff61019e366004610f73565b610d04565b600180546040516373190ca560e01b81526001600160a01b038a811660048301526024820193909352600092909116906373190ca590604401602060405180830381865afa1580156101f9573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061021d9190610f97565b610229575060016107d1565b60018054604051637b4ed18560e01b81526001600160a01b038b81166004830152602482019390935260009290911690637b4ed18590604401602060405180830381865afa15801561027f573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906102a39190610fb9565b604051636277717560e11b81529091506001600160a01b0382169063c4eee2ea906102d79060009088908890600401611021565b602060405180830381865afa1580156102f4573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906103189190611047565b896001600160a01b0316146103315760029150506107d1565b604051636277717560e11b81526001600160a01b0382169063c4eee2ea906103629060019088908890600401611021565b602060405180830381865afa15801561037f573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906103a39190611047565b886001600160a01b0316146103bc5760039150506107d1565b604051636277717560e11b81526000906001600160a01b0383169063c4eee2ea906103f09060069089908990600401611021565b602060405180830381865afa15801561040d573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906104319190611047565b600254604051631f89dc0b60e11b8152600481018b905260248101839052600160448201529192506001600160a01b031690633f13b81690606401602060405180830381865afa158015610489573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906104ad9190610f97565b6104bc576004925050506107d1565b50604051636277717560e11b81526000906001600160a01b0383169063c4eee2ea906104f19060059089908990600401611021565b602060405180830381865afa15801561050e573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906105329190611047565b905042811015610547576007925050506107d1565b506001546040516392b0a57f60e01b81526001600160a01b038b81166004830152909116906392b0a57f90602401602060405180830381865afa158015610592573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906105b69190610f97565b156106cb57604051636277717560e11b81526000906001600160a01b0383169063c4eee2ea906105ef9060089089908990600401611021565b602060405180830381865afa15801561060c573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906106309190611047565b600254604051632deed10d60e21b81526001600160a01b038d811660048301528c81166024830152604482018c90529293506000929091169063b7bb443490606401602060405180830381865afa15801561068f573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906106b39190611047565b90508181146106c857600593505050506107d1565b50505b5060018054604051631ef84f8560e31b81526001600160a01b038b8116600483015260248201939093526000929091169063f7c27c28906044015b602060405180830381865afa158015610723573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906107479190610fb9565b604051631c87a92b60e21b81529091506001600160a01b0382169063721ea4ac9061077c908990899089908990600401611060565b602060405180830381865afa158015610799573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906107bd9190610f97565b6107cb5760069150506107d1565b60009150505b979650505050505050565b6107e4610d94565b6001600160a01b03811661084057604051631fff1b3b60e21b815260206004820152601e60248201527f6973737565725265676973747279206973207a65726f2061646472657373000060448201526064015b60405180910390fd5b600254604080516001600160a01b03928316815291831660208301527fe7afd721c46f8367e6fde893fc343404fb8c91b32fe8fc440035458e37ae4444910160405180910390a16002805473ffffffffffffffffffffffffffffffffffffffff19166001600160a01b0392909216919091179055565b6108be610d94565b6001600160a01b03811661091557604051631fff1b3b60e21b815260206004820152601c60248201527f747970655265676973747279206973207a65726f2061646472657373000000006044820152606401610837565b600154604080516001600160a01b03928316815291831660208301527f7eebb102f6399a39c5c44574c655f01fbeef3fcfc24732acbb2df1d608dee744910160405180910390a16001805473ffffffffffffffffffffffffffffffffffffffff19166001600160a01b0392909216919091179055565b610993610d94565b61099d6000610dee565b565b600180546040516373190ca560e01b81526001600160a01b038a811660048301526024820193909352600092909116906373190ca590604401602060405180830381865afa1580156109f5573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610a199190610f97565b610a25575060016107d1565b60018054604051637b4ed18560e01b81526001600160a01b038b81166004830152602482019390935260009290911690637b4ed18590604401602060405180830381865afa158015610a7b573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610a9f9190610fb9565b604051636277717560e11b81529091506001600160a01b0382169063c4eee2ea90610ad39060009088908890600401611021565b602060405180830381865afa158015610af0573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610b149190611047565b896001600160a01b031614610b2d5760029150506107d1565b604051636277717560e11b81526001600160a01b0382169063c4eee2ea90610b5e9060019088908890600401611021565b602060405180830381865afa158015610b7b573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610b9f9190611047565b886001600160a01b031614610bb85760039150506107d1565b604051636277717560e11b81526001600160a01b0382169063c4eee2ea90610be99060069088908890600401611021565b602060405180830381865afa158015610c06573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610c2a9190611047565b8714610c3a5760049150506107d1565b604051636277717560e11b81526000906001600160a01b0383169063c4eee2ea90610c6e9060059089908990600401611021565b602060405180830381865afa158015610c8b573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610caf9190611047565b905042811015610cc4576007925050506107d1565b505060018054604051631ef84f8560e31b81526001600160a01b038b8116600483015260248201939093526000929091169063f7c27c2890604401610706565b610d0c610d94565b6001600160a01b038116610d885760405162461bcd60e51b815260206004820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201527f64647265737300000000000000000000000000000000000000000000000000006064820152608401610837565b610d9181610dee565b50565b6000546001600160a01b0316331461099d5760405162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e65726044820152606401610837565b600080546001600160a01b0383811673ffffffffffffffffffffffffffffffffffffffff19831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b6001600160a01b0381168114610d9157600080fd5b60008083601f840112610e7257600080fd5b50813567ffffffffffffffff811115610e8a57600080fd5b6020830191508360208260051b8501011115610ea557600080fd5b9250929050565b600080600080600080600060a0888a031215610ec757600080fd5b8735610ed281610e4b565b96506020880135610ee281610e4b565b955060408801359450606088013567ffffffffffffffff80821115610f0657600080fd5b610f128b838c01610e60565b909650945060808a0135915080821115610f2b57600080fd5b50610f388a828b01610e60565b989b979a50959850939692959293505050565b6020810160098310610f6d57634e487b7160e01b600052602160045260246000fd5b91905290565b600060208284031215610f8557600080fd5b8135610f9081610e4b565b9392505050565b600060208284031215610fa957600080fd5b81518015158114610f9057600080fd5b600060208284031215610fcb57600080fd5b8151610f9081610e4b565b81835260007f07ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff83111561100857600080fd5b8260051b80836020870137939093016020019392505050565b60ff8416815260406020820152600061103e604083018486610fd6565b95945050505050565b60006020828403121561105957600080fd5b5051919050565b604081526000611074604083018688610fd6565b82810360208401526107d1818587610fd656fea164736f6c6343000817000a",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100be5760003560e01c80638cf8d66511610076578063aff16ba11161005b578063aff16ba114610163578063b29b86af14610176578063f2fde38b1461019057600080fd5b80638cf8d665146101415780638da5cb5b1461015257600080fd5b80634b718b8c116100a75780634b718b8c1461010157806354207d4c14610114578063715018a61461013957600080fd5b8063070ecf4d146100c35780631a7d10f1146100ec575b600080fd5b6100d66100d1366004610eac565b6101a3565b6040516100e39190610f4b565b60405180910390f35b6100ff6100fa366004610f73565b6107dc565b005b6100ff61010f366004610f73565b6108b6565b6001546001600160a01b03165b6040516001600160a01b0390911681526020016100e3565b6100ff61098b565b6002546001600160a01b0316610121565b6000546001600160a01b0316610121565b6100d6610171366004610eac565b61099f565b61017e600181565b60405160ff90911681526020016100e3565b6100ff61019e366004610f73565b610d04565b600180546040516373190ca560e01b81526001600160a01b038a811660048301526024820193909352600092909116906373190ca590604401602060405180830381865afa1580156101f9573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061021d9190610f97565b610229575060016107d1565b60018054604051637b4ed18560e01b81526001600160a01b038b81166004830152602482019390935260009290911690637b4ed18590604401602060405180830381865afa15801561027f573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906102a39190610fb9565b604051636277717560e11b81529091506001600160a01b0382169063c4eee2ea906102d79060009088908890600401611021565b602060405180830381865afa1580156102f4573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906103189190611047565b896001600160a01b0316146103315760029150506107d1565b604051636277717560e11b81526001600160a01b0382169063c4eee2ea906103629060019088908890600401611021565b602060405180830381865afa15801561037f573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906103a39190611047565b886001600160a01b0316146103bc5760039150506107d1565b604051636277717560e11b81526000906001600160a01b0383169063c4eee2ea906103f09060069089908990600401611021565b602060405180830381865afa15801561040d573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906104319190611047565b600254604051631f89dc0b60e11b8152600481018b905260248101839052600160448201529192506001600160a01b031690633f13b81690606401602060405180830381865afa158015610489573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906104ad9190610f97565b6104bc576004925050506107d1565b50604051636277717560e11b81526000906001600160a01b0383169063c4eee2ea906104f19060059089908990600401611021565b602060405180830381865afa15801561050e573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906105329190611047565b905042811015610547576007925050506107d1565b506001546040516392b0a57f60e01b81526001600160a01b038b81166004830152909116906392b0a57f90602401602060405180830381865afa158015610592573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906105b69190610f97565b156106cb57604051636277717560e11b81526000906001600160a01b0383169063c4eee2ea906105ef9060089089908990600401611021565b602060405180830381865afa15801561060c573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906106309190611047565b600254604051632deed10d60e21b81526001600160a01b038d811660048301528c81166024830152604482018c90529293506000929091169063b7bb443490606401602060405180830381865afa15801561068f573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906106b39190611047565b90508181146106c857600593505050506107d1565b50505b5060018054604051631ef84f8560e31b81526001600160a01b038b8116600483015260248201939093526000929091169063f7c27c28906044015b602060405180830381865afa158015610723573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906107479190610fb9565b604051631c87a92b60e21b81529091506001600160a01b0382169063721ea4ac9061077c908990899089908990600401611060565b602060405180830381865afa158015610799573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906107bd9190610f97565b6107cb5760069150506107d1565b60009150505b979650505050505050565b6107e4610d94565b6001600160a01b03811661084057604051631fff1b3b60e21b815260206004820152601e60248201527f6973737565725265676973747279206973207a65726f2061646472657373000060448201526064015b60405180910390fd5b600254604080516001600160a01b03928316815291831660208301527fe7afd721c46f8367e6fde893fc343404fb8c91b32fe8fc440035458e37ae4444910160405180910390a16002805473ffffffffffffffffffffffffffffffffffffffff19166001600160a01b0392909216919091179055565b6108be610d94565b6001600160a01b03811661091557604051631fff1b3b60e21b815260206004820152601c60248201527f747970655265676973747279206973207a65726f2061646472657373000000006044820152606401610837565b600154604080516001600160a01b03928316815291831660208301527f7eebb102f6399a39c5c44574c655f01fbeef3fcfc24732acbb2df1d608dee744910160405180910390a16001805473ffffffffffffffffffffffffffffffffffffffff19166001600160a01b0392909216919091179055565b610993610d94565b61099d6000610dee565b565b600180546040516373190ca560e01b81526001600160a01b038a811660048301526024820193909352600092909116906373190ca590604401602060405180830381865afa1580156109f5573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610a199190610f97565b610a25575060016107d1565b60018054604051637b4ed18560e01b81526001600160a01b038b81166004830152602482019390935260009290911690637b4ed18590604401602060405180830381865afa158015610a7b573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610a9f9190610fb9565b604051636277717560e11b81529091506001600160a01b0382169063c4eee2ea90610ad39060009088908890600401611021565b602060405180830381865afa158015610af0573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610b149190611047565b896001600160a01b031614610b2d5760029150506107d1565b604051636277717560e11b81526001600160a01b0382169063c4eee2ea90610b5e9060019088908890600401611021565b602060405180830381865afa158015610b7b573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610b9f9190611047565b886001600160a01b031614610bb85760039150506107d1565b604051636277717560e11b81526001600160a01b0382169063c4eee2ea90610be99060069088908890600401611021565b602060405180830381865afa158015610c06573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610c2a9190611047565b8714610c3a5760049150506107d1565b604051636277717560e11b81526000906001600160a01b0383169063c4eee2ea90610c6e9060059089908990600401611021565b602060405180830381865afa158015610c8b573d6000803e3d6000fd5b505050506040513d601f19601f82011682018060405250810190610caf9190611047565b905042811015610cc4576007925050506107d1565b505060018054604051631ef84f8560e31b81526001600160a01b038b8116600483015260248201939093526000929091169063f7c27c2890604401610706565b610d0c610d94565b6001600160a01b038116610d885760405162461bcd60e51b815260206004820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201527f64647265737300000000000000000000000000000000000000000000000000006064820152608401610837565b610d9181610dee565b50565b6000546001600160a01b0316331461099d5760405162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e65726044820152606401610837565b600080546001600160a01b0383811673ffffffffffffffffffffffffffffffffffffffff19831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b6001600160a01b0381168114610d9157600080fd5b60008083601f840112610e7257600080fd5b50813567ffffffffffffffff811115610e8a57600080fd5b6020830191508360208260051b8501011115610ea557600080fd5b9250929050565b600080600080600080600060a0888a031215610ec757600080fd5b8735610ed281610e4b565b96506020880135610ee281610e4b565b955060408801359450606088013567ffffffffffffffff80821115610f0657600080fd5b610f128b838c01610e60565b909650945060808a0135915080821115610f2b57600080fd5b50610f388a828b01610e60565b989b979a50959850939692959293505050565b6020810160098310610f6d57634e487b7160e01b600052602160045260246000fd5b91905290565b600060208284031215610f8557600080fd5b8135610f9081610e4b565b9392505050565b600060208284031215610fa957600080fd5b81518015158114610f9057600080fd5b600060208284031215610fcb57600080fd5b8151610f9081610e4b565b81835260007f07ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff83111561100857600080fd5b8260051b80836020870137939093016020019392505050565b60ff8416815260406020820152600061103e604083018486610fd6565b95945050505050565b60006020828403121561105957600080fd5b5051919050565b604081526000611074604083018688610fd6565b82810360208401526107d1818587610fd656fea164736f6c6343000817000a",
+  "devdoc": {
+    "events": {
+      "IssuerRegistryUpdated(address,address)": {
+        "params": {
+          "newIssuerRegistry": "The address of the new IssuerRegistry.",
+          "oldIssuerRegistry": "The address of the old IssuerRegistry."
+        }
+      },
+      "TypeRegistryUpdated(address,address)": {
+        "params": {
+          "newTypeRegistry": "The address of the new TypeRegistry.",
+          "oldTypeRegistry": "The address of the old TypeRegistry."
+        }
+      }
+    },
+    "kind": "dev",
+    "methods": {
+      "constructor": {
+        "details": "BabyzkVerifier constructor",
+        "params": {
+          "issuerRegistry": "issuer registry contract",
+          "typeRegistry": "type registry contract"
+        }
+      },
+      "getIssuerRegistry()": {
+        "details": "return the issuer registry"
+      },
+      "getTypeRegistry()": {
+        "details": "return the type registry"
+      },
+      "owner()": {
+        "details": "Returns the address of the current owner."
+      },
+      "renounceOwnership()": {
+        "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+      },
+      "transferOwnership(address)": {
+        "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+      },
+      "updateIssuerRegistry(address)": {
+        "details": "update the issuer registry"
+      },
+      "updateTypeRegistry(address)": {
+        "details": "update the type registry"
+      },
+      "verifyProofFull(uint160,uint160,uint256,uint256[],uint256[])": {
+        "details": "Stateful verification of zero-knowledge proofs that checks      if the proof is valid and the issuer public key is active, and      for revocation checks if the the smt root matches.The trust relationship between the credential and issuer is binded by      the public key ID:      credential <--- signed by ---- publikc key <--- authroized by ---- issuer      As long as the issuer set the public key ID to be active, the credential is trusted by the issuer,      However, note that it does not mean that the credential is directly generated by the issuer."
+      },
+      "verifyProofStatic(uint160,uint160,uint256,uint256[],uint256[])": {
+        "details": "static verification of zero-knowledge proofs that only checks if the proof is valid.Code duplication is deliberate for clear separation of concerns."
+      }
+    },
+    "stateVariables": {
+      "_issuerRegistry": {
+        "details": "issuer registry"
+      },
+      "_typeRegistry": {
+        "details": "type registry"
+      }
+    },
+    "title": "BabyzkVerifier",
+    "version": 1
+  },
+  "userdoc": {
+    "events": {
+      "IssuerRegistryUpdated(address,address)": {
+        "notice": "Emitted when the IssuerRegistry is updated."
+      },
+      "TypeRegistryUpdated(address,address)": {
+        "notice": "Emitted when the TypeRegistry is updated."
+      }
+    },
+    "kind": "user",
+    "methods": {},
+    "notice": "@dev BabyzkVerifier is a contract that does on-chain stateful verification of zero-knowledge proofs.",
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 7,
+        "contract": "contracts/babyzk/StatefulProofVerifier.sol:BabyzkStatefulVerifier",
+        "label": "_owner",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 1852,
+        "contract": "contracts/babyzk/StatefulProofVerifier.sol:BabyzkStatefulVerifier",
+        "label": "_typeRegistry",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_contract(ITypeRegistry)4417"
+      },
+      {
+        "astId": 1856,
+        "contract": "contracts/babyzk/StatefulProofVerifier.sol:BabyzkStatefulVerifier",
+        "label": "_issuerRegistry",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_contract(IIssuerRegistry)4023"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_contract(IIssuerRegistry)4023": {
+        "encoding": "inplace",
+        "label": "contract IIssuerRegistry",
+        "numberOfBytes": "20"
+      },
+      "t_contract(ITypeRegistry)4417": {
+        "encoding": "inplace",
+        "label": "contract ITypeRegistry",
+        "numberOfBytes": "20"
+      }
+    }
+  }
+}

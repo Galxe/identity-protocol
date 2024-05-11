@@ -1,0 +1,90 @@
+{
+  "name": "@galxe-identity-protocol/sdk",
+  "version": "1.0.7",
+  "description": "Galxe Identity Protocol TypeScript SDK",
+  "packageManager": "pnpm@9.1.0+sha256.22e36fba7f4880ecf749a5ca128b8435da085ecd49575e7fb9e64d6bf4fad394",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "main": "dist/common/index.js",
+  "types": "dist/common/index.d.ts",
+  "module": "dist/esm/index.mjs",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "require": {
+        "types": "./dist/common/index.d.ts",
+        "default": "./dist/common/index.js"
+      },
+      "import": {
+        "types": "./dist/esm/index.d.mts",
+        "default": "./dist/esm/index.mjs"
+      },
+      "bundled": "./dist/bundled/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "!src/testutils/*",
+    "!src/e2e/*",
+    "!src/**/*.test.ts"
+  ],
+  "scripts": {
+    "build": "rimraf dist && tsup",
+    "format:scripts": "prettier . --write",
+    "format:styles": "stylelint ./**/*.{css,scss} --fix --allow-empty-input",
+    "format": "pnpm format:scripts && pnpm format:styles",
+    "lint:scripts": "eslint . --ext .ts",
+    "lint:styles": "stylelint ./**/*.{css,scss} --allow-empty-input",
+    "lint": "pnpm lint:scripts && pnpm lint:styles",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "doc": "typedoc --cname protocol.galxe.com --githubPages true"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^20.0.1",
+    "@types/node": "^18.19.33",
+    "@types/node-fetch": "^2.6.11",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "axios-mock-adapter": "^1.22.0",
+    "esbuild-plugin-polyfill-node": "^0.3.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^8.10.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "ganache": "^7.9.2",
+    "lint-staged": "^13.3.0",
+    "postcss": "^8.4.38",
+    "postcss-scss": "^4.0.9",
+    "prettier": "^2.8.8",
+    "rimraf": "^5.0.6",
+    "solc": "^0.8.25",
+    "stylelint": "^14.16.1",
+    "stylelint-config-prettier": "^9.0.5",
+    "stylelint-config-recommended": "^9.0.0",
+    "stylelint-config-sass-guidelines": "^9.0.1",
+    "stylelint-prettier": "^3.0.0",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.0.2",
+    "typedoc": "^0.25.13",
+    "typescript": "^5.4.5",
+    "vite-tsconfig-paths": "^4.3.2",
+    "vitest": "^1.6.0",
+    "webdriverio": "^8.36.1"
+  },
+  "dependencies": {
+    "@galxe-identity-protocol/evm-contracts": "workspace:^",
+    "@iden3/js-crypto": "^1.1.0",
+    "@iden3/js-merkletree": "^1.2.0",
+    "axios": "^1.6.8",
+    "circomlibjs": "^0.1.7",
+    "ethers": "^6.12.1",
+    "ffjavascript": "^0.2.63",
+    "idb-keyval": "^6.2.1",
+    "js-sha3": "^0.8.0",
+    "node-fetch": "^2.7.0",
+    "snarkjs": "^0.7.4"
+  }
+}

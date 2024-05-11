@@ -1,0 +1,105 @@
+syntax = "proto3";
+
+package issuer.v1;
+
+option go_package = "github.com/Galxe/galxe-identity-protocol/apps/issuer/api/go;issuer";
+
+message PingRequest {}
+message PingResponse {}
+
+enum ClaimTypeEnum {
+  CLAIM_TYPE_ENUM_UNSPECIFIED =0;
+  CLAIM_TYPE_ENUM_SCALAR = 1;
+  CLAIM_TYPE_ENUM_PROPERTY = 2;
+  CLAIM_TYPE_ENUM_BOOLEAN = 3;
+}
+
+enum PropHashEnum {
+  PROP_HASH_ENUM_UNSPECIFIED = 0;
+  PROP_HASH_ENUM_POSEIDON = 1;
+  PROP_HASH_ENUM_KECCAK256 = 2;
+  PROP_HASH_ENUM_CUSTOM = 3;
+}
+
+message ClaimType {
+  message ScalarType {
+      int64 width = 1;
+  }
+  message PropertyType {
+      int64 width = 1;
+      PropHashEnum hash_algorithm = 2;
+      optional int64 n_equal_checks = 3;
+  }
+  message BooleanType {
+      bool value = 1;
+  }
+  oneof type {
+      ScalarType scalar_type = 1;
+      PropertyType property_type = 2;
+      BooleanType boolean_type = 3;
+  }
+}
+
+message ClaimDef {
+  string name = 1;
+  ClaimType claim_type = 2;
+}
+
+message CredType {
+  repeated ClaimDef claims = 1;
+  optional int64 revocable = 2;
+  string type_id = 3;
+}
+
+message ClaimValue {
+  message ScalarValue {
+      string value = 1;
+  }
+  message PropertyValue {
+      string value = 1;
+      optional string hash = 2;
+  }
+  message BoolValue {
+      bool value = 1;
+  }
+  oneof value {
+      ScalarValue scalar_value = 1;
+      PropertyValue property_value = 2;
+      BoolValue bool_value = 3;
+  }
+}
+
+message Header {
+  uint64 version = 1;
+  string type = 2;
+  string context = 3;
+  string id = 4;
+}
+
+message Body {
+  CredType tp = 1;
+  repeated ClaimValue values = 2;
+}
+
+message AttachmentSet {
+  map<string, string> attachments = 1;
+}
+
+message GenerateSignedCredentialRequest {
+  Header header = 1;
+  Body body = 2;
+  AttachmentSet attachments = 3;
+  uint64 chain_id = 4;
+  string identity_commitment = 5;
+  string expired_at = 6;
+}
+
+message GenerateSignedCredentialResponse {
+  string signed_cred = 1;
+}
+
+service IssuerService {
+  rpc Ping(PingRequest) returns (PingResponse) {}
+
+  rpc GenerateSignedCredential(GenerateSignedCredentialRequest) returns (GenerateSignedCredentialResponse) {}
+}

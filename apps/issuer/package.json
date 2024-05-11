@@ -1,0 +1,51 @@
+{
+  "name": "@galxe-identity-protocol/issuer",
+  "version": "0.0.1",
+  "description": "Galxe Identity Protocol Issuer",
+  "packageManager": "pnpm@9.1.0+sha256.22e36fba7f4880ecf749a5ca128b8435da085ecd49575e7fb9e64d6bf4fad394",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "type": "module",
+  "module": "dist/common/server.cjs",
+  "license": "MIT",
+  "bin": {
+    "issuer": "./dist/common/server.cjs"
+  },
+  "scripts": {
+    "start": "node dist/common/server.cjs",
+    "build": "rimraf dist && tsup",
+    "prettier:write": "prettier --write ./src",
+    "lint": "eslint --ignore-path ./.eslintignore --ext .js,.ts .",
+    "test": "echo TODO"
+  },
+  "dependencies": {
+    "@galxe-identity-protocol/evm-contracts": "workspace:^",
+    "@galxe-identity-protocol/sdk": "workspace:^",
+    "@grpc/grpc-js": "^1.10.7",
+    "@types/jsonfile": "^6.1.4",
+    "@types/node": "^20.12.11",
+    "conf": "^12.0.0",
+    "dotenv-flow": "^3.3.0",
+    "dts-gen": "^0.10.2",
+    "express": "^4.19.2",
+    "google-protobuf": "^3.21.2",
+    "jsonfile": "^6.1.0",
+    "long": "^5.2.3",
+    "protobufjs": "^7.3.0",
+    "ts-node": "^10.9.2",
+    "ts-proto": "^1.174.0",
+    "ts-protoc-gen": "^0.15.0",
+    "tslog": "^4.9.2",
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@types/google-protobuf": "^3.15.12",
+    "rimraf": "^5.0.6",
+    "tsconfig-paths": "^4.2.0",
+    "tsup": "^8.0.2",
+    "vite": "^5.2.11",
+    "vite-node": "^1.6.0",
+    "vitest": "^1.6.0"
+  }
+}

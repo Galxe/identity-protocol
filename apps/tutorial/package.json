@@ -1,0 +1,37 @@
+{
+  "name": "@galxe-identity-protocol/tutorial",
+  "version": "0.0.1",
+  "description": "Galxe Identity Protocol tutorial",
+  "packageManager": "pnpm@9.1.0+sha256.22e36fba7f4880ecf749a5ca128b8435da085ecd49575e7fb9e64d6bf4fad394",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "MIT",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "echo NOTHING",
+    "test": "echo TODO",
+    "tutorial1": "ts-node -T src/tutorial1.ts",
+    "useNebraUpa": "ts-node -T src/useNebraUpa.ts",
+    "prettier:write": "prettier --write ./src",
+    "lint": "eslint --ignore-path ./.eslintignore --ext .js,.ts ."
+  },
+  "dependencies": {
+    "@galxe-identity-protocol/sdk": "workspace:^",
+    "@nebrazkp/upa": "^1.1.1",
+    "@types/jsonfile": "^6.1.4",
+    "@types/node": "^20.12.11",
+    "@types/snarkjs": "^0.7.8",
+    "dotenv": "^16.4.5",
+    "ethers": "^6.12.1",
+    "node-fetch": "^3.3.2",
+    "tslog": "^4.9.2",
+    "typescript": "^5.4.5",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.6",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0"
+  }
+}

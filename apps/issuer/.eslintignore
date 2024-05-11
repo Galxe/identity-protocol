@@ -1,0 +1,14 @@
+.history
+.husky
+.vscode
+coverage
+dist
+docs
+node_modules
+submodules
+vite.config.cts
+tsup.config.ts
+vitest.config.mts
+.eslintrc.cjs
+api/
+src/grpc

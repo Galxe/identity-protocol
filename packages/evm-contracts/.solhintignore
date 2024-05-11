@@ -1,0 +1,7 @@
+# directories
+**/build
+**/artifacts
+**/node_modules
+**/contracts/babyzk/test
+**/contracts/primitive
+**/deployments

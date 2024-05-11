@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo</title>
+    <style>
+      /* Grid Styles */
+      .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr; /* This creates three equal columns */
+        height: 100vh; /* 100% of the viewport height */
+        gap: 10px;
+      }
+
+      /* Columns */
+      .column {
+        padding: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Optional shadow for each column */
+      }
+
+      .bg {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="grid-container">
+        <div class="column">
+          <h1>Issuer</h1>
+          <div>
+            <label for="type-definition">Type Definition String:</label>
+            <textarea v-model="typeDefinition" id="type-definition" cols="80" rows="3"></textarea>
+          </div>
+
+          <div>
+            <label for="type-id">TypeID:</label>
+            <input v-model="typeID" id="type-id" />
+          </div>
+
+          <div>
+            <label for="credential">Credential:</label>
+            <textarea v-model="credentialText" id="credential" cols="30" rows="20"></textarea>
+          </div>
+
+          <div>
+            <label for="skHex">Issuer Private key:</label>
+            <input v-model="skHex" id="skHex" />
+          </div>
+
+          <div>
+            <label for="expiration">Expiration:</label>
+            <input v-model="expiration" id="expiration" />
+          </div>
+
+          <div>identityCommitment: {{ rst.idc ? rst.idc.toString() : "" }}</div>
+
+          <hr />
+          <h1>Holder</h1>
+          <div>
+            <label for="idsecret">ID Secret:</label>
+            <input v-model="idsecret" id="idsecret" />
+          </div>
+
+          <div>
+            <label for="idnullifier">ID Nullifier:</label>
+            <input v-model="idnullifier" id="idnullifier" />
+          </div>
+        </div>
+        <div class="column bg">
+          <p>Generated credential:</p>
+          <pre>{{ rst.cred ? rst.cred.marshal(2) : s(rst.err, 2) }}</pre>
+          <p>Generated credential type:</p>
+          <pre>{{ rst.tp ? s(rst.tp, 2) : s(rst.err, 2) }}</pre>
+          <p>Generated circuit:</p>
+          <pre>{{ rst.circuit ? rst.circuit.code : s(rst.err, 2) }}</pre>
+        </div>
+        <div class="column">
+          <p>Error:</p>
+          <pre>{{ rst.err ? rst.err.toString() : "" }}</pre>
+        </div>
+      </div>
+    </div>
+    <script src="../dist/browser/index.global.js"></script>
+    <script type="module">
+      await window.gidp.babyzk.prepare();
+      import { createApp, ref, computed } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
+      // This is a demo app of using the SDK to:
+      // 1. create a new credential type: passport.
+      // 2. zk setup for the credential
+      //     i. generate circuit and compile
+      //    ii. 1-party trust setup, locally.
+      //   iii. generate proving and verifying keys
+      //    iv. generate solidity verifier
+      // 3. make a new issuer
+      // 4. issue a new credential
+      // 5. verify the credential (raw signature verification)
+      // 6. generate a proof for the credential
+      // 7. verify the proof.
+      createApp({
+        setup() {
+          const g = window.gidp;
+          console.log("Galxe identity SDK:", g);
+          const typeDefinition = ref("token_balance:uint<256>;birthday:uint<64>;status:prop<8,c>;followed:bool;");
+          const credentialText = ref(`
+{
+  "header": {
+    "version": "1",
+    "type": "778",
+    "context": "666",
+    "id": "9"
+  },
+  "body": {
+    "token_balance": "100",
+    "birthday": "200",
+    "status": {
+      "str": "middle-class",
+      "value": "2"
+    },
+    "followed": "true"
+  },
+  "signatures": []
+}
+          `);
+          const typeID = ref("778");
+          const skHex = ref("0xfd60ceb442aca7f74d2e56c1f0e93507798e8a6e02c4cd1a5585a36167fa7b03");
+          const sk = g.utils.decodeFromHex(skHex.value);
+          const pk = g.babyzk.toPubKey(sk);
+          const expiration = ref(+Date.now());
+          const idsecret = ref("123");
+          const idnullifier = ref("456");
+          const issuerID = ref("888888");
+          const s = g.utils.JSONStringifyBigInts;
+          const rst = computed(() => {
+            const rv = {};
+            try {
+              const identityCommitment = g.babyzk.genIdentityCommitment(
+                BigInt(idsecret.value),
+                BigInt(idnullifier.value)
+              );
+              rv.idc = identityCommitment;
+              const sigMeta = new g.credential.SignatureMetadata(
+                g.credential.VerificationStackEnum.BabyZK,
+                BigInt(999),
+                BigInt(expiration.value),
+                identityCommitment,
+                BigInt(issuerID.value),
+                BigInt(0),
+                pk
+              );
+              let claimsResult = g.credType.parseCredType(typeDefinition.value);
+              if (!claimsResult.ok) {
+                rv.err = claimsResult.error;
+                return rv;
+              }
+              let credType = claimsResult.value;
+              credType.typeID = BigInt(typeID.value);
+              rv.tp = credType;
+              rv.circuit = g.babyzk.genCircuit(rv.tp);
+              const cred = g.credential.Credential.unmarshal(rv.tp, credentialText.value);
+              if (!cred.ok) {
+                rv.err = cred.error;
+                return rv;
+              }
+              rv.cred = cred.value;
+              rv.cred.sign(g.babyzk, sk, sigMeta);
+            } catch (e) {
+              rv.err = e;
+            }
+            return rv;
+          });
+          return {
+            s,
+            typeDefinition,
+            credentialText,
+            typeID,
+            skHex,
+            expiration,
+            idsecret,
+            idnullifier,
+            issuerID,
+            rst,
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

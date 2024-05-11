@@ -1,0 +1,21 @@
+.DS_STORE
+node_modules
+.env
+coverage
+coverage.json
+typechain
+typechain-types
+types
+.yarn
+.yarnrc.yml
+build/
+dist/
+
+# Hardhat files
+cache
+artifacts
+
+# editor
+.idea
+.vscode
+.history

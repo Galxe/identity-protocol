@@ -1,0 +1,3 @@
+[submodule "apps/sstyper/circomlib"]
+	path = apps/sstyper/circomlib
+	url = https://github.com/iden3/circomlib.git

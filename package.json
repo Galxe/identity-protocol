@@ -1,0 +1,29 @@
+{
+  "name": "galxe-identity-protocol",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "doc": "turbo doc",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "dependencies": {
+    "@galxe-identity-protocol/evm-contracts": "workspace:*",
+    "@galxe-identity-protocol/sdk": "workspace:*"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "prettier": "^3.2.5",
+    "turbo": "^1.13.3"
+  },
+  "packageManager": "pnpm@9.1.0+sha256.22e36fba7f4880ecf749a5ca128b8435da085ecd49575e7fb9e64d6bf4fad394",
+  "engines": {
+    "node": ">=20"
+  },
+  "resolutions": {
+    "web-worker": "1.2.0"
+  }
+}

@@ -1,0 +1,246 @@
+
+// SPDX-License-Identifier: GPL-3.0
+/*
+    Copyright (c) 2021 0KIMS association.
+    Copyright (c) [2024] Galxe.com.
+
+    Modifications to this file are part of the Galxe Identity Protocol SDK,
+    which is built using the snarkJS template and is subject to the GNU
+    General Public License v3.0.
+
+    snarkJS is free software: you can redistribute it and/or modify it
+    under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program. If not, see <https://www.gnu.org/licenses/>.
+*/
+
+pragma solidity >=0.8.4 <0.9.0;
+
+contract BabyZKGroth16Verifier {
+    error AliasedPublicSignal();
+
+    // Scalar field size
+    uint256 constant r   = 21888242871839275222246405745257275088548364400416034343698204186575808495617;
+    // Base field size
+    uint256 constant q   = 21888242871839275222246405745257275088696311157297823662689037894645226208583;
+
+    // Verification Key data
+    uint256 constant alphax  = 20491192805390485299153009773594534940189261866228447918068658471970481763042;
+    uint256 constant alphay  = 9383485363053290200918347156157836566562967994039712273449902621266178545958;
+    uint256 constant betax1  = 4252822878758300859123897981450591353533073413197771768651442665752259397132;
+    uint256 constant betax2  = 6375614351688725206403948262868962793625744043794305715222011528459656738731;
+    uint256 constant betay1  = 21847035105528745403288232691147584728191162732299865338377159692350059136679;
+    uint256 constant betay2  = 10505242626370262277552901082094356697409835680220590971873171140371331206856;
+    uint256 constant gammax1 = 11559732032986387107991004021392285783925812861821192530917403151452391805634;
+    uint256 constant gammax2 = 10857046999023057135944570762232829481370756359578518086990519993285655852781;
+    uint256 constant gammay1 = 4082367875863433681332203403145435568316851327593401208105741076214120093531;
+    uint256 constant gammay2 = 8495653923123431417604973247489272438418190587263600148770280649306958101930;
+    uint256 constant deltax1 = 11386766365824379679527974311800739296620166334678560777819386094772738908117;
+    uint256 constant deltax2 = 5914602868708600112219413104636571687761738884936609474954954410582503098408;
+    uint256 constant deltay1 = 4651652966715538918037908003920688590707225453456401092100837651799858508873;
+    uint256 constant deltay2 = 5750097786758545771271419578462125638542345819747228567491655641926808625820;
+
+    uint256 constant IC0x = 19718694483962552457546703022943755844960272065236852983483449121878944032229;
+    uint256 constant IC0y = 19277224091235934629720467697154129029409763052492419487195354501450906873293;
+    uint256 constant IC1x = 11524898445759539751988664644643984354080320377887036267619838360664088041388;
+    uint256 constant IC1y = 12052476618631930474450519376758323338799389525512264273381315623349871320459;
+    uint256 constant IC2x = 1796432713996171209429206469628339720979571370972673842341066237052302144708;
+    uint256 constant IC2y = 15910694945325453731816254570140821145883366324705775641131332163142393553430;
+    uint256 constant IC3x = 13301490279450482586102948347778809500550800419089382713271598741737846927098;
+    uint256 constant IC3y = 14259881931883214004278332811480412945774487191113970531745254373843301815030;
+    uint256 constant IC4x = 1207500870815263464967774976312359598755762009848827143199201686666476624758;
+    uint256 constant IC4y = 8435967651447070421240072360683620289857808299003263625530661340454266925495;
+    uint256 constant IC5x = 20596312126307507544254706071585116472086770107182790995667405884937786149072;
+    uint256 constant IC5y = 20101366561967269911230004725117599795346838430903241466492512719716156452494;
+    uint256 constant IC6x = 17526481656940755408681043575718606969101388584842965003168213187937318841363;
+    uint256 constant IC6y = 13265795018345573998790937061244260230280148075859101413091614551080502238943;
+    uint256 constant IC7x = 8797399508837900954995623995490844490558692290611898196384918943481136881246;
+    uint256 constant IC7y = 1189204587490882345729074991940308020536737538799963545904189346677112172621;
+    uint256 constant IC8x = 17425938981588937088170006395579119680236927961246903247977312401168286974480;
+    uint256 constant IC8y = 5313672417270749056228790951665922810430694276452143630621001803078527956704;
+    uint256 constant IC9x = 21558569413462776597053285568737324938159130522610738437830367783496513501490;
+    uint256 constant IC9y = 12326766729916800830567908978618969396776317942337594117075699985152575345284;
+    uint256 constant IC10x = 6395915430939619962955569365706969975441352219959453609660666075170686062244;
+    uint256 constant IC10y = 8282983962149557587079522102277232822891054043805116932692253318963003844810;
+    // Memory data
+    uint16 constant pVk = 0;
+    uint16 constant pPairing = 128;
+
+    uint16 constant pLastMem = 896;
+
+    uint16 constant proofLength = 8;
+    uint32 constant pubSignalLength = 10;
+
+    /// @dev returns the verification keys in the order that the verifier expects them:
+    /// alpha, beta, gamma, delta, ICs..
+    function getVerificationKeys() public pure returns (uint[] memory) {
+        uint[] memory vks = new uint[](16 + pubSignalLength * 2);
+        vks[0] = 20491192805390485299153009773594534940189261866228447918068658471970481763042;
+        vks[1] = 9383485363053290200918347156157836566562967994039712273449902621266178545958;
+        vks[2] = 4252822878758300859123897981450591353533073413197771768651442665752259397132;
+        vks[3] = 6375614351688725206403948262868962793625744043794305715222011528459656738731;
+        vks[4] = 21847035105528745403288232691147584728191162732299865338377159692350059136679;
+        vks[5] = 10505242626370262277552901082094356697409835680220590971873171140371331206856;
+        vks[6] = 11559732032986387107991004021392285783925812861821192530917403151452391805634;
+        vks[7] = 10857046999023057135944570762232829481370756359578518086990519993285655852781;
+        vks[8] = 4082367875863433681332203403145435568316851327593401208105741076214120093531;
+        vks[9] = 8495653923123431417604973247489272438418190587263600148770280649306958101930;
+        vks[10] = 11386766365824379679527974311800739296620166334678560777819386094772738908117;
+        vks[11] = 5914602868708600112219413104636571687761738884936609474954954410582503098408;
+        vks[12] = 4651652966715538918037908003920688590707225453456401092100837651799858508873;
+        vks[13] = 5750097786758545771271419578462125638542345819747228567491655641926808625820;
+        vks[14] = 19718694483962552457546703022943755844960272065236852983483449121878944032229;
+        vks[15] = 19277224091235934629720467697154129029409763052492419487195354501450906873293;
+        vks[16] = 11524898445759539751988664644643984354080320377887036267619838360664088041388;
+        vks[17] = 12052476618631930474450519376758323338799389525512264273381315623349871320459;
+        vks[18] = 1796432713996171209429206469628339720979571370972673842341066237052302144708;
+        vks[19] = 15910694945325453731816254570140821145883366324705775641131332163142393553430;
+        vks[20] = 13301490279450482586102948347778809500550800419089382713271598741737846927098;
+        vks[21] = 14259881931883214004278332811480412945774487191113970531745254373843301815030;
+        vks[22] = 1207500870815263464967774976312359598755762009848827143199201686666476624758;
+        vks[23] = 8435967651447070421240072360683620289857808299003263625530661340454266925495;
+        vks[24] = 20596312126307507544254706071585116472086770107182790995667405884937786149072;
+        vks[25] = 20101366561967269911230004725117599795346838430903241466492512719716156452494;
+        vks[26] = 17526481656940755408681043575718606969101388584842965003168213187937318841363;
+        vks[27] = 13265795018345573998790937061244260230280148075859101413091614551080502238943;
+        vks[28] = 8797399508837900954995623995490844490558692290611898196384918943481136881246;
+        vks[29] = 1189204587490882345729074991940308020536737538799963545904189346677112172621;
+        vks[30] = 17425938981588937088170006395579119680236927961246903247977312401168286974480;
+        vks[31] = 5313672417270749056228790951665922810430694276452143630621001803078527956704;
+        vks[32] = 21558569413462776597053285568737324938159130522610738437830367783496513501490;
+        vks[33] = 12326766729916800830567908978618969396776317942337594117075699985152575345284;
+        vks[34] = 6395915430939619962955569365706969975441352219959453609660666075170686062244;
+        vks[35] = 8282983962149557587079522102277232822891054043805116932692253318963003844810;
+        return vks;
+    }
+
+    /// @dev return true if the public signal is aliased
+    function isAliased(uint[] calldata _pubSignals) public pure returns (bool) {
+        // Alias check
+        if (_pubSignals[0] >= 1461501637330902918203684832716283019655932542976) { return true; }
+        if (_pubSignals[1] >= 1461501637330902918203684832716283019655932542976) { return true; }
+        if (_pubSignals[2] >= 21888242871839275222246405745257275088548364400416034343698204186575808495617) { return true; }
+        if (_pubSignals[3] >= 1461501637330902918203684832716283019655932542976) { return true; }
+        if (_pubSignals[4] >= 452312848583266388373324160190187140051835877600158453279131187530910662656) { return true; }
+        if (_pubSignals[5] >= 18446744073709551616) { return true; }
+        if (_pubSignals[6] >= 21888242871839275222246405745257275088548364400416034343698204186575808495617) { return true; }
+        if (_pubSignals[7] >= 904625697166532776746648320380374280103671755200316906558262375061821325312) { return true; }
+        if (_pubSignals[8] >= 452312848583266388373324160190187140051835877600158453279131187530910662656) { return true; }
+        if (_pubSignals[9] >= 452312848583266388373324160190187140051835877600158453279131187530910662656) { return true; }
+        return false;
+    }
+
+    function verifyProof(uint[] calldata _proofs, uint[] calldata _pubSignals) public view returns (bool) {
+        // Check Argument
+        require(_proofs.length == proofLength, "Invalid proof");
+        require(_pubSignals.length == pubSignalLength, "Invalid public signal");
+        if (isAliased(_pubSignals)) { return false; }
+        assembly {
+            // G1 function to multiply a G1 value(x,y) to value in an address
+            function g1_mulAccC(pR, x, y, s) {
+                let success
+                let mIn := mload(0x40)
+                mstore(mIn, x)
+                mstore(add(mIn, 32), y)
+                mstore(add(mIn, 64), s)
+
+                success := staticcall(sub(gas(), 2000), 7, mIn, 96, mIn, 64)
+
+                if iszero(success) {
+                    mstore(0, 0)
+                    return(0, 0x20)
+                }
+
+                mstore(add(mIn, 64), mload(pR))
+                mstore(add(mIn, 96), mload(add(pR, 32)))
+
+                success := staticcall(sub(gas(), 2000), 6, mIn, 128, pR, 64)
+
+                if iszero(success) {
+                    mstore(0, 0)
+                    return(0, 0x20)
+                }
+            }
+
+            function checkPairing(pA, pB, pC, pubSignals, pMem) -> isOk {
+                let _pPairing := add(pMem, pPairing)
+                let _pVk := add(pMem, pVk)
+
+                mstore(_pVk, IC0x)
+                mstore(add(_pVk, 32), IC0y)
+
+                // Compute the linear combination it.vkey.vk_x
+                g1_mulAccC(_pVk, IC1x, IC1y, calldataload(add(pubSignals, 0)))
+                g1_mulAccC(_pVk, IC2x, IC2y, calldataload(add(pubSignals, 32)))
+                g1_mulAccC(_pVk, IC3x, IC3y, calldataload(add(pubSignals, 64)))
+                g1_mulAccC(_pVk, IC4x, IC4y, calldataload(add(pubSignals, 96)))
+                g1_mulAccC(_pVk, IC5x, IC5y, calldataload(add(pubSignals, 128)))
+                g1_mulAccC(_pVk, IC6x, IC6y, calldataload(add(pubSignals, 160)))
+                g1_mulAccC(_pVk, IC7x, IC7y, calldataload(add(pubSignals, 192)))
+                g1_mulAccC(_pVk, IC8x, IC8y, calldataload(add(pubSignals, 224)))
+                g1_mulAccC(_pVk, IC9x, IC9y, calldataload(add(pubSignals, 256)))
+                g1_mulAccC(_pVk, IC10x, IC10y, calldataload(add(pubSignals, 288)))
+                // -A
+                mstore(_pPairing, calldataload(pA))
+                mstore(add(_pPairing, 32), mod(sub(q, calldataload(add(pA, 32))), q))
+
+                // B
+                mstore(add(_pPairing, 64), calldataload(pB))
+                mstore(add(_pPairing, 96), calldataload(add(pB, 32)))
+                mstore(add(_pPairing, 128), calldataload(add(pB, 64)))
+                mstore(add(_pPairing, 160), calldataload(add(pB, 96)))
+
+                // alpha1
+                mstore(add(_pPairing, 192), alphax)
+                mstore(add(_pPairing, 224), alphay)
+
+                // beta2
+                mstore(add(_pPairing, 256), betax1)
+                mstore(add(_pPairing, 288), betax2)
+                mstore(add(_pPairing, 320), betay1)
+                mstore(add(_pPairing, 352), betay2)
+
+                // it.vkey.vk_x
+                mstore(add(_pPairing, 384), mload(add(pMem, pVk)))
+                mstore(add(_pPairing, 416), mload(add(pMem, add(pVk, 32))))
+
+                // gamma2
+                mstore(add(_pPairing, 448), gammax1)
+                mstore(add(_pPairing, 480), gammax2)
+                mstore(add(_pPairing, 512), gammay1)
+                mstore(add(_pPairing, 544), gammay2)
+
+                // C
+                mstore(add(_pPairing, 576), calldataload(pC))
+                mstore(add(_pPairing, 608), calldataload(add(pC, 32)))
+
+                // delta2
+                mstore(add(_pPairing, 640), deltax1)
+                mstore(add(_pPairing, 672), deltax2)
+                mstore(add(_pPairing, 704), deltay1)
+                mstore(add(_pPairing, 736), deltay2)
+
+                let success := staticcall(sub(gas(), 2000), 8, _pPairing, 768, _pPairing, 0x20)
+
+                isOk := and(success, mload(_pPairing))
+            }
+
+            let pMem := mload(0x40)
+            mstore(0x40, add(pMem, pLastMem))
+
+            // Validate all evaluations
+            let isValid := checkPairing(_proofs.offset, add(_proofs.offset, 64), add(_proofs.offset, 192), _pubSignals.offset, pMem)
+
+            mstore(0, isValid)
+            return(0, 0x20)
+        }
+    }
+}

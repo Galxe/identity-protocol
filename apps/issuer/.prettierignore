@@ -1,0 +1,12 @@
+.history
+.husky
+.vscode
+.github
+coverage
+dist
+docs
+node_modules
+submodules
+vite.config.cts
+api
+src/grpc

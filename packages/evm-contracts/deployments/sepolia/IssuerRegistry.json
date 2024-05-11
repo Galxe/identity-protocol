@@ -1,0 +1,950 @@
+{
+  "address": "0xc4525dA874A6A3877db65e37f21eEc0b41ef9877",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "InvalidName",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "IssuerAlreadyExists",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "IssuerNotExists",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "NotIssuerOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NotOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "PublicKeyAlreadyExists",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "PublicKeyNotExists",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "issuerId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "oldAdmin",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newAdmin",
+          "type": "address"
+        }
+      ],
+      "name": "IssuerAdminTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "issuerId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        }
+      ],
+      "name": "IssuerRegistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "issuerId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "publicKeyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "enum PublicKeyStatus",
+          "name": "status",
+          "type": "uint8"
+        }
+      ],
+      "name": "PublicKeyStatusUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "issuerId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "publicKeyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "verificationStackId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "enabled",
+          "type": "bool"
+        }
+      ],
+      "name": "PublicKeyVerificationStackUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint160",
+          "name": "typeId",
+          "type": "uint160"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint160",
+          "name": "contextID",
+          "type": "uint160"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "issuerId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "newRoot",
+          "type": "bytes32"
+        }
+      ],
+      "name": "SignatureStateRootUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint160",
+          "name": "typeId",
+          "type": "uint160"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint160",
+          "name": "contextID",
+          "type": "uint160"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "issuerId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "newTreeURI",
+          "type": "string"
+        }
+      ],
+      "name": "SignatureStateURIUpdated",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "issuerId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint8",
+          "name": "verificationStackId",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "publicKeyId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "publicKeyRaw",
+          "type": "bytes"
+        }
+      ],
+      "name": "addPublicKey",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "issuerId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getIssuer",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "internalType": "address",
+              "name": "admin",
+              "type": "address"
+            }
+          ],
+          "internalType": "struct Issuer",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "issuerId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "publicKeyId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getPublicKeyRaw",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint160",
+          "name": "typeId",
+          "type": "uint160"
+        },
+        {
+          "internalType": "uint160",
+          "name": "contextId",
+          "type": "uint160"
+        },
+        {
+          "internalType": "uint256",
+          "name": "issuerId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getSignatureState",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "root",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "string",
+              "name": "treeURI",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct SignatureState",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint160",
+          "name": "typeId",
+          "type": "uint160"
+        },
+        {
+          "internalType": "uint160",
+          "name": "contextId",
+          "type": "uint160"
+        },
+        {
+          "internalType": "uint256",
+          "name": "issuerId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getSignatureStateRoot",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint160",
+          "name": "typeId",
+          "type": "uint160"
+        },
+        {
+          "internalType": "uint160",
+          "name": "contextId",
+          "type": "uint160"
+        },
+        {
+          "internalType": "uint256",
+          "name": "issuerId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getSignatureStateURI",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "issuerId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "publicKeyId",
+          "type": "uint256"
+        }
+      ],
+      "name": "isPublicKeyActive",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "issuerId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "publicKeyId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint8",
+          "name": "verificationStackId",
+          "type": "uint8"
+        }
+      ],
+      "name": "isPublicKeyActiveForStack",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "internalType": "uint8",
+          "name": "verificationStackId",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "publicKeyId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "publicKeyRaw",
+          "type": "bytes"
+        }
+      ],
+      "name": "registerIssuer",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint160",
+          "name": "typeId",
+          "type": "uint160"
+        },
+        {
+          "internalType": "uint160",
+          "name": "contextId",
+          "type": "uint160"
+        },
+        {
+          "internalType": "uint256",
+          "name": "issuerId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "treeURI",
+          "type": "string"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "root",
+          "type": "bytes32"
+        }
+      ],
+      "name": "setSignatureState",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "issuerId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferIssuerAdmin",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "issuerId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "publicKeyId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "enum PublicKeyStatus",
+          "name": "status",
+          "type": "uint8"
+        }
+      ],
+      "name": "updatePublicKeyStatus",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "issuerId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "publicKeyId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint8",
+          "name": "verificationStackId",
+          "type": "uint8"
+        },
+        {
+          "internalType": "bool",
+          "name": "enabled",
+          "type": "bool"
+        }
+      ],
+      "name": "updatePublicKeyVerificationStack",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint160",
+          "name": "typeId",
+          "type": "uint160"
+        },
+        {
+          "internalType": "uint160",
+          "name": "contextId",
+          "type": "uint160"
+        },
+        {
+          "internalType": "uint256",
+          "name": "issuerId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "root",
+          "type": "bytes32"
+        }
+      ],
+      "name": "updateSignatureState",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint160",
+          "name": "typeId",
+          "type": "uint160"
+        },
+        {
+          "internalType": "uint160",
+          "name": "contextId",
+          "type": "uint160"
+        },
+        {
+          "internalType": "uint256",
+          "name": "issuerId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "treeURI",
+          "type": "string"
+        }
+      ],
+      "name": "updateSignatureStateURI",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "8496ac51a8f7b3fff0d6774160b2744b",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.23+commit.f704f362\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"InvalidName\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"IssuerAlreadyExists\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"IssuerNotExists\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"NotIssuerOwner\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"NotOwner\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"PublicKeyAlreadyExists\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"PublicKeyNotExists\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"issuerId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"oldAdmin\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newAdmin\",\"type\":\"address\"}],\"name\":\"IssuerAdminTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"issuerId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"}],\"name\":\"IssuerRegistered\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"issuerId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"publicKeyId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"enum PublicKeyStatus\",\"name\":\"status\",\"type\":\"uint8\"}],\"name\":\"PublicKeyStatusUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"issuerId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"publicKeyId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"verificationStackId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"enabled\",\"type\":\"bool\"}],\"name\":\"PublicKeyVerificationStackUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint160\",\"name\":\"typeId\",\"type\":\"uint160\"},{\"indexed\":true,\"internalType\":\"uint160\",\"name\":\"contextID\",\"type\":\"uint160\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"issuerId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"newRoot\",\"type\":\"bytes32\"}],\"name\":\"SignatureStateRootUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint160\",\"name\":\"typeId\",\"type\":\"uint160\"},{\"indexed\":true,\"internalType\":\"uint160\",\"name\":\"contextID\",\"type\":\"uint160\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"issuerId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"newTreeURI\",\"type\":\"string\"}],\"name\":\"SignatureStateURIUpdated\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"issuerId\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"verificationStackId\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"publicKeyId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"publicKeyRaw\",\"type\":\"bytes\"}],\"name\":\"addPublicKey\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"issuerId\",\"type\":\"uint256\"}],\"name\":\"getIssuer\",\"outputs\":[{\"components\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"admin\",\"type\":\"address\"}],\"internalType\":\"struct Issuer\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"issuerId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"publicKeyId\",\"type\":\"uint256\"}],\"name\":\"getPublicKeyRaw\",\"outputs\":[{\"internalType\":\"bytes\",\"name\":\"\",\"type\":\"bytes\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint160\",\"name\":\"typeId\",\"type\":\"uint160\"},{\"internalType\":\"uint160\",\"name\":\"contextId\",\"type\":\"uint160\"},{\"internalType\":\"uint256\",\"name\":\"issuerId\",\"type\":\"uint256\"}],\"name\":\"getSignatureState\",\"outputs\":[{\"components\":[{\"internalType\":\"bytes32\",\"name\":\"root\",\"type\":\"bytes32\"},{\"internalType\":\"string\",\"name\":\"treeURI\",\"type\":\"string\"}],\"internalType\":\"struct SignatureState\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint160\",\"name\":\"typeId\",\"type\":\"uint160\"},{\"internalType\":\"uint160\",\"name\":\"contextId\",\"type\":\"uint160\"},{\"internalType\":\"uint256\",\"name\":\"issuerId\",\"type\":\"uint256\"}],\"name\":\"getSignatureStateRoot\",\"outputs\":[{\"internalType\":\"bytes32\",\"name\":\"\",\"type\":\"bytes32\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint160\",\"name\":\"typeId\",\"type\":\"uint160\"},{\"internalType\":\"uint160\",\"name\":\"contextId\",\"type\":\"uint160\"},{\"internalType\":\"uint256\",\"name\":\"issuerId\",\"type\":\"uint256\"}],\"name\":\"getSignatureStateURI\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"issuerId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"publicKeyId\",\"type\":\"uint256\"}],\"name\":\"isPublicKeyActive\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"issuerId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"publicKeyId\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"verificationStackId\",\"type\":\"uint8\"}],\"name\":\"isPublicKeyActiveForStack\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"uint8\",\"name\":\"verificationStackId\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"publicKeyId\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"publicKeyRaw\",\"type\":\"bytes\"}],\"name\":\"registerIssuer\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint160\",\"name\":\"typeId\",\"type\":\"uint160\"},{\"internalType\":\"uint160\",\"name\":\"contextId\",\"type\":\"uint160\"},{\"internalType\":\"uint256\",\"name\":\"issuerId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"treeURI\",\"type\":\"string\"},{\"internalType\":\"bytes32\",\"name\":\"root\",\"type\":\"bytes32\"}],\"name\":\"setSignatureState\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"issuerId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferIssuerAdmin\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"issuerId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"publicKeyId\",\"type\":\"uint256\"},{\"internalType\":\"enum PublicKeyStatus\",\"name\":\"status\",\"type\":\"uint8\"}],\"name\":\"updatePublicKeyStatus\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"issuerId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"publicKeyId\",\"type\":\"uint256\"},{\"internalType\":\"uint8\",\"name\":\"verificationStackId\",\"type\":\"uint8\"},{\"internalType\":\"bool\",\"name\":\"enabled\",\"type\":\"bool\"}],\"name\":\"updatePublicKeyVerificationStack\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint160\",\"name\":\"typeId\",\"type\":\"uint160\"},{\"internalType\":\"uint160\",\"name\":\"contextId\",\"type\":\"uint160\"},{\"internalType\":\"uint256\",\"name\":\"issuerId\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"root\",\"type\":\"bytes32\"}],\"name\":\"updateSignatureState\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint160\",\"name\":\"typeId\",\"type\":\"uint160\"},{\"internalType\":\"uint160\",\"name\":\"contextId\",\"type\":\"uint160\"},{\"internalType\":\"uint256\",\"name\":\"issuerId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"treeURI\",\"type\":\"string\"}],\"name\":\"updateSignatureStateURI\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"events\":{\"IssuerAdminTransferred(uint256,address,address)\":{\"params\":{\"issuerId\":\"ID of issuer whose admin is being transferred.\",\"newAdmin\":\"Address of the new admin taking over.\",\"oldAdmin\":\"Address of the current admin being replaced.\"}},\"IssuerRegistered(uint256,string)\":{\"params\":{\"issuerId\":\"Unique identifier for the newly registered issuer.\",\"name\":\"Name of the issuer registered.\"}},\"PublicKeyStatusUpdated(uint256,uint256,uint8)\":{\"params\":{\"issuerId\":\"ID for the issuer to whom the public key belongs.\",\"publicKeyId\":\"ID for the public key being updated.\",\"status\":\"New status of the public key.\"}},\"PublicKeyVerificationStackUpdated(uint256,uint256,uint256,bool)\":{\"params\":{\"enabled\":\"Boolean indicating whether the stack is enabled or disabled for the public key.\",\"issuerId\":\"Unique identifier for the issuer to whom the public key belongs.\",\"publicKeyId\":\"Unique identifier for the public key.\",\"verificationStackId\":\"Identifier for the verification stack being updated.\"}},\"SignatureStateRootUpdated(uint160,uint160,uint256,bytes32)\":{\"params\":{\"contextID\":\"Context identifier for the signature state being updated.\",\"issuerId\":\"Issuer identifier related to the signature state.\",\"newRoot\":\"New root hash for the signature state tree.\",\"typeId\":\"Type identifier for the signature state being updated.\"}},\"SignatureStateURIUpdated(uint160,uint160,uint256,string)\":{\"params\":{\"contextID\":\"Context identifier for the signature state being updated.\",\"issuerId\":\"Issuer identifier related to the signature state.\",\"newTreeURI\":\"New URI for the signature state tree.\",\"typeId\":\"Type identifier for the signature state being updated.\"}}},\"kind\":\"dev\",\"methods\":{\"addPublicKey(uint256,uint8,uint256,bytes)\":{\"details\":\"add a new public key to the issuer.\"},\"getIssuer(uint256)\":{\"details\":\"return the issuer, if not exists, revert.\"},\"getPublicKeyRaw(uint256,uint256)\":{\"details\":\"return the public key, if not exists, revert.\"},\"getSignatureState(uint160,uint160,uint256)\":{\"details\":\"return the status of the public key, if not exists, returns UNINITIALIZED.\"},\"getSignatureStateRoot(uint160,uint160,uint256)\":{\"details\":\"return the root of the signature state, if not exists, returns empty bytes.\"},\"getSignatureStateURI(uint160,uint160,uint256)\":{\"details\":\"return the status of the public key, if not exists, returns empty string.\"},\"isPublicKeyActive(uint256,uint256)\":{\"details\":\"return if public key is active. If public key is not exists, return false.\"},\"isPublicKeyActiveForStack(uint256,uint256,uint8)\":{\"details\":\"return if public key is active for the verification stack. If public key is not exists, return false.\"},\"registerIssuer(string,uint8,uint256,bytes)\":{\"details\":\"register a new issuer\"},\"setSignatureState(uint160,uint160,uint256,string,bytes32)\":{\"details\":\"set both the signature state URI and root.\"},\"transferIssuerAdmin(uint256,address)\":{\"details\":\"transfer the admin of the issuer\"},\"updatePublicKeyStatus(uint256,uint256,uint8)\":{\"details\":\"update the status of the public key.\"},\"updatePublicKeyVerificationStack(uint256,uint256,uint8,bool)\":{\"details\":\"update the status of the public key.\"},\"updateSignatureState(uint160,uint160,uint256,bytes32)\":{\"details\":\"set the signature state root\"},\"updateSignatureStateURI(uint160,uint160,uint256,string)\":{\"details\":\"set the signature state URI\"}},\"stateVariables\":{\"_issuers\":{\"details\":\"all issuers, isser id = uint256(caller)\"}},\"version\":1},\"userdoc\":{\"events\":{\"IssuerAdminTransferred(uint256,address,address)\":{\"notice\":\"Emitted when an issuer's administrative role is transferred to a new address.\"},\"IssuerRegistered(uint256,string)\":{\"notice\":\"Emitted when a new issuer is registered in the registry.\"},\"PublicKeyStatusUpdated(uint256,uint256,uint8)\":{\"notice\":\"Emitted when the status of a public key is updated.\"},\"PublicKeyVerificationStackUpdated(uint256,uint256,uint256,bool)\":{\"notice\":\"Emitted when the verification stack for a public key is updated.\"},\"SignatureStateRootUpdated(uint160,uint160,uint256,bytes32)\":{\"notice\":\"Emitted when the signature state root is updated for a specific type and context.\"},\"SignatureStateURIUpdated(uint160,uint160,uint256,string)\":{\"notice\":\"Emitted when the signature state URI is updated for a specific type and context.\"}},\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/IssuerRegistry.sol\":\"IssuerRegistry\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"none\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":800},\"remappings\":[]},\"sources\":{\"contracts/IssuerRegistry.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.18;\\n\\nimport { IIssuerRegistry, Issuer, PublicKey, PublicKeyStatus, SignatureState } from \\\"./interfaces/IIssuerRegistry.sol\\\";\\n\\n// IssuerRegistry is a contract that manages the issuers and their public keys and signature state.\\ncontract IssuerRegistry is IIssuerRegistry {\\n    error IssuerAlreadyExists();\\n    error IssuerNotExists();\\n    error PublicKeyNotExists();\\n    error PublicKeyAlreadyExists();\\n    error NotIssuerOwner(address owner);\\n    error NotOwner();\\n    error InvalidName();\\n\\n    /// @dev all issuers, isser id = uint256(caller)\\n    // mapping issuer id to issuer.\\n    mapping(uint256 isserId => Issuer issuer) private _issuers;\\n\\n    // (issuerId, publickeyId) => PublicKey\\n    mapping(uint256 issuerId => mapping(uint256 publicKeyId => PublicKey publicKey)) private _issuerPublicKeys;\\n\\n    // mapping of hash(credentialType, contextId, issuerId) => SignatureState.\\n    mapping(uint256 credHashValue => SignatureState sigStatus) private _revocableSigStates;\\n\\n    /// @dev only issuer owner can call this function\\n    modifier onlyIssuerAdmin(uint256 issuerId) {\\n        _onlyIssuerAdmin(issuerId);\\n        _;\\n    }\\n\\n    /// @dev only issuer owner can call this function\\n    function _onlyIssuerAdmin(uint256 issuerId) private view {\\n        if (!_issuerExists(issuerId)) {\\n            revert IssuerNotExists();\\n        }\\n        if (msg.sender != _issuers[issuerId].admin) {\\n            revert NotIssuerOwner(_issuers[issuerId].admin);\\n        }\\n    }\\n\\n    /// @dev register a new issuer\\n    // @notice the issuerId is the address of the caller, so 1 address can only have 1 issuer.\\n    function registerIssuer(\\n        string calldata name,\\n        uint8 verificationStackId,\\n        uint256 publicKeyId,\\n        bytes calldata publicKeyRaw\\n    ) external override returns (uint256) {\\n        uint256 issuerId = uint256(uint160(msg.sender));\\n        // register new issuer\\n        _registerNewIssuer(issuerId, name);\\n        // add public key\\n        _setPublicKey(issuerId, verificationStackId, publicKeyId, publicKeyRaw);\\n        // transfer ownership\\n        return issuerId;\\n    }\\n\\n    /// @dev transfer the admin of the issuer\\n    function transferIssuerAdmin(uint256 issuerId, address newOwner) external override onlyIssuerAdmin(issuerId) {\\n        _issuers[issuerId].admin = newOwner;\\n        emit IssuerAdminTransferred(issuerId, msg.sender, newOwner);\\n    }\\n\\n    /// @dev add a new public key to the issuer.\\n    // @param issuerId the id of the issuer\\n    // @param verificationStackId the id of the verification stack\\n    // @param publicKeyId the id of the public key\\n    // @param publicKeyRaw the raw public key\\n    // @notice only the issuer admin can call this function\\n    // @notice the public key can only be added once, if incorrect, use a new key.\\n    function addPublicKey(\\n        uint256 issuerId,\\n        uint8 verificationStackId,\\n        uint256 publicKeyId,\\n        bytes calldata publicKeyRaw\\n    ) external override onlyIssuerAdmin(issuerId) {\\n        if (_publicKeyExists(issuerId, publicKeyId)) {\\n            revert PublicKeyAlreadyExists();\\n        }\\n        _setPublicKey(issuerId, verificationStackId, publicKeyId, publicKeyRaw);\\n    }\\n\\n    /// @dev update the status of the public key.\\n    function updatePublicKeyStatus(\\n        uint256 issuerId,\\n        uint256 publicKeyId,\\n        PublicKeyStatus status\\n    ) external override onlyIssuerAdmin(issuerId) {\\n        if (!_publicKeyExists(issuerId, publicKeyId)) {\\n            revert PublicKeyNotExists();\\n        }\\n\\n        _issuerPublicKeys[issuerId][publicKeyId].status = status;\\n        emit PublicKeyStatusUpdated(issuerId, publicKeyId, status);\\n    }\\n\\n    /// @dev update the status of the public key.\\n    function updatePublicKeyVerificationStack(\\n        uint256 issuerId,\\n        uint256 publicKeyId,\\n        uint8 verificationStackId,\\n        bool enabled\\n    ) external override onlyIssuerAdmin(issuerId) {\\n        if (!_publicKeyExists(issuerId, publicKeyId)) {\\n            revert PublicKeyNotExists();\\n        }\\n\\n        _issuerPublicKeys[issuerId][publicKeyId].enabledVerificationStacks[verificationStackId] = enabled;\\n        emit PublicKeyVerificationStackUpdated(issuerId, publicKeyId, verificationStackId, enabled);\\n    }\\n\\n    /// @dev set the signature state URI\\n    function updateSignatureStateURI(\\n        uint160 typeId,\\n        uint160 contextId,\\n        uint256 issuerId,\\n        string calldata treeURI\\n    ) external override onlyIssuerAdmin(issuerId) {\\n        uint256 key = _calculateCredentialHash(typeId, contextId, issuerId);\\n        _revocableSigStates[key].treeURI = treeURI;\\n        emit SignatureStateURIUpdated(typeId, contextId, issuerId, treeURI);\\n    }\\n\\n    /// @dev set the signature state root\\n    function updateSignatureState(\\n        uint160 typeId,\\n        uint160 contextId,\\n        uint256 issuerId,\\n        bytes32 root\\n    ) external override onlyIssuerAdmin(issuerId) {\\n        uint256 key = _calculateCredentialHash(typeId, contextId, issuerId);\\n        _revocableSigStates[key].root = root;\\n        emit SignatureStateRootUpdated(typeId, contextId, issuerId, root);\\n    }\\n\\n    /// @dev set both the signature state URI and root.\\n    function setSignatureState(\\n        uint160 typeId,\\n        uint160 contextId,\\n        uint256 issuerId,\\n        string calldata treeURI,\\n        bytes32 root\\n    ) external override onlyIssuerAdmin(issuerId) {\\n        uint256 key = _calculateCredentialHash(typeId, contextId, issuerId);\\n        _revocableSigStates[key] = SignatureState({ treeURI: treeURI, root: root });\\n        emit SignatureStateURIUpdated(typeId, contextId, issuerId, treeURI);\\n        emit SignatureStateRootUpdated(typeId, contextId, issuerId, root);\\n    }\\n\\n    /// @dev calculate the hash of the credential, which is the key of the revocableSigStates.\\n    function _calculateCredentialHash(\\n        uint160 typeId,\\n        uint160 contextId,\\n        uint256 issuerId\\n    ) private pure returns (uint256) {\\n        return uint256(keccak256(abi.encodePacked(typeId, contextId, issuerId)));\\n    }\\n\\n    /// @dev register a new issuer\\n    // @param issuerId the id of the issuer\\n    // @param name the name of the issuer\\n    function _registerNewIssuer(uint256 issuerId, string calldata name) private {\\n        if (bytes(name).length == 0) {\\n            revert InvalidName();\\n        }\\n        if (_issuerExists(issuerId)) {\\n            revert IssuerAlreadyExists();\\n        }\\n\\n        _issuers[issuerId] = Issuer({ name: name, admin: msg.sender });\\n        emit IssuerRegistered(issuerId, name);\\n        emit IssuerAdminTransferred(issuerId, address(0), msg.sender);\\n    }\\n\\n    /// @dev add a new public key to the issuer\\n    // @param issuerId the id of the issuer\\n    // @param verificationStackId the id of the verification stack\\n    // @param publicKeyId the id of the public key\\n    // @param publicKeyRaw the raw public key\\n    function _setPublicKey(\\n        uint256 issuerId,\\n        uint8 verificationStackId,\\n        uint256 publicKeyId,\\n        bytes calldata publicKeyRaw\\n    ) private {\\n        mapping(uint256 => PublicKey) storage keys = _issuerPublicKeys[issuerId];\\n        keys[publicKeyId].enabledVerificationStacks[verificationStackId] = true;\\n        keys[publicKeyId].status = PublicKeyStatus.ACTIVE;\\n        keys[publicKeyId].raw = publicKeyRaw;\\n\\n        emit PublicKeyStatusUpdated(issuerId, publicKeyId, PublicKeyStatus.ACTIVE);\\n        emit PublicKeyVerificationStackUpdated(issuerId, publicKeyId, verificationStackId, true);\\n    }\\n\\n    /// @dev return the issuer, if not exists, revert.\\n    function getIssuer(uint256 issuerId) external view override returns (Issuer memory) {\\n        if (!_issuerExists(issuerId)) {\\n            revert IssuerNotExists();\\n        }\\n        return _issuers[issuerId];\\n    }\\n\\n    /// @dev return the public key, if not exists, revert.\\n    function getPublicKeyRaw(uint256 issuerId, uint256 publicKeyId) external view override returns (bytes memory) {\\n        if (!_publicKeyExists(issuerId, publicKeyId)) {\\n            revert PublicKeyNotExists();\\n        }\\n        return _issuerPublicKeys[issuerId][publicKeyId].raw;\\n    }\\n\\n    /// @dev return if public key is active. If public key is not exists, return false.\\n    function isPublicKeyActive(uint256 issuerId, uint256 publicKeyId) external view override returns (bool) {\\n        if (!_publicKeyExists(issuerId, publicKeyId)) {\\n            return false;\\n        }\\n        return _issuerPublicKeys[issuerId][publicKeyId].status == PublicKeyStatus.ACTIVE;\\n    }\\n\\n    /// @dev return if public key is active for the verification stack. If public key is not exists, return false.\\n    function isPublicKeyActiveForStack(\\n        uint256 issuerId,\\n        uint256 publicKeyId,\\n        uint8 verificationStackId\\n    ) external view override returns (bool) {\\n        if (!_publicKeyExists(issuerId, publicKeyId)) {\\n            return false;\\n        }\\n        return\\n            _issuerPublicKeys[issuerId][publicKeyId].enabledVerificationStacks[verificationStackId] &&\\n            _issuerPublicKeys[issuerId][publicKeyId].status == PublicKeyStatus.ACTIVE;\\n    }\\n\\n    /// @dev return the status of the public key, if not exists, returns UNINITIALIZED.\\n    function getSignatureState(\\n        uint160 typeId,\\n        uint160 contextId,\\n        uint256 issuerId\\n    ) external view override returns (SignatureState memory) {\\n        return _revocableSigStates[_calculateCredentialHash(typeId, contextId, issuerId)];\\n    }\\n\\n    /// @dev return the status of the public key, if not exists, returns empty string.\\n    function getSignatureStateURI(\\n        uint160 typeId,\\n        uint160 contextId,\\n        uint256 issuerId\\n    ) external view override returns (string memory) {\\n        return _revocableSigStates[_calculateCredentialHash(typeId, contextId, issuerId)].treeURI;\\n    }\\n\\n    /// @dev return the root of the signature state, if not exists, returns empty bytes.\\n    function getSignatureStateRoot(\\n        uint160 typeId,\\n        uint160 contextId,\\n        uint256 issuerId\\n    ) external view override returns (bytes32) {\\n        return _revocableSigStates[_calculateCredentialHash(typeId, contextId, issuerId)].root;\\n    }\\n\\n    /// @dev internal function to check if the public key exists.\\n    function _publicKeyExists(uint256 issuerId, uint256 publicKeyId) internal view returns (bool) {\\n        return _issuerPublicKeys[issuerId][publicKeyId].status != PublicKeyStatus.UNINITIALIZED;\\n    }\\n\\n    /// @dev internal function to check if the issuer exists.\\n    function _issuerExists(uint256 issuerId) internal view returns (bool) {\\n        return bytes(_issuers[issuerId].name).length != 0;\\n    }\\n}\\n\",\"keccak256\":\"0x95c04fe80eb693dbb6682a7a0dafe8e2a7e3b1f20126841e7869d58c7be7e92a\",\"license\":\"MIT\"},\"contracts/interfaces/IIssuerRegistry.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.18;\\n\\n/// @dev The status of the public key, only active public key can be used for verification.\\nenum PublicKeyStatus {\\n    UNINITIALIZED,\\n    REVOKED,\\n    ACTIVE\\n}\\n\\n/// @dev The public key struct\\nstruct PublicKey {\\n    /// @dev the verification stack id that the public key is enabled for.\\n    mapping(uint8 => bool) enabledVerificationStacks;\\n    /// @dev the status of the public key\\n    PublicKeyStatus status;\\n    /// @dev the raw bytes of the public key. Not used in the contract, only for off-chain usage.\\n    /// The spec for marshalling the public key is defined by the issuer.\\n    bytes raw;\\n}\\n\\n/// @dev The revoked signature ID in a sparsed merkle tree.\\nstruct SignatureState {\\n    /// @dev the root hash of the sparsed merkle tree.\\n    bytes32 root;\\n    /// @dev uri to the sparsed merkle tree, representing the revoked signature ids.\\n    string treeURI;\\n}\\n\\n/// @dev The issuer struct\\nstruct Issuer {\\n    /// @dev the name of the issuer\\n    string name;\\n    /// @dev the admin of the issuer, who can add or revoke public keys.\\n    address admin;\\n}\\n\\n/// @title IIssuerRegistry\\n/// @dev The interface for the issuer registry contract.\\ninterface IIssuerRegistry {\\n    /// @notice Emitted when a new issuer is registered in the registry.\\n    /// @param issuerId Unique identifier for the newly registered issuer.\\n    /// @param name Name of the issuer registered.\\n    event IssuerRegistered(uint256 indexed issuerId, string name);\\n\\n    /// @notice Emitted when an issuer's administrative role is transferred to a new address.\\n    /// @param issuerId ID of issuer whose admin is being transferred.\\n    /// @param oldAdmin Address of the current admin being replaced.\\n    /// @param newAdmin Address of the new admin taking over.\\n    event IssuerAdminTransferred(uint256 indexed issuerId, address indexed oldAdmin, address indexed newAdmin);\\n\\n    /// @notice Emitted when the status of a public key is updated.\\n    /// @param issuerId ID for the issuer to whom the public key belongs.\\n    /// @param publicKeyId ID for the public key being updated.\\n    /// @param status New status of the public key.\\n    event PublicKeyStatusUpdated(uint256 indexed issuerId, uint256 indexed publicKeyId, PublicKeyStatus status);\\n\\n    /// @notice Emitted when the verification stack for a public key is updated.\\n    /// @param issuerId Unique identifier for the issuer to whom the public key belongs.\\n    /// @param publicKeyId Unique identifier for the public key.\\n    /// @param verificationStackId Identifier for the verification stack being updated.\\n    /// @param enabled Boolean indicating whether the stack is enabled or disabled for the public key.\\n    event PublicKeyVerificationStackUpdated(\\n        uint256 indexed issuerId,\\n        uint256 indexed publicKeyId,\\n        uint256 indexed verificationStackId,\\n        bool enabled\\n    );\\n\\n    /// @notice Emitted when the signature state URI is updated for a specific type and context.\\n    /// @param typeId Type identifier for the signature state being updated.\\n    /// @param contextID Context identifier for the signature state being updated.\\n    /// @param issuerId Issuer identifier related to the signature state.\\n    /// @param newTreeURI New URI for the signature state tree.\\n    event SignatureStateURIUpdated(\\n        uint160 indexed typeId,\\n        uint160 indexed contextID,\\n        uint256 indexed issuerId,\\n        string newTreeURI\\n    );\\n\\n    /// @notice Emitted when the signature state root is updated for a specific type and context.\\n    /// @param typeId Type identifier for the signature state being updated.\\n    /// @param contextID Context identifier for the signature state being updated.\\n    /// @param issuerId Issuer identifier related to the signature state.\\n    /// @param newRoot New root hash for the signature state tree.\\n    event SignatureStateRootUpdated(\\n        uint160 indexed typeId,\\n        uint160 indexed contextID,\\n        uint256 indexed issuerId,\\n        bytes32 newRoot\\n    );\\n\\n    /// @dev Registers a new issuer along with their first public key and enabled verification stack.\\n    /// @param name Name of the issuer to register.\\n    /// @param verificationStackId Identifier for the verification stack.\\n    /// @param publicKeyId  Identifier for the issuer's public key.\\n    /// @param publicKeyRaw The raw public key data.\\n    /// @return The unique identifier for the newly registered issuer.\\n    function registerIssuer(\\n        string calldata name,\\n        uint8 verificationStackId,\\n        uint256 publicKeyId,\\n        bytes calldata publicKeyRaw\\n    ) external returns (uint256);\\n\\n    /// @dev Transfers the administrative role of an issuer to a new owner.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @param newOwner Address of the new administrator.\\n    function transferIssuerAdmin(uint256 issuerId, address newOwner) external;\\n\\n    /// @dev Adds a new public key for an issuer and enables it for a specified verification stack.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @param verificationStackId Identifier for the verification stack.\\n    /// @param publicKeyId Unique identifier for the new public key.\\n    /// @param publicKeyRaw The raw public key data.\\n    function addPublicKey(\\n        uint256 issuerId,\\n        uint8 verificationStackId,\\n        uint256 publicKeyId,\\n        bytes calldata publicKeyRaw\\n    ) external;\\n\\n    /// @dev Updates the status (active/revoked) of an issuer's public key.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @param publicKeyId Unique identifier for the public key.\\n    /// @param status New status for the public key.\\n    // only the issuer admin can call this function\\n    function updatePublicKeyStatus(uint256 issuerId, uint256 publicKeyId, PublicKeyStatus status) external;\\n\\n    /// @dev Updates the verification stack association for an issuer's public key.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @param publicKeyId Unique identifier for the public key.\\n    /// @param verificationStackId New verification stack identifier for the public key.\\n    /// @param enabled Boolean indicating whether the stack is enabled for the public key.\\n    function updatePublicKeyVerificationStack(\\n        uint256 issuerId,\\n        uint256 publicKeyId,\\n        uint8 verificationStackId,\\n        bool enabled\\n    ) external;\\n\\n    /// @dev Updates the signature state URI for a given type and context.\\n    /// @param typeId Type identifier.\\n    /// @param contextId Context identifier.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @param treeURI New URI for the signature state.\\n    function updateSignatureStateURI(\\n        uint160 typeId,\\n        uint160 contextId,\\n        uint256 issuerId,\\n        string calldata treeURI\\n    ) external;\\n\\n    /// @dev Updates the signature SMT root for a given type, context and issuer.\\n    /// @param typeId Type identifier.\\n    /// @param contextId Context identifier.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @param root New root hash for the revoked SMT.\\n    function updateSignatureState(uint160 typeId, uint160 contextId, uint256 issuerId, bytes32 root) external;\\n\\n    /// @dev Sets both the signature SMT URI and root for a given type, context and issuer.\\n    /// @param typeId Type identifier.\\n    /// @param contextId Context identifier.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @param treeURI New URI for the signature state.\\n    /// @param root New root hash for the signature state.\\n    function setSignatureState(\\n        uint160 typeId,\\n        uint160 contextId,\\n        uint256 issuerId,\\n        string calldata treeURI,\\n        bytes32 root\\n    ) external;\\n\\n    /// @dev Retrieves the issuer data, reverts if the issuer does not exist.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @return Issuer data structure containing issuer details.\\n    function getIssuer(uint256 issuerId) external view returns (Issuer memory);\\n\\n    /// @dev Retrieves the raw public key data for an issuer's public key.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @param publicKeyId Unique identifier for the public key.\\n    /// @return The raw public key data.\\n    function getPublicKeyRaw(uint256 issuerId, uint256 publicKeyId) external view returns (bytes memory);\\n\\n    /// @dev Checks if an issuer's public key is active.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @param publicKeyId Unique identifier for the public key.\\n    /// @return True if the public key is active, false otherwise.\\n    function isPublicKeyActive(uint256 issuerId, uint256 publicKeyId) external view returns (bool);\\n\\n    /// @dev Checks if an issuer's public key is active and enabled for a specific verification stack.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @param publicKeyId Unique identifier for the public key.\\n    /// @param verificationStackId Identifier for the verification stack.\\n    /// @return True if the public key is active and enabled for the stack, false otherwise.\\n    function isPublicKeyActiveForStack(\\n        uint256 issuerId,\\n        uint256 publicKeyId,\\n        uint8 verificationStackId\\n    ) external view returns (bool);\\n\\n    /// @dev Retrieves the signature state for a given type, context and issuer.\\n    /// @param typeId Type identifier.\\n    /// @param contextId Context identifier.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @return The signature state.\\n    function getSignatureState(\\n        uint160 typeId,\\n        uint160 contextId,\\n        uint256 issuerId\\n    ) external view returns (SignatureState memory);\\n\\n    /// @dev Retrieves the signature state URI for a given type, context and issuer.\\n    /// @param typeId Type identifier.\\n    /// @param contextId Context identifier.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @return The URI of the signature state.\\n    function getSignatureStateURI(\\n        uint160 typeId,\\n        uint160 contextId,\\n        uint256 issuerId\\n    ) external view returns (string memory);\\n\\n    /// @dev Retrieves the signature state root for a given type, context and issuer.\\n    /// @param typeId Type identifier.\\n    /// @param contextId Context identifier.\\n    /// @param issuerId Unique identifier for the issuer.\\n    /// @return The root hash of the signature state.\\n    function getSignatureStateRoot(uint160 typeId, uint160 contextId, uint256 issuerId) external view returns (bytes32);\\n}\\n\",\"keccak256\":\"0xec472bdee80280b790f226a9526cdea5a618e65881858317b40fba1a9893932b\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506115b0806100206000396000f3fe608060405234801561001057600080fd5b50600436106100f55760003560e01c806392089c4611610097578063b050d66c11610066578063b050d66c1461020a578063b7bb44341461022a578063cc46e8d61461023d578063e8a123b31461025057600080fd5b806392089c46146101b1578063a2211ed7146101d1578063a498ea23146101e4578063a9d3e1fb146101f757600080fd5b80634a4721a6116100d35780634a4721a61461014a5780635c5bccf51461016a5780635da034861461017d5780638fe3ee4f1461019e57600080fd5b80630d590dc5146100fa5780633f13b8161461010f578063446ac6e514610137575b600080fd5b61010d610108366004610ea5565b610263565b005b61012261011d366004610ef2565b610305565b60405190151581526020015b60405180910390f35b61010d610145366004610f70565b610389565b61015d610158366004610fed565b6103d0565b60405161012e9190611074565b61010d6101783660046110a1565b6104b2565b61019061018b3660046110de565b610560565b60405190815260200161012e565b61010d6101ac36600461116b565b610586565b6101c46101bf36600461119e565b610614565b60405161012e91906111b7565b61010d6101df3660046111f2565b610713565b61010d6101f2366004611222565b610788565b61010d610205366004611268565b610807565b61021d6102183660046112e3565b61093c565b60405161012e9190611305565b610190610238366004610fed565b610a13565b61012261024b3660046112e3565b610a3d565b61021d61025e366004610fed565b610a8f565b8361026d81610b43565b6102778585610bc9565b610294576040516322389ec360e11b815260040160405180910390fd5b6000858152600160209081526040808320878452825280832060ff871680855290835292819020805460ff19168615159081179091559051908152869188917f1af2113c69242d6336219e3a8f9dafec6c4210ae8a92cb93495c8df77467094a910160405180910390a45050505050565b60006103118484610bc9565b61031d57506000610382565b6000848152600160209081526040808320868452825280832060ff808716855292529091205416801561037f575060026000858152600160208181526040808420888552909152909120015460ff16600281111561037d5761037d611318565b145b90505b9392505050565b8461039381610b43565b61039d8685610bc9565b156103bb57604051632fea582560e21b815260040160405180910390fd5b6103c88686868686610c03565b505050505050565b604080518082019091526000815260606020820152600260006103f4868686610ccd565b8152602001908152602001600020604051806040016040529081600082015481526020016001820180546104279061132e565b80601f01602080910402602001604051908101604052809291908181526020018280546104539061132e565b80156104a05780601f10610475576101008083540402835291602001916104a0565b820191906000526020600020905b81548152906001019060200180831161048357829003601f168201915b50505050508152505090509392505050565b826104bc81610b43565b6104c68484610bc9565b6104e3576040516322389ec360e11b815260040160405180910390fd5b600084815260016020818152604080842087855290915290912081018054849260ff199091169083600281111561051c5761051c611318565b021790555082847f55b271602137c928f8160ab64285e1b4d3380b30db931853c27defe706d8a54f846040516105529190611368565b60405180910390a350505050565b60003361056e818989610d20565b61057b8187878787610c03565b979650505050505050565b8261059081610b43565b600061059d878787610ccd565b60008181526002602052604090209091506001016105bc8486836113f3565b5084866001600160a01b0316886001600160a01b03167fee844470b75deb2a75b4e8badf84facf9768a7073b8bae933df304067c78dc4c87876040516106039291906114b4565b60405180910390a450505050505050565b60408051808201909152606081526000602082015261063282610e6d565b61064f57604051630f202d6560e31b815260040160405180910390fd5b6000828152602081905260409081902081518083019092528054829082906106769061132e565b80601f01602080910402602001604051908101604052809291908181526020018280546106a29061132e565b80156106ef5780601f106106c4576101008083540402835291602001916106ef565b820191906000526020600020905b8154815290600101906020018083116106d257829003601f168201915b5050509183525050600191909101546001600160a01b031660209091015292915050565b8161071d81610b43565b600083815260208190526040808220600101805473ffffffffffffffffffffffffffffffffffffffff19166001600160a01b03861690811790915590519091339186917fce632a60fd89eafb0e01f64196fd7ded7cb05ca669f84f40c523ddaba217c29191a4505050565b8161079281610b43565b600061079f868686610ccd565b600081815260026020526040908190208590555190915084906001600160a01b0380881691908916907fef413e36f587b9e4a0e3b07db68cbdbcdbdd9b1a9a2be22db42e3bcf440677f5906107f79088815260200190565b60405180910390a4505050505050565b8361081181610b43565b600061081e888888610ccd565b9050604051806040016040528084815260200186868080601f01602080910402602001604051908101604052809392919081815260200183838082843760009201829052509390945250508381526002602090815260409091208351815590830151909150600182019061089290826114e3565b5090505085876001600160a01b0316896001600160a01b03167fee844470b75deb2a75b4e8badf84facf9768a7073b8bae933df304067c78dc4c88886040516108dc9291906114b4565b60405180910390a485876001600160a01b0316896001600160a01b03167fef413e36f587b9e4a0e3b07db68cbdbcdbdd9b1a9a2be22db42e3bcf440677f58660405161092a91815260200190565b60405180910390a45050505050505050565b60606109488383610bc9565b610965576040516322389ec360e11b815260040160405180910390fd5b60008381526001602090815260408083208584529091529020600201805461098c9061132e565b80601f01602080910402602001604051908101604052809291908181526020018280546109b89061132e565b8015610a055780601f106109da57610100808354040283529160200191610a05565b820191906000526020600020905b8154815290600101906020018083116109e857829003601f168201915b505050505090505b92915050565b600060026000610a24868686610ccd565b8152602081019190915260400160002054949350505050565b6000610a498383610bc9565b610a5557506000610a0d565b60026000848152600160208181526040808420878552909152909120015460ff166002811115610a8757610a87611318565b149392505050565b606060026000610aa0868686610ccd565b81526020019081526020016000206001018054610abc9061132e565b80601f0160208091040260200160405190810160405280929190818152602001828054610ae89061132e565b8015610b355780601f10610b0a57610100808354040283529160200191610b35565b820191906000526020600020905b815481529060010190602001808311610b1857829003601f168201915b505050505090509392505050565b610b4c81610e6d565b610b6957604051630f202d6560e31b815260040160405180910390fd5b6000818152602081905260409020600101546001600160a01b03163314610bc65760008181526020819052604090819020600101549051635d882f0760e01b81526001600160a01b03909116600482015260240160405180910390fd5b50565b600082815260016020818152604080842085855290915282200154819060ff166002811115610bfa57610bfa611318565b14159392505050565b600085815260016020818152604080842087855280835281852060ff8a168652808452918520805460ff1990811686179091559488905291829052918201805460029416841790559101610c588385836113f3565b5083867f55b271602137c928f8160ab64285e1b4d3380b30db931853c27defe706d8a54f6002604051610c8b9190611368565b60405180910390a38460ff1684877f1af2113c69242d6336219e3a8f9dafec6c4210ae8a92cb93495c8df77467094a60016040516107f7911515815260200190565b6040516bffffffffffffffffffffffff19606085811b8216602084015284901b1660348201526048810182905260009060680160408051601f198184030181529190528051602090910120949350505050565b6000819003610d425760405163430f13b360e01b815260040160405180910390fd5b610d4b83610e6d565b15610d6957604051630eeb1b5960e21b815260040160405180910390fd5b6040805160606020601f85018190040282018101835291810183815290918291908590859081908501838280828437600092018290525093855250503360209384015250858152908190526040902081518190610dc690826114e3565b50602091909101516001909101805473ffffffffffffffffffffffffffffffffffffffff19166001600160a01b0390921691909117905560405183907f187f5f8f3e3c2abebb6a11ffa01f399d9ffb676743796efd35b9c57370d7a28090610e3190859085906114b4565b60405180910390a2604051339060009085907fce632a60fd89eafb0e01f64196fd7ded7cb05ca669f84f40c523ddaba217c291908390a4505050565b60008181526020819052604081208054610e869061132e565b15159392505050565b803560ff81168114610ea057600080fd5b919050565b60008060008060808587031215610ebb57600080fd5b8435935060208501359250610ed260408601610e8f565b915060608501358015158114610ee757600080fd5b939692955090935050565b600080600060608486031215610f0757600080fd5b8335925060208401359150610f1e60408501610e8f565b90509250925092565b60008083601f840112610f3957600080fd5b50813567ffffffffffffffff811115610f5157600080fd5b602083019150836020828501011115610f6957600080fd5b9250929050565b600080600080600060808688031215610f8857600080fd5b85359450610f9860208701610e8f565b935060408601359250606086013567ffffffffffffffff811115610fbb57600080fd5b610fc788828901610f27565b969995985093965092949392505050565b6001600160a01b0381168114610bc657600080fd5b60008060006060848603121561100257600080fd5b833561100d81610fd8565b9250602084013561101d81610fd8565b929592945050506040919091013590565b6000815180845260005b8181101561105457602081850181015186830182015201611038565b506000602082860101526020601f19601f83011685010191505092915050565b602081528151602082015260006020830151604080840152611099606084018261102e565b949350505050565b6000806000606084860312156110b657600080fd5b83359250602084013591506040840135600381106110d357600080fd5b809150509250925092565b600080600080600080608087890312156110f757600080fd5b863567ffffffffffffffff8082111561110f57600080fd5b61111b8a838b01610f27565b909850965086915061112f60208a01610e8f565b955060408901359450606089013591508082111561114c57600080fd5b5061115989828a01610f27565b979a9699509497509295939492505050565b60008060008060006080868803121561118357600080fd5b853561118e81610fd8565b94506020860135610f9881610fd8565b6000602082840312156111b057600080fd5b5035919050565b6020815260008251604060208401526111d3606084018261102e565b90506001600160a01b0360208501511660408401528091505092915050565b6000806040838503121561120557600080fd5b82359150602083013561121781610fd8565b809150509250929050565b6000806000806080858703121561123857600080fd5b843561124381610fd8565b9350602085013561125381610fd8565b93969395505050506040820135916060013590565b60008060008060008060a0878903121561128157600080fd5b863561128c81610fd8565b9550602087013561129c81610fd8565b945060408701359350606087013567ffffffffffffffff8111156112bf57600080fd5b6112cb89828a01610f27565b979a9699509497949695608090950135949350505050565b600080604083850312156112f657600080fd5b50508035926020909101359150565b602081526000610382602083018461102e565b634e487b7160e01b600052602160045260246000fd5b600181811c9082168061134257607f821691505b60208210810361136257634e487b7160e01b600052602260045260246000fd5b50919050565b602081016003831061138a57634e487b7160e01b600052602160045260246000fd5b91905290565b634e487b7160e01b600052604160045260246000fd5b601f8211156113ee576000816000526020600020601f850160051c810160208610156113cf5750805b601f850160051c820191505b818110156103c8578281556001016113db565b505050565b67ffffffffffffffff83111561140b5761140b611390565b61141f83611419835461132e565b836113a6565b6000601f841160018114611453576000851561143b5750838201355b600019600387901b1c1916600186901b1783556114ad565b600083815260209020601f19861690835b828110156114845786850135825560209485019460019092019101611464565b50868210156114a15760001960f88860031b161c19848701351681555b505060018560011b0183555b5050505050565b60208152816020820152818360408301376000818301604090810191909152601f909201601f19160101919050565b815167ffffffffffffffff8111156114fd576114fd611390565b6115118161150b845461132e565b846113a6565b602080601f831160018114611546576000841561152e5750858301515b600019600386901b1c1916600185901b1785556103c8565b600085815260208120601f198616915b8281101561157557888601518255948401946001909101908401611556565b50858210156115935787850151600019600388901b60f8161c191681555b5050505050600190811b0190555056fea164736f6c6343000817000a",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100f55760003560e01c806392089c4611610097578063b050d66c11610066578063b050d66c1461020a578063b7bb44341461022a578063cc46e8d61461023d578063e8a123b31461025057600080fd5b806392089c46146101b1578063a2211ed7146101d1578063a498ea23146101e4578063a9d3e1fb146101f757600080fd5b80634a4721a6116100d35780634a4721a61461014a5780635c5bccf51461016a5780635da034861461017d5780638fe3ee4f1461019e57600080fd5b80630d590dc5146100fa5780633f13b8161461010f578063446ac6e514610137575b600080fd5b61010d610108366004610ea5565b610263565b005b61012261011d366004610ef2565b610305565b60405190151581526020015b60405180910390f35b61010d610145366004610f70565b610389565b61015d610158366004610fed565b6103d0565b60405161012e9190611074565b61010d6101783660046110a1565b6104b2565b61019061018b3660046110de565b610560565b60405190815260200161012e565b61010d6101ac36600461116b565b610586565b6101c46101bf36600461119e565b610614565b60405161012e91906111b7565b61010d6101df3660046111f2565b610713565b61010d6101f2366004611222565b610788565b61010d610205366004611268565b610807565b61021d6102183660046112e3565b61093c565b60405161012e9190611305565b610190610238366004610fed565b610a13565b61012261024b3660046112e3565b610a3d565b61021d61025e366004610fed565b610a8f565b8361026d81610b43565b6102778585610bc9565b610294576040516322389ec360e11b815260040160405180910390fd5b6000858152600160209081526040808320878452825280832060ff871680855290835292819020805460ff19168615159081179091559051908152869188917f1af2113c69242d6336219e3a8f9dafec6c4210ae8a92cb93495c8df77467094a910160405180910390a45050505050565b60006103118484610bc9565b61031d57506000610382565b6000848152600160209081526040808320868452825280832060ff808716855292529091205416801561037f575060026000858152600160208181526040808420888552909152909120015460ff16600281111561037d5761037d611318565b145b90505b9392505050565b8461039381610b43565b61039d8685610bc9565b156103bb57604051632fea582560e21b815260040160405180910390fd5b6103c88686868686610c03565b505050505050565b604080518082019091526000815260606020820152600260006103f4868686610ccd565b8152602001908152602001600020604051806040016040529081600082015481526020016001820180546104279061132e565b80601f01602080910402602001604051908101604052809291908181526020018280546104539061132e565b80156104a05780601f10610475576101008083540402835291602001916104a0565b820191906000526020600020905b81548152906001019060200180831161048357829003601f168201915b50505050508152505090509392505050565b826104bc81610b43565b6104c68484610bc9565b6104e3576040516322389ec360e11b815260040160405180910390fd5b600084815260016020818152604080842087855290915290912081018054849260ff199091169083600281111561051c5761051c611318565b021790555082847f55b271602137c928f8160ab64285e1b4d3380b30db931853c27defe706d8a54f846040516105529190611368565b60405180910390a350505050565b60003361056e818989610d20565b61057b8187878787610c03565b979650505050505050565b8261059081610b43565b600061059d878787610ccd565b60008181526002602052604090209091506001016105bc8486836113f3565b5084866001600160a01b0316886001600160a01b03167fee844470b75deb2a75b4e8badf84facf9768a7073b8bae933df304067c78dc4c87876040516106039291906114b4565b60405180910390a450505050505050565b60408051808201909152606081526000602082015261063282610e6d565b61064f57604051630f202d6560e31b815260040160405180910390fd5b6000828152602081905260409081902081518083019092528054829082906106769061132e565b80601f01602080910402602001604051908101604052809291908181526020018280546106a29061132e565b80156106ef5780601f106106c4576101008083540402835291602001916106ef565b820191906000526020600020905b8154815290600101906020018083116106d257829003601f168201915b5050509183525050600191909101546001600160a01b031660209091015292915050565b8161071d81610b43565b600083815260208190526040808220600101805473ffffffffffffffffffffffffffffffffffffffff19166001600160a01b03861690811790915590519091339186917fce632a60fd89eafb0e01f64196fd7ded7cb05ca669f84f40c523ddaba217c29191a4505050565b8161079281610b43565b600061079f868686610ccd565b600081815260026020526040908190208590555190915084906001600160a01b0380881691908916907fef413e36f587b9e4a0e3b07db68cbdbcdbdd9b1a9a2be22db42e3bcf440677f5906107f79088815260200190565b60405180910390a4505050505050565b8361081181610b43565b600061081e888888610ccd565b9050604051806040016040528084815260200186868080601f01602080910402602001604051908101604052809392919081815260200183838082843760009201829052509390945250508381526002602090815260409091208351815590830151909150600182019061089290826114e3565b5090505085876001600160a01b0316896001600160a01b03167fee844470b75deb2a75b4e8badf84facf9768a7073b8bae933df304067c78dc4c88886040516108dc9291906114b4565b60405180910390a485876001600160a01b0316896001600160a01b03167fef413e36f587b9e4a0e3b07db68cbdbcdbdd9b1a9a2be22db42e3bcf440677f58660405161092a91815260200190565b60405180910390a45050505050505050565b60606109488383610bc9565b610965576040516322389ec360e11b815260040160405180910390fd5b60008381526001602090815260408083208584529091529020600201805461098c9061132e565b80601f01602080910402602001604051908101604052809291908181526020018280546109b89061132e565b8015610a055780601f106109da57610100808354040283529160200191610a05565b820191906000526020600020905b8154815290600101906020018083116109e857829003601f168201915b505050505090505b92915050565b600060026000610a24868686610ccd565b8152602081019190915260400160002054949350505050565b6000610a498383610bc9565b610a5557506000610a0d565b60026000848152600160208181526040808420878552909152909120015460ff166002811115610a8757610a87611318565b149392505050565b606060026000610aa0868686610ccd565b81526020019081526020016000206001018054610abc9061132e565b80601f0160208091040260200160405190810160405280929190818152602001828054610ae89061132e565b8015610b355780601f10610b0a57610100808354040283529160200191610b35565b820191906000526020600020905b815481529060010190602001808311610b1857829003601f168201915b505050505090509392505050565b610b4c81610e6d565b610b6957604051630f202d6560e31b815260040160405180910390fd5b6000818152602081905260409020600101546001600160a01b03163314610bc65760008181526020819052604090819020600101549051635d882f0760e01b81526001600160a01b03909116600482015260240160405180910390fd5b50565b600082815260016020818152604080842085855290915282200154819060ff166002811115610bfa57610bfa611318565b14159392505050565b600085815260016020818152604080842087855280835281852060ff8a168652808452918520805460ff1990811686179091559488905291829052918201805460029416841790559101610c588385836113f3565b5083867f55b271602137c928f8160ab64285e1b4d3380b30db931853c27defe706d8a54f6002604051610c8b9190611368565b60405180910390a38460ff1684877f1af2113c69242d6336219e3a8f9dafec6c4210ae8a92cb93495c8df77467094a60016040516107f7911515815260200190565b6040516bffffffffffffffffffffffff19606085811b8216602084015284901b1660348201526048810182905260009060680160408051601f198184030181529190528051602090910120949350505050565b6000819003610d425760405163430f13b360e01b815260040160405180910390fd5b610d4b83610e6d565b15610d6957604051630eeb1b5960e21b815260040160405180910390fd5b6040805160606020601f85018190040282018101835291810183815290918291908590859081908501838280828437600092018290525093855250503360209384015250858152908190526040902081518190610dc690826114e3565b50602091909101516001909101805473ffffffffffffffffffffffffffffffffffffffff19166001600160a01b0390921691909117905560405183907f187f5f8f3e3c2abebb6a11ffa01f399d9ffb676743796efd35b9c57370d7a28090610e3190859085906114b4565b60405180910390a2604051339060009085907fce632a60fd89eafb0e01f64196fd7ded7cb05ca669f84f40c523ddaba217c291908390a4505050565b60008181526020819052604081208054610e869061132e565b15159392505050565b803560ff81168114610ea057600080fd5b919050565b60008060008060808587031215610ebb57600080fd5b8435935060208501359250610ed260408601610e8f565b915060608501358015158114610ee757600080fd5b939692955090935050565b600080600060608486031215610f0757600080fd5b8335925060208401359150610f1e60408501610e8f565b90509250925092565b60008083601f840112610f3957600080fd5b50813567ffffffffffffffff811115610f5157600080fd5b602083019150836020828501011115610f6957600080fd5b9250929050565b600080600080600060808688031215610f8857600080fd5b85359450610f9860208701610e8f565b935060408601359250606086013567ffffffffffffffff811115610fbb57600080fd5b610fc788828901610f27565b969995985093965092949392505050565b6001600160a01b0381168114610bc657600080fd5b60008060006060848603121561100257600080fd5b833561100d81610fd8565b9250602084013561101d81610fd8565b929592945050506040919091013590565b6000815180845260005b8181101561105457602081850181015186830182015201611038565b506000602082860101526020601f19601f83011685010191505092915050565b602081528151602082015260006020830151604080840152611099606084018261102e565b949350505050565b6000806000606084860312156110b657600080fd5b83359250602084013591506040840135600381106110d357600080fd5b809150509250925092565b600080600080600080608087890312156110f757600080fd5b863567ffffffffffffffff8082111561110f57600080fd5b61111b8a838b01610f27565b909850965086915061112f60208a01610e8f565b955060408901359450606089013591508082111561114c57600080fd5b5061115989828a01610f27565b979a9699509497509295939492505050565b60008060008060006080868803121561118357600080fd5b853561118e81610fd8565b94506020860135610f9881610fd8565b6000602082840312156111b057600080fd5b5035919050565b6020815260008251604060208401526111d3606084018261102e565b90506001600160a01b0360208501511660408401528091505092915050565b6000806040838503121561120557600080fd5b82359150602083013561121781610fd8565b809150509250929050565b6000806000806080858703121561123857600080fd5b843561124381610fd8565b9350602085013561125381610fd8565b93969395505050506040820135916060013590565b60008060008060008060a0878903121561128157600080fd5b863561128c81610fd8565b9550602087013561129c81610fd8565b945060408701359350606087013567ffffffffffffffff8111156112bf57600080fd5b6112cb89828a01610f27565b979a9699509497949695608090950135949350505050565b600080604083850312156112f657600080fd5b50508035926020909101359150565b602081526000610382602083018461102e565b634e487b7160e01b600052602160045260246000fd5b600181811c9082168061134257607f821691505b60208210810361136257634e487b7160e01b600052602260045260246000fd5b50919050565b602081016003831061138a57634e487b7160e01b600052602160045260246000fd5b91905290565b634e487b7160e01b600052604160045260246000fd5b601f8211156113ee576000816000526020600020601f850160051c810160208610156113cf5750805b601f850160051c820191505b818110156103c8578281556001016113db565b505050565b67ffffffffffffffff83111561140b5761140b611390565b61141f83611419835461132e565b836113a6565b6000601f841160018114611453576000851561143b5750838201355b600019600387901b1c1916600186901b1783556114ad565b600083815260209020601f19861690835b828110156114845786850135825560209485019460019092019101611464565b50868210156114a15760001960f88860031b161c19848701351681555b505060018560011b0183555b5050505050565b60208152816020820152818360408301376000818301604090810191909152601f909201601f19160101919050565b815167ffffffffffffffff8111156114fd576114fd611390565b6115118161150b845461132e565b846113a6565b602080601f831160018114611546576000841561152e5750858301515b600019600386901b1c1916600185901b1785556103c8565b600085815260208120601f198616915b8281101561157557888601518255948401946001909101908401611556565b50858210156115935787850151600019600388901b60f8161c191681555b5050505050600190811b0190555056fea164736f6c6343000817000a",
+  "devdoc": {
+    "events": {
+      "IssuerAdminTransferred(uint256,address,address)": {
+        "params": {
+          "issuerId": "ID of issuer whose admin is being transferred.",
+          "newAdmin": "Address of the new admin taking over.",
+          "oldAdmin": "Address of the current admin being replaced."
+        }
+      },
+      "IssuerRegistered(uint256,string)": {
+        "params": {
+          "issuerId": "Unique identifier for the newly registered issuer.",
+          "name": "Name of the issuer registered."
+        }
+      },
+      "PublicKeyStatusUpdated(uint256,uint256,uint8)": {
+        "params": {
+          "issuerId": "ID for the issuer to whom the public key belongs.",
+          "publicKeyId": "ID for the public key being updated.",
+          "status": "New status of the public key."
+        }
+      },
+      "PublicKeyVerificationStackUpdated(uint256,uint256,uint256,bool)": {
+        "params": {
+          "enabled": "Boolean indicating whether the stack is enabled or disabled for the public key.",
+          "issuerId": "Unique identifier for the issuer to whom the public key belongs.",
+          "publicKeyId": "Unique identifier for the public key.",
+          "verificationStackId": "Identifier for the verification stack being updated."
+        }
+      },
+      "SignatureStateRootUpdated(uint160,uint160,uint256,bytes32)": {
+        "params": {
+          "contextID": "Context identifier for the signature state being updated.",
+          "issuerId": "Issuer identifier related to the signature state.",
+          "newRoot": "New root hash for the signature state tree.",
+          "typeId": "Type identifier for the signature state being updated."
+        }
+      },
+      "SignatureStateURIUpdated(uint160,uint160,uint256,string)": {
+        "params": {
+          "contextID": "Context identifier for the signature state being updated.",
+          "issuerId": "Issuer identifier related to the signature state.",
+          "newTreeURI": "New URI for the signature state tree.",
+          "typeId": "Type identifier for the signature state being updated."
+        }
+      }
+    },
+    "kind": "dev",
+    "methods": {
+      "addPublicKey(uint256,uint8,uint256,bytes)": {
+        "details": "add a new public key to the issuer."
+      },
+      "getIssuer(uint256)": {
+        "details": "return the issuer, if not exists, revert."
+      },
+      "getPublicKeyRaw(uint256,uint256)": {
+        "details": "return the public key, if not exists, revert."
+      },
+      "getSignatureState(uint160,uint160,uint256)": {
+        "details": "return the status of the public key, if not exists, returns UNINITIALIZED."
+      },
+      "getSignatureStateRoot(uint160,uint160,uint256)": {
+        "details": "return the root of the signature state, if not exists, returns empty bytes."
+      },
+      "getSignatureStateURI(uint160,uint160,uint256)": {
+        "details": "return the status of the public key, if not exists, returns empty string."
+      },
+      "isPublicKeyActive(uint256,uint256)": {
+        "details": "return if public key is active. If public key is not exists, return false."
+      },
+      "isPublicKeyActiveForStack(uint256,uint256,uint8)": {
+        "details": "return if public key is active for the verification stack. If public key is not exists, return false."
+      },
+      "registerIssuer(string,uint8,uint256,bytes)": {
+        "details": "register a new issuer"
+      },
+      "setSignatureState(uint160,uint160,uint256,string,bytes32)": {
+        "details": "set both the signature state URI and root."
+      },
+      "transferIssuerAdmin(uint256,address)": {
+        "details": "transfer the admin of the issuer"
+      },
+      "updatePublicKeyStatus(uint256,uint256,uint8)": {
+        "details": "update the status of the public key."
+      },
+      "updatePublicKeyVerificationStack(uint256,uint256,uint8,bool)": {
+        "details": "update the status of the public key."
+      },
+      "updateSignatureState(uint160,uint160,uint256,bytes32)": {
+        "details": "set the signature state root"
+      },
+      "updateSignatureStateURI(uint160,uint160,uint256,string)": {
+        "details": "set the signature state URI"
+      }
+    },
+    "stateVariables": {
+      "_issuers": {
+        "details": "all issuers, isser id = uint256(caller)"
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "events": {
+      "IssuerAdminTransferred(uint256,address,address)": {
+        "notice": "Emitted when an issuer's administrative role is transferred to a new address."
+      },
+      "IssuerRegistered(uint256,string)": {
+        "notice": "Emitted when a new issuer is registered in the registry."
+      },
+      "PublicKeyStatusUpdated(uint256,uint256,uint8)": {
+        "notice": "Emitted when the status of a public key is updated."
+      },
+      "PublicKeyVerificationStackUpdated(uint256,uint256,uint256,bool)": {
+        "notice": "Emitted when the verification stack for a public key is updated."
+      },
+      "SignatureStateRootUpdated(uint160,uint160,uint256,bytes32)": {
+        "notice": "Emitted when the signature state root is updated for a specific type and context."
+      },
+      "SignatureStateURIUpdated(uint160,uint160,uint256,string)": {
+        "notice": "Emitted when the signature state URI is updated for a specific type and context."
+      }
+    },
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 281,
+        "contract": "contracts/IssuerRegistry.sol:IssuerRegistry",
+        "label": "_issuers",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_mapping(t_uint256,t_struct(Issuer)3789_storage)"
+      },
+      {
+        "astId": 288,
+        "contract": "contracts/IssuerRegistry.sol:IssuerRegistry",
+        "label": "_issuerPublicKeys",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_mapping(t_uint256,t_mapping(t_uint256,t_struct(PublicKey)3773_storage))"
+      },
+      {
+        "astId": 293,
+        "contract": "contracts/IssuerRegistry.sol:IssuerRegistry",
+        "label": "_revocableSigStates",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_mapping(t_uint256,t_struct(SignatureState)3781_storage)"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_bytes32": {
+        "encoding": "inplace",
+        "label": "bytes32",
+        "numberOfBytes": "32"
+      },
+      "t_bytes_storage": {
+        "encoding": "bytes",
+        "label": "bytes",
+        "numberOfBytes": "32"
+      },
+      "t_enum(PublicKeyStatus)3759": {
+        "encoding": "inplace",
+        "label": "enum PublicKeyStatus",
+        "numberOfBytes": "1"
+      },
+      "t_mapping(t_uint256,t_mapping(t_uint256,t_struct(PublicKey)3773_storage))": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => mapping(uint256 => struct PublicKey))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_uint256,t_struct(PublicKey)3773_storage)"
+      },
+      "t_mapping(t_uint256,t_struct(Issuer)3789_storage)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => struct Issuer)",
+        "numberOfBytes": "32",
+        "value": "t_struct(Issuer)3789_storage"
+      },
+      "t_mapping(t_uint256,t_struct(PublicKey)3773_storage)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => struct PublicKey)",
+        "numberOfBytes": "32",
+        "value": "t_struct(PublicKey)3773_storage"
+      },
+      "t_mapping(t_uint256,t_struct(SignatureState)3781_storage)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => struct SignatureState)",
+        "numberOfBytes": "32",
+        "value": "t_struct(SignatureState)3781_storage"
+      },
+      "t_mapping(t_uint8,t_bool)": {
+        "encoding": "mapping",
+        "key": "t_uint8",
+        "label": "mapping(uint8 => bool)",
+        "numberOfBytes": "32",
+        "value": "t_bool"
+      },
+      "t_string_storage": {
+        "encoding": "bytes",
+        "label": "string",
+        "numberOfBytes": "32"
+      },
+      "t_struct(Issuer)3789_storage": {
+        "encoding": "inplace",
+        "label": "struct Issuer",
+        "members": [
+          {
+            "astId": 3785,
+            "contract": "contracts/IssuerRegistry.sol:IssuerRegistry",
+            "label": "name",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 3788,
+            "contract": "contracts/IssuerRegistry.sol:IssuerRegistry",
+            "label": "admin",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address"
+          }
+        ],
+        "numberOfBytes": "64"
+      },
+      "t_struct(PublicKey)3773_storage": {
+        "encoding": "inplace",
+        "label": "struct PublicKey",
+        "members": [
+          {
+            "astId": 3765,
+            "contract": "contracts/IssuerRegistry.sol:IssuerRegistry",
+            "label": "enabledVerificationStacks",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_mapping(t_uint8,t_bool)"
+          },
+          {
+            "astId": 3769,
+            "contract": "contracts/IssuerRegistry.sol:IssuerRegistry",
+            "label": "status",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_enum(PublicKeyStatus)3759"
+          },
+          {
+            "astId": 3772,
+            "contract": "contracts/IssuerRegistry.sol:IssuerRegistry",
+            "label": "raw",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_bytes_storage"
+          }
+        ],
+        "numberOfBytes": "96"
+      },
+      "t_struct(SignatureState)3781_storage": {
+        "encoding": "inplace",
+        "label": "struct SignatureState",
+        "members": [
+          {
+            "astId": 3777,
+            "contract": "contracts/IssuerRegistry.sol:IssuerRegistry",
+            "label": "root",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_bytes32"
+          },
+          {
+            "astId": 3780,
+            "contract": "contracts/IssuerRegistry.sol:IssuerRegistry",
+            "label": "treeURI",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_string_storage"
+          }
+        ],
+        "numberOfBytes": "64"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      },
+      "t_uint8": {
+        "encoding": "inplace",
+        "label": "uint8",
+        "numberOfBytes": "1"
+      }
+    }
+  }
+}

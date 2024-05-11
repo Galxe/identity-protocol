@@ -1,0 +1,20 @@
+name: Lint
+
+# This example workflow assumes that the default branch for your repository is `main`. If the default branch has a different name, edit this example and add your repository's default branch.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use latest node version
+        uses: actions/setup-node@v3
+        with:
+          node-version: latest
+      - run: yarn install
+      - run: yarn lint

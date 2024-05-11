@@ -1,0 +1,76 @@
+{
+  "address": "0x1418b5e79eE53396dE4a454d78DF2ab522CE24CC",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "uint8",
+          "name": "name",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "publicSignals",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "getPublicSignal",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x1869e33df9b3d3168bd433cf681f1f3b2b94c2fad98354b8537f3cde7d8442b9",
+  "receipt": {
+    "to": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
+    "from": "0xa5E5EA38cF3bD36475596858AC7546d17752E4A7",
+    "contractAddress": null,
+    "transactionIndex": 122,
+    "gasUsed": "118954",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x3df56ea45d59bdd33967116fa8c0c4c57cdc81f8d929d2ebe5c0350798d082f5",
+    "transactionHash": "0x1869e33df9b3d3168bd433cf681f1f3b2b94c2fad98354b8537f3cde7d8442b9",
+    "logs": [],
+    "blockNumber": 19623815,
+    "cumulativeGasUsed": "9536255",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "bc078363460d61dedeec968994d22b1e",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.23+commit.f704f362\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint8\",\"name\":\"name\",\"type\":\"uint8\"},{\"internalType\":\"uint256[]\",\"name\":\"publicSignals\",\"type\":\"uint256[]\"}],\"name\":\"getPublicSignal\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"pure\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"getPublicSignal(uint8,uint256[])\":{\"details\":\"Implements the getPublicSignal function from the IPublicSignalGetter interface.\",\"params\":{\"name\":\"The signal name, represented as the given enum (converted to uint8).\",\"publicSignals\":\"The public signals, as an array of uints.\"},\"returns\":{\"_0\":\"The public signal associated with the given name.\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/babyzk/DefaultPublicSignalGetter.sol\":\"BabyzkDefaultPsGetter\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"none\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":800},\"remappings\":[]},\"sources\":{\"contracts/babyzk/DefaultPublicSignalGetter.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.18;\\n\\nimport { IPublicSignalGetter } from \\\"../interfaces/IPublicSignalGetter.sol\\\";\\n\\ncontract BabyzkDefaultPsGetter is IPublicSignalGetter {\\n    /// @dev Implements the getPublicSignal function from the IPublicSignalGetter interface.\\n    /// @param name The signal name, represented as the given enum (converted to uint8).\\n    /// @param publicSignals The public signals, as an array of uints.\\n    /// @return The public signal associated with the given name.\\n    function getPublicSignal(uint8 name, uint256[] calldata publicSignals) external pure override returns (uint256) {\\n        // Because in babyzk's circom circuit, the index of the public signals is the same as the enum value of the signal name,\\n        // we can simply return the public signal at the index of the signal name.\\n        // This is deliberately done to make the circuit easier to understand and to avoid the need for a more complex getter.\\n        // However, in a more complex circuit, the order of public signals can be different from the enum values.\\n        // In those cases, type designers can use a custom public signal getter to return the correct public signal.\\n        return publicSignals[name];\\n    }\\n}\\n\",\"keccak256\":\"0xb36ea59fdf51e2b816d82747b62e3cfb109310dddbf41f23d85496a03f79ce52\",\"license\":\"MIT\"},\"contracts/interfaces/IPublicSignalGetter.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.18;\\n\\n/// @title Intrinsic Signal enum\\nenum IntrinsicSignalName {\\n    TYPE,\\n    CONTEXT,\\n    NULLIFIER,\\n    EXTERNAL_NULLIFIER,\\n    REVEAL_IDENTITY,\\n    EXPIRATION_LB,\\n    KEY_ID,\\n    ID_EQUALS_TO,\\n    SIG_REVOCATION_SMT_ROOT\\n}\\n\\n/// @title Public Signal Getter Interface\\n/// @dev Public signals (inputs) are represented as an array of uints in galxe identity protocol.\\n///      To find the public signal for a given signal name, type designer should set a contract\\n///      in the type registry that implements this interface.\\ninterface IPublicSignalGetter {\\n    /// @dev get the public signal for the signal name, represented as the given enum (represented as uint8), based on the public signals.\\n    /// @notice Implementation must be able to handle intrinsic signals, defiend in IntrinsicSignalName enum.\\n    ///         Type-specific signals support is optional.\\n    /// @param name The signal name, represented as the given enum (converted to uint8).\\n    /// @param publicSignals The public signals.\\n    function getPublicSignal(uint8 name, uint256[] calldata publicSignals) external view returns (uint256);\\n}\\n\",\"keccak256\":\"0xdfdfd996ad88b94d59f07e0ef67a2e6091ccd03a25c395fe53fb1e83770d99b2\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5061012d806100206000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c8063c4eee2ea14610030575b600080fd5b61004361003e36600461007c565b610055565b60405190815260200160405180910390f35b600082828560ff1681811061006c5761006c61010a565b9050602002013590509392505050565b60008060006040848603121561009157600080fd5b833560ff811681146100a257600080fd5b9250602084013567ffffffffffffffff808211156100bf57600080fd5b818601915086601f8301126100d357600080fd5b8135818111156100e257600080fd5b8760208260051b85010111156100f757600080fd5b6020830194508093505050509250925092565b634e487b7160e01b600052603260045260246000fdfea164736f6c6343000817000a",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061002b5760003560e01c8063c4eee2ea14610030575b600080fd5b61004361003e36600461007c565b610055565b60405190815260200160405180910390f35b600082828560ff1681811061006c5761006c61010a565b9050602002013590509392505050565b60008060006040848603121561009157600080fd5b833560ff811681146100a257600080fd5b9250602084013567ffffffffffffffff808211156100bf57600080fd5b818601915086601f8301126100d357600080fd5b8135818111156100e257600080fd5b8760208260051b85010111156100f757600080fd5b6020830194508093505050509250925092565b634e487b7160e01b600052603260045260246000fdfea164736f6c6343000817000a",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "getPublicSignal(uint8,uint256[])": {
+        "details": "Implements the getPublicSignal function from the IPublicSignalGetter interface.",
+        "params": {
+          "name": "The signal name, represented as the given enum (converted to uint8).",
+          "publicSignals": "The public signals, as an array of uints."
+        },
+        "returns": {
+          "_0": "The public signal associated with the given name."
+        }
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [],
+    "types": null
+  }
+}

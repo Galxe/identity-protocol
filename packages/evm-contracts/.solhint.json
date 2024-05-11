@@ -1,0 +1,20 @@
+{
+  "extends": "solhint:recommended",
+  "plugins": ["prettier"],
+  "rules": {
+    "code-complexity": ["error", 10],
+    "compiler-version": ["error", ">=0.8.0"],
+    "func-visibility": ["error", { "ignoreConstructors": true }],
+    "max-line-length": ["error", 140],
+    "named-parameters-mapping": "warn",
+    "no-console": "off",
+    "not-rely-on-time": "off",
+    "no-inline-assembly": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
+  }
+}
