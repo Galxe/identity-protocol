@@ -197,8 +197,8 @@ export class User {
     const input = babyzk.genCircuitInput(
       cred,
       userSecrets,
-      proofOptions.externalNullifier,
       proofOptions.pseudonym,
+      proofOptions.externalNullifier,
       new statement.StatementList(proofOptions.expiratedAtLowerBound, proofOptions.equalCheckId, statements)
     );
     return await babyzk.genProof(proofGenGadgets.wasm, proofGenGadgets.zkey, input);
