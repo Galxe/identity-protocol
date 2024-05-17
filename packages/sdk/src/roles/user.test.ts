@@ -3,6 +3,7 @@ import path from "path";
 
 import { describe, expect, it } from "vitest";
 import { prepare, isPrepared } from "@/crypto/babyzk/deps";
+import { poseidonBigInts } from "@/crypto/hash";
 import * as credType from "@/credential/credType";
 import * as credential from "@/credential/credential";
 import * as claimType from "@/credential/claimType";
@@ -140,5 +141,83 @@ describe("user and issuer class", () => {
       const proofOk = await babyzk.verifyProofRaw(vkey, proof);
       expect(proofOk).toBe(true);
     }
+  });
+
+  it("generated proof has correct public signals", async () => {
+    const artifactsDir = path.resolve(__dirname, "../testutils/artifacts");
+    const u = new User();
+    const evmIdSlice = u.createNewIdentitySlice("evm");
+    const userIdc = User.computeIdentityCommitment(evmIdSlice);
+    const tp = unwrap(credType.createTypeFromSpec(unit));
+    const contextId = 11n;
+    const userId = 22n;
+    const expiredAtLowerBound = "1";
+    const externalNullifier = "2";
+    const equalCheckId = "3";
+    const pseudonym = "4";
+    const cred = unwrap(
+      credential.Credential.create(
+        {
+          type: tp,
+          contextID: contextId,
+          userID: userId,
+        },
+        {}
+      )
+    );
+    const pk = decodeFromHex(skStr);
+    const myIssuer = new BabyzkIssuer(pk, 1n, 1n);
+    myIssuer.sign(cred, {
+      sigID: BigInt(100),
+      expiredAt: BigInt(1715899510),
+      identityCommitment: userIdc,
+    });
+    expect(cred.isSigned()).toBe(true);
+
+    // proof generation
+    const proofGenGadgets = await User.loadProofGenGadgetsFromFile(
+      `${artifactsDir}/unit/circom.wasm`,
+      `${artifactsDir}/unit/circuit_final.zkey`
+    );
+    // Finally, let's generate the proof.
+    const proof = await u.genBabyzkProof(
+      userIdc,
+      cred,
+      {
+        expiratedAtLowerBound: BigInt(expiredAtLowerBound),
+        externalNullifier: BigInt(externalNullifier),
+        equalCheckId: BigInt(equalCheckId),
+        pseudonym: BigInt(pseudonym),
+      },
+      proofGenGadgets,
+      []
+    );
+    // proof matches the verification key
+    const vkey = JSON.parse(fs.readFileSync(`${artifactsDir}/unit/circuit.vkey.json`, "utf-8"));
+    const proofOk = await babyzk.verifyProofRaw(vkey, proof);
+    expect(proofOk).toBe(true);
+
+    // calculate out_id_equals_to (prop<248, c, 1>). Since the least significant bit designates equality,
+    // we need to shift the value by 1 bit to the left.
+    const idEqualsTo = BigInt(equalCheckId) << 1n;
+
+    expect(proof.publicSignals).toStrictEqual([
+      // Type
+      tp.typeID.toString(),
+      // Context
+      contextId.toString(),
+      // Nullifier
+      poseidonBigInts([evmIdSlice.internalNullifier, BigInt(externalNullifier)]).toString(),
+      // ExternalNullifier
+      externalNullifier,
+      // RevealIdentity
+      pseudonym,
+      // ExpirationLb
+      expiredAtLowerBound,
+      // KeyId
+      "1743582416365651167392966598529843347617363862106697818328310770809664607117",
+      // IdEqualsTo
+      idEqualsTo.toString(),
+    ]);
   });
 });
