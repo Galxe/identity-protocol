@@ -14,8 +14,8 @@ const provider = new ethers.JsonRpcProvider(RPC);
 const context = "Proof Aggregation Tutorial Example Context";
 
 // registered with this tx:
-// https://sepolia.etherscan.io/tx/0x2d1515bbb8680144d06ce61323e080aac7396b820a14382413eb983493c7e980
-const circuidId = BigInt("19492248766170790707669674188275240677746386057031629350922666022616552857566");
+// https://sepolia.etherscan.io/tx/0x89c0cf5af6f6c0b6750bd6b3a4b93c02605d0ba1541c26387ed7da3ae7df3ffa
+const circuidId = BigInt("535783125321978663259414080602879573584328345995263811920911450103380255481");
 
 // This is a dummy issuer's EVM address that has been registered on sepolia.
 const dummyIssuerEvmAddr = "0xdeee54e0f3cbb7d5c4b2cb91d39c9c9b48a1b532";
