@@ -5,10 +5,12 @@ import { babyzk } from "@/babyzk";
 import { Credential } from "@/credential/credential";
 import * as utils from "@/utils";
 import * as statement from "@/credential/statement";
+import * as query from "@/credential/query";
 import * as credType from "@/credential/credType";
-// import * as errors from "@/errors";
+import { unwrap } from "@/errors";
 import type { SignerOrProvider } from "@/evm/base";
 import { createTypeRegistry } from "@/evm/v1";
+import { ClaimTypeEnum, ScalarType, PropType, BoolType } from "../credential/claimType";
 
 /**
  * BabyzkProofGenGadgets is a struct that contains the wasm and zkey for the babyzk's proof generation.
@@ -188,8 +190,6 @@ export class User {
     },
     statements: statement.Statement[]
   ): Promise<WholeProof> {
-    // Assuming that the user has received the credential,
-    // user can generate a zk proof to prove that he has sent more than 500 transactions, but no more than 5000.
     const userSecrets = this.getIdentitySliceByIdc(identityCommitment);
     if (!userSecrets) {
       throw new Error("No identity slice found");
@@ -200,6 +200,94 @@ export class User {
       proofOptions.pseudonym,
       proofOptions.externalNullifier,
       new statement.StatementList(proofOptions.expiratedAtLowerBound, proofOptions.equalCheckId, statements)
+    );
+    return await babyzk.genProof(proofGenGadgets.wasm, proofGenGadgets.zkey, input);
+  }
+
+  /**
+   * genBabyzkProofWithQuery generates a zk proof for the given credential and proof
+   * query string, using identity commitment stored in this user.
+   */
+  public async genBabyzkProofWithQuery(
+    identityCommitment: bigint,
+    cred: Credential,
+    proofGenGadgets: {
+      wasm: Uint8Array;
+      zkey: Uint8Array;
+    },
+    queryStr: string
+  ): Promise<WholeProof> {
+    const userSecrets = this.getIdentitySliceByIdc(identityCommitment);
+    if (!userSecrets) {
+      throw new Error("No identity slice found");
+    }
+
+    const queryObj = unwrap(query.parse(queryStr));
+    const statements: statement.Statement[] = [];
+    const statementNames = new Set<string>();
+    for (const expr of queryObj.conditions) {
+      const claim = cred.body.tp.claims.find(c => c.name === expr.identifier);
+      if (!claim) {
+        throw new Error(`Claim '${expr.identifier}' not found in the credential`);
+      }
+      statementNames.add(claim.name);
+      switch (claim.type.tp) {
+        case ClaimTypeEnum.Scalar: {
+          statements.push(
+            new statement.ScalarStatement(
+              claim.type as ScalarType,
+              BigInt((expr.value as query.Range).from),
+              BigInt((expr.value as query.Range).to)
+            )
+          );
+          break;
+        }
+        case ClaimTypeEnum.Property: {
+          const ct = claim.type as PropType;
+          const qs = expr.value as query.Set;
+          if (ct.nEqualChecks !== qs.length) {
+            throw new Error(`Number of equal checks does not match for claim '${claim.name}'`);
+          }
+
+          statements.push(new statement.PropStatement(ct, qs));
+          break;
+        }
+        case ClaimTypeEnum.Boolean: {
+          let reveal = false;
+          if (expr.operation === "REVEAL") {
+            reveal = true;
+          } else if (expr.operation === "HIDE") {
+            reveal = false;
+          } else {
+            throw new Error("Unsupported operation");
+          }
+          statements.push(new statement.BoolStatement(claim.type as BoolType, reveal));
+          break;
+        }
+        default:
+          throw new Error("Unsupported claim type");
+      }
+    }
+
+    // Ensure all claims have corresponding statements, and vice versa.
+    for (const claim of cred.body.tp.claims) {
+      if (!statementNames.has(claim.name)) {
+        throw new Error(`Missing query statement for claim '${claim.name}'`);
+      }
+    }
+    const claimNames = new Set<string>(cred.body.tp.claims.map(c => c.name));
+    for (const name of statementNames) {
+      if (!claimNames.has(name)) {
+        throw new Error(`Missing claim '${name}' for query statements`);
+      }
+    }
+
+    const input = babyzk.genCircuitInput(
+      cred,
+      userSecrets,
+      queryObj.options.pseudonym,
+      queryObj.options.externalNullifier,
+      new statement.StatementList(queryObj.options.expiredAtLowerBound, queryObj.options.equalCheckId, statements)
     );
     return await babyzk.genProof(proofGenGadgets.wasm, proofGenGadgets.zkey, input);
   }
