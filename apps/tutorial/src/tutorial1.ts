@@ -104,21 +104,38 @@ async function proofGenProcess(myCred: credential.Credential, u: user.User) {
   const proofGenGagets = await user.User.fetchProofGenGadgetsByTypeID(myCred.header.type, provider);
   console.log("proof generation gadgets are downloaded successfully.");
   // Finally, let's generate the proof.
-  const proof = await u.genBabyzkProof(
+  // Assume that we want to verify that the credential is still valid after 3 days.
+  const expiredAtLowerBound = BigInt(Math.ceil(new Date().getTime() / 1000) + 3 * 24 * 60 * 60);
+  // Do not reveal the credential's actual id, which is the evm address in this example
+  const equalCheckId = BigInt(0);
+  // Instead, claim to be Mr.Deadbeef. It's verifier's responsibility to verify that the pseudonym is who
+  // he claims to be, after verifying the proof.
+  const pseudonym = BigInt("0xdeadbeef");
+  // We want to prove that the credential's 'val' value is between 500 and 5000, inclusively.
+  const proof = await u.genBabyzkProofWithQuery(
     u.getIdentityCommitment("evm")!,
     myCred,
-    // proof generation options
-    {
-      expiratedAtLowerBound: BigInt(Math.ceil(new Date().getTime() / 1000) + 3 * 24 * 60 * 60), // assume that we want to verify that the credential is still valid after 3 days.
-      externalNullifier: externalNullifier,
-      equalCheckId: BigInt(0), // do not reveal the credential's actual id, which is the evm address in this example
-      // Instead, claim to be Mr.Deadbeef. It's verifier's responsibility to verify that
-      // the pseudonym is who he claims to be, after verifying the proof.
-      pseudonym: BigInt("0xdeadbeef"),
-    },
     proofGenGagets,
-    // statements to be proved, in this case, we want to prove that the credential's first uint248 value is between 500 and 5000, inclusively.
-    [new statement.ScalarStatement(new claimType.ScalarType(248), 500n, 5000n)]
+    `
+    {
+      "conditions": [
+        {
+          "identifier": "val",
+          "operation": "IN",
+          "value": {
+            "from": "500",
+            "to": "5000"
+          }
+        }
+      ],
+      "options": {
+        "expiredAtLowerBound": "${expiredAtLowerBound}",
+        "externalNullifier": "${externalNullifier}",
+        "equalCheckId": "${equalCheckId}",
+        "pseudonym": "${pseudonym}"
+      }
+    }
+    `
   );
   return proof;
 }

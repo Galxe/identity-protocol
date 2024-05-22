@@ -67,18 +67,29 @@ async function proofGenProcess(myCred: credential.Credential, u: user.User) {
   console.log("downloading proof generation gadgets...");
   const proofGenGagets = await user.User.fetchProofGenGadgetsByTypeID(myCred.header.type, provider);
   console.log("proof generation gadgets are downloaded successfully.");
-  const proof = await u.genBabyzkProof(
+  // Let's generate the proof.
+  // Assume that we want to verify that the credential is still valid after 3 days.
+  const expiredAtLowerBound = BigInt(Math.ceil(new Date().getTime() / 1000) + 3 * 24 * 60 * 60);
+  // Do not reveal the credential's actual id, which is the evm address in this example
+  const equalCheckId = BigInt(0);
+  // Instead, claim to be Mr.Deadbeef. It's verifier's responsibility to verify that the pseudonym is who
+  // he claims to be, after verifying the proof.
+  const pseudonym = BigInt("0xdeadbeef");
+  // Here we ignore the conditions and just use the options in the query, since unit credential needs no conditions.
+  const proof = await u.genBabyzkProofWithQuery(
     u.getIdentityCommitment("evm")!,
     myCred,
-    // proof generation options
-    {
-      expiratedAtLowerBound: BigInt(Math.ceil(new Date().getTime() / 1000) + 3 * 24 * 60 * 60), // assume that we want to verify that the credential is still valid after 3 days.
-      externalNullifier: externalNullifier,
-      equalCheckId: BigInt(0), // do not reveal the credential's actual id, which is the evm address in this example
-      pseudonym: BigInt("0xdeadbeef"),
-    },
     proofGenGagets,
-    []
+    `
+    {
+      "options": {
+        "expiredAtLowerBound": "${expiredAtLowerBound}",
+        "externalNullifier": "${externalNullifier}",
+        "equalCheckId": "${equalCheckId}",
+        "pseudonym": "${pseudonym}"
+      }
+    }
+    `
   );
   return proof;
 }

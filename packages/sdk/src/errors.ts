@@ -38,6 +38,7 @@ export enum ErrorName {
   InvalidCredential = "InvalidCredential",
   InvalidStatement = "InvalidStatement",
   InvalidStatementCheck = "InvalidStatementCheck",
+  InvalidQuery = "InvalidQuery",
 
   InvalidParameter = "InvalidTypeParameter",
   InvalidSignature = "InvalidSignature",
