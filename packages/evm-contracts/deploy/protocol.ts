@@ -19,7 +19,8 @@ const f: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   // deploy aggregated verifier only if on sepolia
   let upaVerifierAddr = "";
   if (chainId == "11155111") {
-    upaVerifierAddr = "0xB6D545eEe2d9B3653DaBCf1D0ea23A80FCd51B4C";
+    // nebra v1.1 verifier
+    upaVerifierAddr = "0x8bdEa1842afb8Be3b46d8fE8D6d110eDE057d7c7";
   }
 
   // 1. type registry
