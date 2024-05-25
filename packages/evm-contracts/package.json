@@ -42,7 +42,11 @@
     "deploy:mainnet": "hardhat deploy --tags GalxeIdentityProtocol --network mainnet",
     "deploy-primitive:mainnet": "hardhat deploy --tags BabyZKPrimitive --network mainnet",
     "verify:mainnet": "NETWORK=mainnet hardhat etherscan-verify --network mainnet",
-    "register-primitive:mainnet": "hardhat run scripts/registerPrimitiveTypes.ts --network mainnet"
+    "register-primitive:mainnet": "hardhat run scripts/registerPrimitiveTypes.ts --network mainnet",
+    "deploy:gravity": "hardhat deploy --tags GalxeIdentityProtocol --network gravity",
+    "deploy-primitive:gravity": "hardhat deploy --tags BabyZKPrimitive --network gravity",
+    "verify:gravity": "NETWORK=gravity hardhat etherscan-verify --network gravity",
+    "register-primitive:gravity": "hardhat run scripts/registerPrimitiveTypes.ts --network gravity"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.6",
