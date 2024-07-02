@@ -1,4 +1,4 @@
-import { keccak256 } from "js-sha3";
+import { keccak256 } from "ethers";
 
 import { poseidon, BigInter } from "@/crypto/babyzk/deps";
 import { Result, Err, Ok, encase } from "@/errors";
