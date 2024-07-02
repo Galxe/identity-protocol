@@ -388,9 +388,6 @@ importers:
       idb-keyval:
         specifier: ^6.2.1
         version: 6.2.1
-      js-sha3:
-        specifier: ^0.8.0
-        version: 0.8.0
       node-fetch:
         specifier: ^2.7.0
         version: 2.7.0

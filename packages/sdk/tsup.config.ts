@@ -35,7 +35,7 @@ const COMMON_CONFIG: MandatoryOptions = {
 // ESM config
 const ESM_CONFIG: MandatoryOptions = {
   ...DEFAULT_CONFIG,
-  entry: ["src/**/*.ts", "!src/**/*.test.*", "!src/testutils"], // Include all files but tests, better tree-shaking
+  entry: ["src/index.ts", "!src/**/*.test.*", "!src/testutils"], // Include all files but tests, better tree-shaking
   format: "esm",
   outDir: "dist/esm",
   platform: "browser",
