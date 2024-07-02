@@ -1,4 +1,4 @@
-import { keccak256 } from "js-sha3";
+import { keccak256, toUtf8Bytes } from "ethers";
 
 import { poseidon, BigInter } from "@/crypto/babyzk/deps";
 import { Result, Err, Ok, encase } from "@/errors";
@@ -89,7 +89,7 @@ function poseidonBytesX(msg: Uint8Array, frameSize: number): Result<bigint> {
  * @returns a bigint, uint256 hash result.
  */
 export const keccak256Str = (s: string): Result<bigint> => {
-  return Ok(BigInt("0x" + keccak256(s)));
+  return Ok(BigInt(keccak256(toUtf8Bytes(s))));
 };
 
 const bytesBEtoBigInt = (bytes: Uint8Array): bigint => {
