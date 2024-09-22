@@ -24,7 +24,7 @@
     "@galxe-identity-protocol/sdk": "workspace:^",
     "@grpc/grpc-js": "^1.10.7",
     "@types/jsonfile": "^6.1.4",
-    "@types/node": "^20.12.11",
+    "@types/node": "^22.5.2",
     "conf": "^12.0.0",
     "dotenv-flow": "^3.3.0",
     "dts-gen": "^0.10.2",
