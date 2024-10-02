@@ -1,6 +1,6 @@
 {
   "name": "@galxe-identity-protocol/sdk",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Galxe Identity Protocol TypeScript SDK",
   "packageManager": "pnpm@9.1.0+sha256.22e36fba7f4880ecf749a5ca128b8435da085ecd49575e7fb9e64d6bf4fad394",
   "license": "MIT",
@@ -83,7 +83,6 @@
     "ethers": "^6.12.1",
     "ffjavascript": "^0.2.63",
     "idb-keyval": "^6.2.1",
-    "js-sha3": "^0.8.0",
     "node-fetch": "^2.7.0",
     "snarkjs": "^0.7.4"
   }
