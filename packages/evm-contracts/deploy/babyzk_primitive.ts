@@ -12,7 +12,7 @@ const f: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
   console.log("deployer: %s", deployer);
 
-  const primitiveTypes = ["Boolean", "Passport", "Property", "Scalar", "Scalar256", "Unit"];
+  const primitiveTypes = ["Boolean", "Passport", "PassportV2d1", "Property", "Scalar", "Scalar256", "Unit"];
   for (const primitiveType of primitiveTypes) {
     const contract = `BabyZKGroth16${primitiveType}Verifier`;
     const verifier = await deploy(contract, {

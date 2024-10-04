@@ -79,7 +79,7 @@ const config: HardhatUserConfig = {
       accounts: [privateKey],
     },
     mainnet: {
-      url: "https://cloudflare-eth.com",
+      url: "https://eth.llamarpc.com",
       chainId: 1,
       accounts: [privateKey],
     },

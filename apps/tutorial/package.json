@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@galxe-identity-protocol/sdk": "workspace:^",
-    "@nebrazkp/upa": "^1.1.1",
+    "@nebrazkp/upa": "^1.2.5",
     "@types/jsonfile": "^6.1.4",
     "@types/node": "^20.12.11",
     "@types/snarkjs": "^0.7.8",

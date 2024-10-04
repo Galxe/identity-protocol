@@ -1,0 +1,7 @@
+{
+  "circom_uri": "ipfs://QmfRLNCSMNaaQUBvcAdKxdLfXXxG39xSpXi9TCRHU9z8oZ/circuit.circom",
+  "verifier_uri": "ipfs://QmfRLNCSMNaaQUBvcAdKxdLfXXxG39xSpXi9TCRHU9z8oZ/verifier.sol",
+  "vkey_uri": "ipfs://QmfRLNCSMNaaQUBvcAdKxdLfXXxG39xSpXi9TCRHU9z8oZ/circuit.vkey.json",
+  "witness_wasm_uri": "ipfs://QmfRLNCSMNaaQUBvcAdKxdLfXXxG39xSpXi9TCRHU9z8oZ/circom.wasm",
+  "zkey_uri": "ipfs://QmfRLNCSMNaaQUBvcAdKxdLfXXxG39xSpXi9TCRHU9z8oZ/circuit_final.zkey"
+}

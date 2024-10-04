@@ -9,6 +9,16 @@ first_verification_date:uint<64>;
 last_selfie_date:uint<64>;
 total_sefie_verified:uint<8>`;
 
+const passportv2d1TypeDef = `birthdate:uint<64>; 
+gender:prop<8,c,1>; 
+id_country:prop<16,c,1>; 
+id_class:prop<8,c,1>; 
+document_expiration_date:uint<64>; 
+proof_of_time:uint<64>; 
+last_revoke_time:uint<64>; 
+last_selfie_date:uint<64>; 
+total_sefie_verified:uint<8>;`;
+
 const typeRegistry = "0x77dA3Cf4418009D171B4963db815Ca46d6F2E79D";
 const defaultPublicSignalGetter = "0x1418b5e79eE53396dE4a454d78DF2ab522CE24CC";
 const babyZKStackId = 1n;
@@ -60,6 +70,14 @@ const types = [
     description: "Galxe Passport v2 type",
     resourceUri: "ipfs://QmZ4UghikEohVtpJaiAQorBeHNPFZ9vq5TfnE8jTAyLU9k",
     proofVerifier: "0xCA355CE1D55670F7CE29Bb2d23061fe041Fd4B35",
+  },
+  {
+    typeId: 10001n,
+    name: "Galxe Passport v2.1",
+    definition: passportv2d1TypeDef,
+    description: "Galxe Passport v2.1 type",
+    resourceUri: "ipfs://QmecKSb3LwjzxDjrMEt9MiszaLTAbRJAP1KduEYwLfuh2t",
+    proofVerifier: "0xAb995d6b7eFc02A90dC1aF378bc27264da42c12F",
   },
 ];
 

@@ -46,6 +46,16 @@ pnpm build
 pnpm test
 ```
 
+## How to create a new credential type
+
+1. Using type DSL to design the credential type.
+2. Use `app/sstyper` to run the setup process, which will generate type artifacts, including 
+  + zkey, vkey, proofgen wasm...
+  + solidity verifier contract
+3. Upload the artifacts to IPFS and create a metadata json file containing URI to the artifacts. See artifacts in `artifacts/**/metadata.json` for reference.
+4. Deploy the verifier contract to supported chains. See `evm-contracts/deploy`.
+5. Register the type on supported chains, using the `metadata.json` URI. If primitive type, see `evm-contracts/scripts` for reference.
+
 ### NOTICE
 
 If you saw build error when building a package that is depending on local packages, try `pnpm build` in the root directory first. It is because that dependencies were not built.
