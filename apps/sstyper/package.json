@@ -28,7 +28,7 @@
     "@types/snarkjs": "^0.7.8",
     "axios": "^1.6.8",
     "bfj": "^8.0.0",
-    "ffjavascript": "^0.2.63",
+    "ffjavascript": "^0.3.1",
     "jsonfile": "^6.1.0",
     "snarkjs": "^0.7.4",
     "tslog": "^4.9.2",
