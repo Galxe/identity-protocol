@@ -1,61 +1,76 @@
-# Galxe Identity Protocol
+# Galxe Identity Protocol x ZKVerify
 
-## What's inside?
+This project was developed for the ZKVerify online hackathon. It's a fork of the Galxe Identity Protocol [repository](https://github.com/galxe-identity-protocol/tutorial). You can find the original README [here](README-ORIGINAL.md).
 
-This is the monorepo for Galxe Identity protocol, powered by Turborepo. It includes the following packages/apps:
+The files modified for the hackathon are:
+- [`src/useZkVerify.ts`](apps/tutorial/src/useZkVerify.ts)
+- [`package.json`](apps/tutorial/package.json)
 
-### Packages
+The goal of this project is to demonstrate how to integrate Galxe Identity Protocol with ZKVerify to significantly reduce verification costs without sacrificing security.
 
-- `@galxe-identity-protocol/evm-contracts`: a hardhat project of all the evm contracts, including typechain generated TypeScript bindings.
-- `@galxe-identity-protocol/sdk`: a TypeScript SDK for everything related to the protocol.
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+## Galxe
+Galxe is a decentralized super app and web3's largest onchain distribution platform, with over 22 million users and trusted by top partners like Optimism, Polygon, and many more.
+Within its infrastructure, Galxe built Identity Protocol, a technology that utilizes privacy-preserving ZK technology to enable safe and seamless integration of digital identities across platforms.
+Built on top of Identity Protocol, there is another product by Galxe, the Galxe Passport, chosen by over 1 million users to share their digital identity.
 
-### Apps
+## ZKVerify
+ZKVerify is a zero-knowledge proof platform that allows users to verify their identity without revealing any personal information.
 
-- `cli`: a cli tool for managing the protocol, including interacting with the on-chain contracts and type generation.
-- `issuer`: a microservice that issues credentials by GRPC request.
-- `sstyper`: a fully self-sovereign credential type setup tool.
+## What we cooked
+We created a new tutorial that follows the original one published by Galxe in this repo, but instead of doing an off-chain or on-chain verification, we use ZKVerify to verify the proof submitted. 
 
-## Development setup
+The process is divided in three steps:
+1. Issuer issuing a credential to the user
+2. User generating a proof to prove some statements about the credential
+3. Submitting the proof to ZKVerify to verify it
 
-### Node version
+We implemented the last step in two ways:
+- Registering the verification key of the issuer onchain and then submitting the proof to ZKVerify
+- Submitting the proof directly to ZKVerify with the verification key
 
-Developers should use the current LTS version of node. Currently, node v20.11.1. For package users, the SDK is compatible with node v18 and above.
+We implementing the last step in two way:
+- Registering the verification key of the issuer onchain and then submitting the proof to ZKVerify.
+- Submitting the proof directly to ZKVerify with the verification key.
 
++++ add considerations about the size +++
+
+## How to run it
+
+Follow the original tutorial to run the code:
 ```bash
-# For nvm users:
-nvm install --lts
-nvm use --lts
-```
-
-### Setup
-
-We use corepack for managing package managers.
-
-```bash
+# Quick start
 corepack enable
-corepack install # this will install pnpm version specified in package.json
-```
-
-## Build, Test, and Lint
-
-```
-pnpm lint
+corepack install
 pnpm build
-pnpm test
+```
+This will install the dependencies and build the project.
+
+Then go to the `apps/tutorial` folder and run:
+```bash
+npm install
+```
+Add `ZKVERIFY_SIGNER_PK` to the `.env` file with the private key of the account that will register the verification key onchain.
+
+Finally, run the script:
+```bash
+npm run useZkVerify
 ```
 
-## How to create a new credential type
+## Considerations
 
-1. Using type DSL to design the credential type.
-2. Use `app/sstyper` to run the setup process, which will generate type artifacts, including 
-  + zkey, vkey, proofgen wasm...
-  + solidity verifier contract
-3. Upload the artifacts to IPFS and create a metadata json file containing URI to the artifacts. See artifacts in `artifacts/**/metadata.json` for reference.
-4. Deploy the verifier contract to supported chains. See `evm-contracts/deploy`.
-5. Register the type on supported chains, using the `metadata.json` URI. If primitive type, see `evm-contracts/scripts` for reference.
 
-### NOTICE
 
-If you saw build error when building a package that is depending on local packages, try `pnpm build` in the root directory first. It is because that dependencies were not built.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
