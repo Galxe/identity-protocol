@@ -1,6 +1,6 @@
 # Galxe Identity Protocol x ZKVerify
 
-This project was developed for the ZKVerify online hackathon. It's a fork of the Galxe Identity Protocol [repository](https://github.com/galxe-identity-protocol/tutorial). You can find the original README [here](README-ORIGINAL.md).
+This project is developed for the ZKVerify online hackathon. It's a fork of the Galxe Identity Protocol [repository](https://github.com/galxe-identity-protocol/tutorial). You can find the original README [here](README-ORIGINAL.md).
 
 The files modified for the hackathon are:
 - [`src/useZkVerify.ts`](apps/tutorial/src/useZkVerify.ts)
@@ -9,15 +9,18 @@ The files modified for the hackathon are:
 The goal of this project is to demonstrate how to integrate Galxe Identity Protocol with ZKVerify to significantly reduce verification costs without sacrificing security.
 
 ## Galxe
-Galxe is a decentralized super app and web3's largest onchain distribution platform, with over 22 million users and trusted by top partners like Optimism, Polygon, and many more.
+Galxe is a decentralized super app and web3's largest onchain distribution platform, with over 31 million active users and trusted by top partners like Optimism, Polygon, and many more.
 Within its infrastructure, Galxe built Identity Protocol, a technology that utilizes privacy-preserving ZK technology to enable safe and seamless integration of digital identities across platforms.
 Built on top of Identity Protocol, there is another product by Galxe, the Galxe Passport, chosen by over 1 million users to share their digital identity.
 
 ## ZKVerify
-ZKVerify is a zero-knowledge proof platform that allows users to verify their identity without revealing any personal information.
+zkVerify is a modular blockchain focused on zero-knowledge (ZK) proof verification. It's specifically designed for verifying ZK proofs across different blockchains efficiently, with benefits in terms of cost reduction and fast verification times.
+It's support multiple verification schemes, including Groth16, Fflonk, Risc0 and more.
 
 ## What we cooked
 We created a new tutorial that follows the original one published by Galxe in this repo, but instead of doing an off-chain or on-chain verification, we use ZKVerify to verify the proof submitted. 
+
+> **Note:** Galxe has already integrated Nebra UPA in a tutorial, a protocol that can aggregate multiple proofs for reducing the verification cost. This validates our idea with zkVerify.
 
 The process is divided in three steps:
 1. Issuer issuing a credential to the user
@@ -36,7 +39,7 @@ We implementing the last step in two way:
 
 ## How to run it
 
-Follow the original tutorial to run the code:
+Follow the original tutorial to initialize the repository:
 ```bash
 # Quick start
 corepack enable
@@ -45,8 +48,9 @@ pnpm build
 ```
 This will install the dependencies and build the project.
 
-Then go to the `apps/tutorial` folder and run:
+Then go to the `apps/tutorial` folder and install the dependencies:
 ```bash
+cd apps/tutorial
 npm install
 ```
 Add `ZKVERIFY_SIGNER_PK` to the `.env` file with the private key of the account that will register the verification key onchain.
@@ -57,6 +61,13 @@ npm run useZkVerify
 ```
 
 ## Considerations
+Galxe currently serves over 31 million active users and manages more than 350,000 credentials, making it the perfect candidate for testing scalable verification solutions.
+
+Assessed that zkVerify can reduce proof verification costs by >90% compared to native verification on Ethereum, at Galxe's scale, this translates to a significant costs dropping  - a transformation that could generate millions in savings annually.
+
+Beyond pure cost reduction, this integration opens new possibilities for Web3 identity management. With over 1 million users actively using Galxe Passport, cheaper verification enables more frequent credential checks, enhanced privacy features, and broader accessibility to trustless credential systems for smaller projects.
+
+On a closing thought, we want to remark how specialized verification layers can solve real problems in large-scale identity systems, with the zkVerify-Galxe integration setting a new standard for efficient, accessible credential verification in Web3.
 
 
 
