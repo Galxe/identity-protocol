@@ -247,15 +247,15 @@ async function verifyWithZkVerify(proof: babyzkTypes.WholeProof): Promise<boolea
   // When using zkVerify on-chain verification, you must first get the verification key.
   // You can embed the verification key in your application, or fetch it from a remote server.
   // We will fetch the verification key from the chain in this example.
-  // The first step is to do a static proof verification, making sure that the zk proof is valid.
+  // The first step is to do a proof verification, making sure that the zk proof is valid.
   const tpRegistry = evm.v1.createTypeRegistry({
     signerOrProvider: provider,
   });
   const verifier = await tpRegistry.getVerifier(expectedTypeID, credential.VerificationStackEnum.BabyZK);
   const vKey = await verifier.getVerificationKeysRaw();
-  console.log("on zkVerify-chain static proof verification start, executing verification transaction");
+  console.log("on zkVerify-chain proof verification start, executing verification transaction");
   const verifyResult = await executeVerificationWithZkVerify(proof, vKey);
-  console.log("on zkVerify-chain static proof verification result: ", verifyResult);
+  console.log("on zkVerify-chain proof verification result: ", verifyResult);
 
   return true;
 }
@@ -266,7 +266,7 @@ async function verifyWithZkVerifyRegisteredZK(proof: babyzkTypes.WholeProof): Pr
   // When using zkVerify on-chain verification, you must first get the verification key.
   // You can embed the verification key in your application, or fetch it from a remote server.
   // We will fetch the verification key from the chain in this example.
-  // The first step is to do a static proof verification, making sure that the zk proof is valid.
+  // The first step is to do a proof verification, making sure that the zk proof is valid.
   const tpRegistry = evm.v1.createTypeRegistry({
     signerOrProvider: provider,
   });
@@ -275,9 +275,9 @@ async function verifyWithZkVerifyRegisteredZK(proof: babyzkTypes.WholeProof): Pr
   // on-chain proof verification
   console.log("on zkVerify-chain zk proof, registering verification key");
   const transactionHash = await registerVerficationKey(vKey);
-  console.log("on zkVerify-chain static proof verification start, executing verification transaction");
+  console.log("on zkVerify-chain proof verification start, executing verification transaction");
   const verifyResult = await executeVerificationWithZkVerifyRegisteredZK(proof, transactionHash);
-  console.log("on zkVerify-chain static proof verification result: ", verifyResult);
+  console.log("on zkVerify-chain proof verification result: ", verifyResult);
 
   return true;
 }
@@ -308,10 +308,14 @@ async function main() {
   console.log("Proof is generated successfully.", proof);
 
   // On zkVeirfy chain verification process: verifying the proof.
+  console.log("Starting verification with zkVerify");
   await verifyWithZkVerify(proof);
+  console.log("End of verification with zkVerify");
 
+  console.log("Starting verification with zkVerify and registered verification key");
   await verifyWithZkVerifyRegisteredZK(proof);
-
+  console.log("End of verification with zkVerify and registered verification key");
+  
   process.exit(0);
 }
 
