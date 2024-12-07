@@ -34,8 +34,8 @@ The process is divided in three steps:
 
 We implemented the last step in two ways:
 
-- Registering the verification key of the issuer onchain and then submitting the proof to zkVerify, txHash: [0x11c2ddf64b5ddfcb1b1404d655ac41f23190f579f4bf2d79d612375df7a1fbf6](https://zkverify-explorer.zeeve.net/extrinsics/0x11c2ddf64b5ddfcb1b1404d655ac41f23190f579f4bf2d79d612375df7a1fbf6?tab=events&page=1)
-- Submitting the proof directly to zkVerify with the verification key, txHash: [0x7d7a24d8c0c47fcc03f24ec54fa4575f6806bc7f9ef202eff7172496a14c27a2](https://zkverify-explorer.zeeve.net/extrinsics/0x7d7a24d8c0c47fcc03f24ec54fa4575f6806bc7f9ef202eff7172496a14c27a2?tab=events&page=1)
+- Registering the verification key of the issuer onchain and then submitting the proof to zkVerify, txHash: [0x11c2ddf64b5ddfcb1b1404d655ac41f23190f579f4bf2d79d612375df7a1fbf6](https://zkverify-explorer.zeeve.net/extrinsics/0x11c2ddf64b5ddfcb1b1404d655ac41f23190f579f4bf2d79d612375df7a1fbf6)
+- Submitting the proof directly to zkVerify with the verification key, txHash: [0x7d7a24d8c0c47fcc03f24ec54fa4575f6806bc7f9ef202eff7172496a14c27a2](https://zkverify-explorer.zeeve.net/extrinsics/0x7d7a24d8c0c47fcc03f24ec54fa4575f6806bc7f9ef202eff7172496a14c27a2)
 
 ## How to run it
 
