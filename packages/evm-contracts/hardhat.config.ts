@@ -33,6 +33,7 @@ switch (process.env.NETWORK) {
     verifyApiKey = process.env.POLYGONSCAN_API_KEY || "";
     break;
   case "sepolia":
+    console.log("etherscan apiKey");
     verifyApiKey = process.env.ETHERSCAN_API_KEY || "";
     break;
   default:
@@ -78,9 +79,20 @@ const config: HardhatUserConfig = {
       accounts: [privateKey],
     },
     mainnet: {
-      url: "https://cloudflare-eth.com",
+      url: "https://eth.llamarpc.com",
       chainId: 1,
       accounts: [privateKey],
+    },
+    gravity: {
+      url: "https://rpc.gravity.xyz",
+      chainId: 1625,
+      accounts: [privateKey],
+      verify: {
+        etherscan: {
+          apiKey: "no-op", // verification on conduit does not require an API key, but hardhat etherscan-verify does.
+          apiUrl: "https://explorer.gravity.xyz/api",
+        },
+      },
     },
   },
   paths: {

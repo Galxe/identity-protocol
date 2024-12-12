@@ -1,0 +1,160 @@
+{
+  "address": "0x42D6444840842F0484C1624899c9a3E835738592",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "AlreadyExists",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint160",
+          "name": "contextId",
+          "type": "uint160"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "context",
+          "type": "string"
+        }
+      ],
+      "name": "ContextRegistered",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "context",
+          "type": "string"
+        }
+      ],
+      "name": "calculateContextID",
+      "outputs": [
+        {
+          "internalType": "uint160",
+          "name": "",
+          "type": "uint160"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint160",
+          "name": "contextId",
+          "type": "uint160"
+        }
+      ],
+      "name": "getContext",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "context",
+          "type": "string"
+        }
+      ],
+      "name": "registerContext",
+      "outputs": [
+        {
+          "internalType": "uint160",
+          "name": "",
+          "type": "uint160"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x535e5c594ad9608e18c0338f2f04b28bdad7919d97cc4da054e3095a06a3da89",
+  "receipt": {
+    "to": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
+    "from": "0xb85b3D61439a3d70D3DF7913a3A764F352b32C55",
+    "contractAddress": null,
+    "transactionIndex": 1,
+    "gasUsed": "328564",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x93e3bcb9bab59e04f4bfec87dadf8deb6e69e42ce785a4c0b99a402b40259be3",
+    "transactionHash": "0x535e5c594ad9608e18c0338f2f04b28bdad7919d97cc4da054e3095a06a3da89",
+    "logs": [],
+    "blockNumber": 28,
+    "cumulativeGasUsed": "328564",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "e08d6b930820ab219ef1afbfaba72b7a",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.23+commit.f704f362\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"AlreadyExists\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint160\",\"name\":\"contextId\",\"type\":\"uint160\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"context\",\"type\":\"string\"}],\"name\":\"ContextRegistered\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"context\",\"type\":\"string\"}],\"name\":\"calculateContextID\",\"outputs\":[{\"internalType\":\"uint160\",\"name\":\"\",\"type\":\"uint160\"}],\"stateMutability\":\"pure\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint160\",\"name\":\"contextId\",\"type\":\"uint160\"}],\"name\":\"getContext\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"context\",\"type\":\"string\"}],\"name\":\"registerContext\",\"outputs\":[{\"internalType\":\"uint160\",\"name\":\"\",\"type\":\"uint160\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"calculateContextID(string)\":{\"details\":\"calculate the contextID for a given context string\"},\"getContext(uint160)\":{\"details\":\"get the context for the given contextID\"},\"registerContext(string)\":{\"details\":\"register a new context\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"notice\":\"ContextRegistry is a contract that allows the registration of contexts. Contexts are strings that represent a specific context for credentials. They are ownerless and can be registered and used by anyone.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/ContextRegistry.sol\":\"ContextRegistry\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"none\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":800},\"remappings\":[]},\"sources\":{\"contracts/ContextRegistry.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.18;\\n\\nimport { IContextRegistry } from \\\"./interfaces/IContextRegistry.sol\\\";\\n\\n/// @notice ContextRegistry is a contract that allows the registration of contexts.\\n/// Contexts are strings that represent a specific context for credentials. They\\n/// are ownerless and can be registered and used by anyone.\\ncontract ContextRegistry is IContextRegistry {\\n    error AlreadyExists();\\n\\n    // The global mapping between contexts and their contextID.\\n    mapping(uint160 contextId => string context) private _registry;\\n\\n    /// @dev register a new context\\n    function registerContext(string calldata context) external override returns (uint160) {\\n        uint160 contextID = _getContextID(context);\\n        if (bytes(_registry[contextID]).length != 0) {\\n            revert AlreadyExists();\\n        }\\n        _registry[contextID] = context;\\n        emit ContextRegistered(contextID, context);\\n        return contextID;\\n    }\\n\\n    /// @dev get the context for the given contextID\\n    function getContext(uint160 contextId) external view override returns (string memory) {\\n        return _registry[contextId];\\n    }\\n\\n    /// @dev calculate the contextID for a given context string\\n    function calculateContextID(string calldata context) external pure override returns (uint160) {\\n        return _getContextID(context);\\n    }\\n\\n    /**\\n     * ContextID is the lower 160 bits of the keccak256 hash of the context string.\\n     * @param context The context string to get the contextID for.\\n     */\\n    function _getContextID(string calldata context) private pure returns (uint160) {\\n        return uint160(uint256(keccak256(abi.encodePacked(context))));\\n    }\\n}\\n\",\"keccak256\":\"0xbb5c1e9a65be057609359d10b24753c455488d0585522185b8baf0593256be82\",\"license\":\"MIT\"},\"contracts/interfaces/IContextRegistry.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.18;\\n\\n/// @title Context Registry Interface\\ninterface IContextRegistry {\\n    // Events\\n    event ContextRegistered(uint160 indexed contextId, string context);\\n\\n    /// @dev registerContext registers a new context and returns the contextId\\n    function registerContext(string calldata context) external returns (uint160);\\n\\n    /// @dev getContext returns the context for the given contextId\\n    function getContext(uint160 contextId) external returns (string memory);\\n\\n    /// @dev calculate the contextID for a given context string\\n    function calculateContextID(string calldata context) external pure returns (uint160);\\n}\\n\",\"keccak256\":\"0x1adddabc089a8ba41ee9be17dd65cd05274c4bc82a9a7c6263890e553c88af3f\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506104f6806100206000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c80633af6bf3814610046578063424f5bf514610076578063f94ea22214610096575b600080fd5b61005961005436600461025e565b6100a9565b6040516001600160a01b0390911681526020015b60405180910390f35b6100896100843660046102d0565b61016b565b60405161006d91906102f9565b6100596100a436600461025e565b610217565b6000806100b6848461022a565b6001600160a01b03811660009081526020819052604090208054919250906100dd90610348565b1590506100fd5760405163119b4fd360e11b815260040160405180910390fd5b6001600160a01b03811660009081526020819052604090206101208486836103e9565b50806001600160a01b03167fca702642220323c022e777423c5022781e7d240bbaf55c6b5c2a9d3203415dea858560405161015c9291906104aa565b60405180910390a29392505050565b6001600160a01b038116600090815260208190526040902080546060919061019290610348565b80601f01602080910402602001604051908101604052809291908181526020018280546101be90610348565b801561020b5780601f106101e05761010080835404028352916020019161020b565b820191906000526020600020905b8154815290600101906020018083116101ee57829003601f168201915b50505050509050919050565b6000610223838361022a565b9392505050565b6000828260405160200161023f9291906104d9565b60408051601f1981840301815291905280516020909101209392505050565b6000806020838503121561027157600080fd5b823567ffffffffffffffff8082111561028957600080fd5b818501915085601f83011261029d57600080fd5b8135818111156102ac57600080fd5b8660208285010111156102be57600080fd5b60209290920196919550909350505050565b6000602082840312156102e257600080fd5b81356001600160a01b038116811461022357600080fd5b60006020808352835180602085015260005b818110156103275785810183015185820160400152820161030b565b506000604082860101526040601f19601f8301168501019250505092915050565b600181811c9082168061035c57607f821691505b60208210810361037c57634e487b7160e01b600052602260045260246000fd5b50919050565b634e487b7160e01b600052604160045260246000fd5b601f8211156103e4576000816000526020600020601f850160051c810160208610156103c15750805b601f850160051c820191505b818110156103e0578281556001016103cd565b5050505b505050565b67ffffffffffffffff83111561040157610401610382565b6104158361040f8354610348565b83610398565b6000601f84116001811461044957600085156104315750838201355b600019600387901b1c1916600186901b1783556104a3565b600083815260209020601f19861690835b8281101561047a578685013582556020948501946001909201910161045a565b50868210156104975760001960f88860031b161c19848701351681555b505060018560011b0183555b5050505050565b60208152816020820152818360408301376000818301604090810191909152601f909201601f19160101919050565b818382376000910190815291905056fea164736f6c6343000817000a",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100415760003560e01c80633af6bf3814610046578063424f5bf514610076578063f94ea22214610096575b600080fd5b61005961005436600461025e565b6100a9565b6040516001600160a01b0390911681526020015b60405180910390f35b6100896100843660046102d0565b61016b565b60405161006d91906102f9565b6100596100a436600461025e565b610217565b6000806100b6848461022a565b6001600160a01b03811660009081526020819052604090208054919250906100dd90610348565b1590506100fd5760405163119b4fd360e11b815260040160405180910390fd5b6001600160a01b03811660009081526020819052604090206101208486836103e9565b50806001600160a01b03167fca702642220323c022e777423c5022781e7d240bbaf55c6b5c2a9d3203415dea858560405161015c9291906104aa565b60405180910390a29392505050565b6001600160a01b038116600090815260208190526040902080546060919061019290610348565b80601f01602080910402602001604051908101604052809291908181526020018280546101be90610348565b801561020b5780601f106101e05761010080835404028352916020019161020b565b820191906000526020600020905b8154815290600101906020018083116101ee57829003601f168201915b50505050509050919050565b6000610223838361022a565b9392505050565b6000828260405160200161023f9291906104d9565b60408051601f1981840301815291905280516020909101209392505050565b6000806020838503121561027157600080fd5b823567ffffffffffffffff8082111561028957600080fd5b818501915085601f83011261029d57600080fd5b8135818111156102ac57600080fd5b8660208285010111156102be57600080fd5b60209290920196919550909350505050565b6000602082840312156102e257600080fd5b81356001600160a01b038116811461022357600080fd5b60006020808352835180602085015260005b818110156103275785810183015185820160400152820161030b565b506000604082860101526040601f19601f8301168501019250505092915050565b600181811c9082168061035c57607f821691505b60208210810361037c57634e487b7160e01b600052602260045260246000fd5b50919050565b634e487b7160e01b600052604160045260246000fd5b601f8211156103e4576000816000526020600020601f850160051c810160208610156103c15750805b601f850160051c820191505b818110156103e0578281556001016103cd565b5050505b505050565b67ffffffffffffffff83111561040157610401610382565b6104158361040f8354610348565b83610398565b6000601f84116001811461044957600085156104315750838201355b600019600387901b1c1916600186901b1783556104a3565b600083815260209020601f19861690835b8281101561047a578685013582556020948501946001909201910161045a565b50868210156104975760001960f88860031b161c19848701351681555b505060018560011b0183555b5050505050565b60208152816020820152818360408301376000818301604090810191909152601f909201601f19160101919050565b818382376000910190815291905056fea164736f6c6343000817000a",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "calculateContextID(string)": {
+        "details": "calculate the contextID for a given context string"
+      },
+      "getContext(uint160)": {
+        "details": "get the context for the given contextID"
+      },
+      "registerContext(string)": {
+        "details": "register a new context"
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "notice": "ContextRegistry is a contract that allows the registration of contexts. Contexts are strings that represent a specific context for credentials. They are ownerless and can be registered and used by anyone.",
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 155,
+        "contract": "contracts/ContextRegistry.sol:ContextRegistry",
+        "label": "_registry",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_mapping(t_uint160,t_string_storage)"
+      }
+    ],
+    "types": {
+      "t_mapping(t_uint160,t_string_storage)": {
+        "encoding": "mapping",
+        "key": "t_uint160",
+        "label": "mapping(uint160 => string)",
+        "numberOfBytes": "32",
+        "value": "t_string_storage"
+      },
+      "t_string_storage": {
+        "encoding": "bytes",
+        "label": "string",
+        "numberOfBytes": "32"
+      },
+      "t_uint160": {
+        "encoding": "inplace",
+        "label": "uint160",
+        "numberOfBytes": "20"
+      }
+    }
+  }
+}

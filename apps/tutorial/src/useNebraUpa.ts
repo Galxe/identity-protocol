@@ -14,8 +14,8 @@ const provider = new ethers.JsonRpcProvider(RPC);
 const context = "Proof Aggregation Tutorial Example Context";
 
 // registered with this tx:
-// https://sepolia.etherscan.io/tx/0x2d1515bbb8680144d06ce61323e080aac7396b820a14382413eb983493c7e980
-const circuidId = BigInt("19492248766170790707669674188275240677746386057031629350922666022616552857566");
+// https://sepolia.etherscan.io/tx/0x89c0cf5af6f6c0b6750bd6b3a4b93c02605d0ba1541c26387ed7da3ae7df3ffa
+const circuidId = BigInt("535783125321978663259414080602879573584328345995263811920911450103380255481");
 
 // This is a dummy issuer's EVM address that has been registered on sepolia.
 const dummyIssuerEvmAddr = "0xdeee54e0f3cbb7d5c4b2cb91d39c9c9b48a1b532";
@@ -67,18 +67,29 @@ async function proofGenProcess(myCred: credential.Credential, u: user.User) {
   console.log("downloading proof generation gadgets...");
   const proofGenGagets = await user.User.fetchProofGenGadgetsByTypeID(myCred.header.type, provider);
   console.log("proof generation gadgets are downloaded successfully.");
-  const proof = await u.genBabyzkProof(
+  // Let's generate the proof.
+  // Assume that we want to verify that the credential is still valid after 3 days.
+  const expiredAtLowerBound = BigInt(Math.ceil(new Date().getTime() / 1000) + 3 * 24 * 60 * 60);
+  // Do not reveal the credential's actual id, which is the evm address in this example
+  const equalCheckId = BigInt(0);
+  // Instead, claim to be Mr.Deadbeef. It's verifier's responsibility to verify that the pseudonym is who
+  // he claims to be, after verifying the proof.
+  const pseudonym = BigInt("0xdeadbeef");
+  // Here we ignore the conditions and just use the options in the query, since unit credential needs no conditions.
+  const proof = await u.genBabyzkProofWithQuery(
     u.getIdentityCommitment("evm")!,
     myCred,
-    // proof generation options
-    {
-      expiratedAtLowerBound: BigInt(Math.ceil(new Date().getTime() / 1000) + 3 * 24 * 60 * 60), // assume that we want to verify that the credential is still valid after 3 days.
-      externalNullifier: externalNullifier,
-      equalCheckId: BigInt(0), // do not reveal the credential's actual id, which is the evm address in this example
-      pseudonym: BigInt("0xdeadbeef"),
-    },
     proofGenGagets,
-    []
+    `
+    {
+      "options": {
+        "expiredAtLowerBound": "${expiredAtLowerBound}",
+        "externalNullifier": "${externalNullifier}",
+        "equalCheckId": "${equalCheckId}",
+        "pseudonym": "${pseudonym}"
+      }
+    }
+    `
   );
   return proof;
 }
