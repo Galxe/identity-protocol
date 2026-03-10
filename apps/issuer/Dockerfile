@@ -21,10 +21,11 @@ RUN pnpm run -r build
 # RUN pnpm deploy --filter=issuer --prod /prod/issuer
 
 FROM base AS issuer
+RUN corepack disable
 # node_modules are symlinked to root directory, so we just copy the whole thing for now
 COPY --from=build /workspace /workspace
 # COPY --from=build /prod/issuer /prod/issuer
 WORKDIR /workspace/apps/issuer
 EXPOSE 8080 9090
-CMD [ "pnpm", "start" ]
+CMD [ "node", "dist/common/server.cjs" ]
 # docker build . --target issuer --tag issuer:latest
